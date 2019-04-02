@@ -1,0 +1,21 @@
+{
+  "name": "falkirk-fc",
+  "version": "1.0.0",
+  "description": "MEAN web application for educational purposes",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "node server/main",
+    "build": "concurrently -k \"npm run ts-build\" ",
+    "dev-watch": "concurrently -k \"npm run ts-watch\" \"npm run node-watch\"",
+    "node-watch": "nodemon server/main",
+    "ts-watch": "tsc -w",
+    "ts-build": "tsc"
+  },
+  "author": "Jose Fernandes",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.10"
+  }
+}
