@@ -2,20 +2,59 @@
   "name": "falkirk-fc",
   "version": "1.0.0",
   "description": "MEAN web application for educational purposes",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "npm run serve",
-    "serve": "node server/main",
-    "build": "concurrently -k \"npm run ts-build\" ",
-    "dev-watch": "concurrently -k \"npm run ts-watch\" \"npm run node-watch\"",
-    "node-watch": "nodemon server/main",
-    "ts-watch": "tsc -w",
-    "ts-build": "tsc"
+    "start": "node main",
+    "ts-build": "tsc",
+    "dev": "concurrently -k \"npm run ts-watch\" \"npm run test-watch\" \"npm run node-watch\"",
+    "dev:noTest": "concurrently -k \"npm run ts-watch\" \"npm run node-watch\"",
+    "node-watch": "env-cmd ./config/dev.env nodemon --delay 3000ms main",
+    "test-watch": "jest --watchAll",
+    "ts-watch": "tsc -w"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json",
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/src/tests/**/*.test.ts"
+    ]
   },
   "author": "Jose Fernandes",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/jest": "^24.0.11",
+    "@types/mongoose": "^5.3.24",
+    "@types/node": "^11.13.0",
+    "@types/supertest": "^2.0.7",
     "concurrently": "^4.1.0",
-    "nodemon": "^1.18.10"
+    "env-cmd": "^8.0.2",
+    "jest": "^24.7.1",
+    "nodemon": "^1.18.10",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.21"
   }
 }

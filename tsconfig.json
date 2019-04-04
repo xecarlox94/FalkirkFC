@@ -4,16 +4,18 @@
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        // "sourceMap": true,
-        "target": "es6",
-        "outDir": "application"
+        "sourceMap": true,
+        "target": "es2017",
+        "outDir": "./server",
+        "baseUrl": "./src"
     },
     "include": [
-        "src/**/*"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules",
         "**/*.spec.ts",
+        "**/*.test.ts",
         "falkirkfc-webapp"
     ]
 }
