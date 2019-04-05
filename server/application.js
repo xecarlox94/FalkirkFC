@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const express_1 = require("express");
+const database_1 = require("./db/database");
 class ServerApplication {
     static setupServer() {
         this._app = express();
@@ -12,6 +13,7 @@ class ServerApplication {
         this._app.get("/", (req, res) => { });
     }
     static initDatabase() {
+        database_1.default.init();
     }
     static initControllers() {
     }

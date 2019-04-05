@@ -1,6 +1,6 @@
 import * as express from "express";
-
 import { json, Application, Request, Response } from "express";
+import Database from "./db/database";
 
 
 export default class ServerApplication {
@@ -23,7 +23,7 @@ export default class ServerApplication {
 
     }
     static initDatabase(): void {
-        // throw new Error("Method not implemented."); Implemeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeent
+        Database.init()
     }
     static initControllers(): void {
         // throw new Error("Method not implemented."); Implemeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeent

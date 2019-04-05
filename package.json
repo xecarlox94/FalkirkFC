@@ -9,30 +9,8 @@
     "dev": "concurrently -k \"npm run ts-watch\" \"npm run test-watch\" \"npm run node-watch\"",
     "dev:noTest": "concurrently -k \"npm run ts-watch\" \"npm run node-watch\"",
     "node-watch": "env-cmd ./config/dev.env nodemon --delay 3000ms main",
-    "test-watch": "jest --watchAll",
+    "test-watch": "env-cmd ./config/test.env jest --watchAll",
     "ts-watch": "tsc -w"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json",
-        "diagnostics": {
-          "warnOnly": true
-        }
-      }
-    },
-    "testEnvironment": "node",
-    "testMatch": [
-      "**/src/tests/**/*.test.ts"
-    ]
   },
   "author": "Jose Fernandes",
   "license": "ISC",
@@ -55,6 +33,29 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.2",
-    "mongoose": "^5.4.21"
+    "mongoose": "^5.4.21",
+    "typegoose": "^5.6.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json",
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/src/tests/**/*.test.ts"
+    ]
   }
 }
