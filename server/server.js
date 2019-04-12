@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const application_1 = require("./application");
-try {
-    application_1.default.start();
-}
-catch (error) {
-    console.error(error);
-}
-//# sourceMappingURL=server.js.map
+const app = require('./app')
+const port = process.env.PORT
+
+
+
+app.listen(port, () => {
+    console.log('Server is up on port ' + port)
+})
