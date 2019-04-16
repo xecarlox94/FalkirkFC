@@ -11,18 +11,14 @@ const teamSchema = new mongoose.Schema({
     manager: {
         type: String,
         required: true
-    },
-    players: [
-        {
-            ref: "Player",
-            type: mongoose.Schema.Types.ObjectId
-        }
-    ]
+    }
 }, {
     toObject: {
         virtuals: true
     }
 })
+
+// virtuals players ????
 
 teamSchema.statics.getTable = async function() {
     const teams = await Team.find({}).populate("awayMatches").populate("homeMatches")

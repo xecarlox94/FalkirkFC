@@ -44,6 +44,9 @@ router.get("/performance/:id", async (req, res) => {
     }
 })
 
+
+// add route for away, home and overall games
+
 router.get("/table", async (req, res) => {
     try {
         const tableRows = await Team.getTable()
