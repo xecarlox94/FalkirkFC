@@ -1,13 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './base/main-nav/main-nav.component';
 import { PolicyModalComponent } from './base/policy-modal/policy-modal.component';
 
-import { MaterialDesignModule } from './shared/material-design.module';
-import { SubscriberModule } from './subscriber/subscriber.module';
-import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
@@ -18,13 +16,13 @@ import { CoreModule } from './core/core.module';
   ],
   imports: [
     BrowserModule,
-    MaterialDesignModule,
-    CoreModule,
-    AuthModule,
-    SubscriberModule
+    BrowserAnimationsModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+// Notification badge component in the navbar which takes a subscriber to a notification page
 
 export class AppModule { }
