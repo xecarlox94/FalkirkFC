@@ -2,23 +2,18 @@ require('./db/mongoose')
 const express = require('express')
 const app = express()
 
-const eventRouter = require("./routers/event");
-const matchRouter = require("./routers/match");
-const newsRouter = require("./routers/news");
-const teamRouter = require("./routers/team");
-const userRouter = require("./routers/user");
-const playerRouter = require("./routers/player");
+const routers = require("./routers/loader");
 
 app.use(express.json())
 
 
 // global error handling
-app.use("/events", eventRouter);
-app.use("/matches", matchRouter);
-app.use("/news", newsRouter);
-app.use("/players", playerRouter);
-app.use("/teams", teamRouter);
-app.use("/users", userRouter);
+app.use("/events", routers.eventRouter);
+app.use("/matches", routers.matchRouter);
+app.use("/news", routers.newsRouter);
+app.use("/players", routers.playerRouter);
+app.use("/teams", routers.teamRouter);
+app.use("/users", routers.userRouter);
 
 
 
