@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Route, RouterModule, PreloadingStrategy } from "@angular/router";
+import { Route, RouterModule, PreloadingStrategy, PreloadAllModules } from "@angular/router";
 
 
 import { LoginComponent } from '../auth/login/login.component';
@@ -17,12 +17,12 @@ const appRoutes: Route[] = [
     { path: "contact", component: ContactUsComponent },
     { path: "cookiesPolicy", component: CookiePolicyComponent },
     { path: "fqa", component: FrequentQuestionsAskedComponent },
-    { path: "**", redirectTo: "login" }
+    { path: "", redirectTo: "login", pathMatch: "full" }
 ]
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules })
     ],
     exports: [
         RouterModule

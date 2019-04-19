@@ -15,4 +15,4 @@ const adminRoutes: Route[] = [
 })
 
 
-export class DashboardRoutingModule { }
+export class AdminRoutingModule { }

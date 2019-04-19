@@ -20,4 +20,5 @@ import { MatchReportComponent } from './match-report/match-report.component';
 
 
 
+
 export class CompetitionsModule { }
