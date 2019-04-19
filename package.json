@@ -2,11 +2,11 @@
   "name": "falkirk-fc",
   "version": "1.0.0",
   "description": "MEAN web application for educational purposes",
-  "main": "./server/server.js",
+  "main": "",
   "scripts": {
-    "start": "node main",
+    "start": "node ./server/server.js",
     "dev": "concurrently -k \"npm run node-watch\" \"npm run test-watch\"",
-    "node-watch": "env-cmd ./config/dev.env nodemon main",
+    "node-watch": "env-cmd ./config/dev.env nodemon ./server/server.js",
     "test-watch": "env-cmd ./config/test.env jest --watchAll"
   },
   "author": "Jose Fernandes",
