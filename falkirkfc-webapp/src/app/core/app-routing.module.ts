@@ -16,13 +16,12 @@ const appRoutes: Route[] = [
     { path: "about", component: AboutUsComponent },
     { path: "contact", component: ContactUsComponent },
     { path: "cookiesPolicy", component: CookiePolicyComponent },
-    { path: "fqa", component: FrequentQuestionsAskedComponent },
-    { path: "", redirectTo: "login", pathMatch: "full" }
+    { path: "fqa", component: FrequentQuestionsAskedComponent }
 ]
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules })
+        RouterModule.forRoot(appRoutes)
     ],
     exports: [
         RouterModule

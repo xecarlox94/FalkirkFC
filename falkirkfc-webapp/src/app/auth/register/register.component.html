@@ -1,3 +1,14 @@
-<p>
-  register works!
-</p>
+
+
+<form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" >
+
+  <mat-form-field>
+    <input type="text" matInput placeholder="email" name="email" ngModel required pattern="[^ @]*@[^ @]*" >
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input type="password" matInput placeholder="password" name="password" ngModel required minlength="6" >
+  </mat-form-field>
+  
+  <button type="submit" mat-button >Register</button>
+</form>

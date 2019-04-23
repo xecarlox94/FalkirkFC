@@ -3,23 +3,19 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatIconModule, MatListModule, MatSidenavModule } from '@angular/material';
 
 
+
+const modules = [
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
+]
+
 @NgModule({
-    imports: [
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule
-    ],
-    exports: [
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule
-    ]
+    imports: [ ...modules ],
+    exports: [ ...modules ]
 })
 
 

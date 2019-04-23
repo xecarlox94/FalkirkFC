@@ -7,6 +7,7 @@ import { MainNavComponent } from './base/main-nav/main-nav.component';
 import { PolicyModalComponent } from './base/policy-modal/policy-modal.component';
 
 import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CoreModule
   ],
   providers: [],

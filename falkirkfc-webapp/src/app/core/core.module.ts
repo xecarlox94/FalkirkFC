@@ -7,22 +7,17 @@ import { AuthModule } from '../auth/auth.module';
 import { InstituitionModule } from '../instituition/instituition.module';
 import { SubscriberModule } from '../subscriber/subscriber.module';
 
+const modules = [
+    AppRoutingModule,
+    MaterialDesignModule,
+    AuthModule,
+    InstituitionModule,
+    SubscriberModule
+]
 
 @NgModule({
-    imports: [
-        AppRoutingModule,
-        MaterialDesignModule,
-        AuthModule,
-        InstituitionModule,
-        SubscriberModule
-    ],
-    exports: [
-        AppRoutingModule,
-        MaterialDesignModule,
-        AuthModule,
-        InstituitionModule,
-        SubscriberModule
-    ],
+    imports: [ ...modules ],
+    exports: [ ...modules ],
     providers: [ ]
 })
 

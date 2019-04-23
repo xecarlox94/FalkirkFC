@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require('mongoose-unique-validator');
 
 
 // add table stats
@@ -94,6 +95,7 @@ teamSchema.virtual("performance").get( function() {
     return { games, wins, draws, loses, scored, conceded, goalDiference, points };
 })
 
+var uniqueValidator = require('mongoose-unique-validator');
 const Team = mongoose.model("Team", teamSchema);
 
 module.exports = Team;
