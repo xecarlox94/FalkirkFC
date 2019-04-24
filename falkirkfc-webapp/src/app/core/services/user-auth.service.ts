@@ -20,10 +20,18 @@ export class UserAuthService {
     }
     
     register(user: User){
-        return this.http.post<User>(`${ environment.baseURL }/users/`, user)
+        return this.http.post<any>(`${ environment.baseURL }/users/`, user)
     }
 
     login(user: User){
-        return this.http.post<User>(`${ environment.baseURL }/users/login`, user)
+        return this.http.post<any>(`${ environment.baseURL }/users/login`, user)
+    }
+
+    isLoggedIn() {
+        return !!localStorage.getItem("token")
+    }
+
+    getToken(){
+        return localStorage.getItem("token")
     }
 }

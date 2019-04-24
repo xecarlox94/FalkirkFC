@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuthService } from 'src/app/core/services/user-auth.service';
 import { User } from 'src/app/core/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,11 @@ import { User } from 'src/app/core/models/user.model';
 export class LoginComponent implements OnInit {
   @ViewChild("loginForm") form: NgForm;
   userAuthService: UserAuthService;
+  router: Router;
 
-  constructor(userAuthSrv: UserAuthService) {
-    this.userAuthService = userAuthSrv
+  constructor(userAuthSrv: UserAuthService, router: Router) {
+    this.userAuthService = userAuthSrv;
+    this.router = router;
   }
 
   ngOnInit() { }
@@ -23,7 +26,12 @@ export class LoginComponent implements OnInit {
     const password = this.form.value.password;
     if(this.form.valid){
       const user = new User(email, password)
-      this.userAuthService.login(user).subscribe( res => console.log("response: ", res), err => console.log("error:", err))
+      this.userAuthService.login(user)
+        .subscribe( res => {
+          console.log("response", res)
+          localStorage.setItem("token", res.token)
+          this.router.navigate(["/fqa"])
+        }, err => console.log("ERROR:", err))
     }
   }
 }

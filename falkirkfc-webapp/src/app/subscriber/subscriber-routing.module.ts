@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 import { TeamComponent } from './squads/team/team.component';
-import { UserAuthGuard } from '../core/guards/user-auth.guard';
+import { UserAuthGuard } from '../core/services/guards/user-auth.guard';
 
 const subscriberRoutes: Route[] = [
     {
