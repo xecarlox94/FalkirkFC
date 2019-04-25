@@ -21,6 +21,26 @@ const teamSchema = new mongoose.Schema({
 
 // virtuals players ????
 
+
+
+teamSchema.virtual("awayMatches", {
+    ref: "Match",
+    localField: "_id",
+    foreignField: "away"
+})
+
+teamSchema.virtual("homeMatches", {
+    ref: "Match",
+    localField: "_id",
+    foreignField: "home"
+})
+
+teamSchema.virtual("players", {
+    ref: "Player",
+    localField: "_id",
+    foreignField: "team"
+})
+
 teamSchema.statics.getTable = async function() {
     const teams = await Team.find({}).populate("awayMatches").populate("homeMatches")
     let tblRows = [];
@@ -52,19 +72,6 @@ teamSchema.statics.getTable = async function() {
     return tblRows;
 }
 
-teamSchema.virtual("awayMatches", {
-    ref: "Match",
-    localField: "_id",
-    foreignField: "away"
-})
-
-teamSchema.virtual("homeMatches", {
-    ref: "Match",
-    localField: "_id",
-    foreignField: "home"
-})
-
-
 teamSchema.virtual("performance").get( function() {
     let games = 0; let wins = 0; let draws = 0; let loses = 0; let scored = 0; let conceded = 0;
     let awayGames = this.awayMatches; let homeGames = this.homeMatches;
@@ -95,7 +102,8 @@ teamSchema.virtual("performance").get( function() {
     return { games, wins, draws, loses, scored, conceded, goalDiference, points };
 })
 
-var uniqueValidator = require('mongoose-unique-validator');
+teamSchema.plugin(uniqueValidator);
+
 const Team = mongoose.model("Team", teamSchema);
 
 module.exports = Team;

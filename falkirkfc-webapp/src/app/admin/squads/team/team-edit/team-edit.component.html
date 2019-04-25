@@ -1,3 +1,13 @@
-<p>
-  team-edit works!
-</p>
+<form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field >
+    <input matInput placeholder="Club" formControlName="name" >
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Manager" formControlName="manager" >
+  </mat-form-field>
+  <button type="submit" [disabled]="!teamForm.valid" mat-raised-button >{{ editMode ? "Update" : "Create"}}</button>
+</form>
+
+
+<button [routerLink]="['/adminDashboard/teams/']">teams list page</button>

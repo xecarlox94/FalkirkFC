@@ -1,3 +1,7 @@
-<p>
-  player-list works!
-</p>
+<mat-list>
+    <mat-list-item *ngFor="let player of players">
+      <button mat-button color="basic" >{{ player.name }}</button>
+      <button mat-raised-button color="accent" (click)="editPlayer(player)" >Edit</button>
+      <button mat-raised-button color="warn" (click)="deletePlayer(player)">Delete</button>
+    </mat-list-item>
+</mat-list>
