@@ -43,7 +43,6 @@ router.patch("/:id", async (req, res) => {
     try {
 
         const player = await Player.findById({ _id })
-        console.log("player before" + player)
 
         updates.forEach( update => player[update] = body[update] )
 
@@ -53,6 +52,19 @@ router.patch("/:id", async (req, res) => {
 
     } catch (error) {
         console.log(error)
+        res.status(500).send()
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+
+        const player = await Player.findByIdAndDelete({ _id })
+
+        res.send({player})
+        
+    } catch (error) {
         res.status(500).send()
     }
 })
