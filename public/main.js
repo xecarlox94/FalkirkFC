@@ -2999,9 +2999,11 @@ __webpack_require__.r(__webpack_exports__);
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+var isLocalHost = window.location.origin === "http://localhost:4200";
+var origin = isLocalHost ? "http://localhost:3000" : window.location.origin;
 var environment = {
     production: false,
-    baseURL: "http://localhost:3000"
+    baseURL: origin
 };
 /*
  * For easier debugging in development mode, you can import the following file
