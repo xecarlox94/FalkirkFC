@@ -70,12 +70,12 @@ export class PlayerEditComponent implements OnInit {
     if( this.editMode ){
       player.setId(this.params.id)
       this.playerService.updatePlayer(player).toPromise()
-          .then( () => this.router.navigate(['/adminDashboard/teams/', player.team]) )
+          .then( () => this.router.navigate(['/adminDashboard/teams/', player.team] ) )
           .catch( (rej) => console.log(rej))
     } else {
       this.playerService
           .createPlayer(player).toPromise()
-          .then(() => this.router.navigate(['/adminDashboard/teams/', player.team]) )
+          .then(() => this.router.navigate(['/adminDashboard/teams/', player.team] ) )
           .catch( (rej) => console.log(rej) )
 
     }

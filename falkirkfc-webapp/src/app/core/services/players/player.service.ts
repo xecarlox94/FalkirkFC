@@ -17,7 +17,7 @@ export class PlayerService {
         this.http = http;
     }
 
-    getPlayer(id: string): Observable<Player>{
+    getPlayer(id: string): Observable<Player> {
         return this.http.get<Player>(`${ environment.baseURL }/players/${id}`).pipe(
             map( (value: any) => new Player(value.player.name, value.player.position, value.player.team, value.player._id))
         )
@@ -27,12 +27,13 @@ export class PlayerService {
         return this.http.post<Player>(`${ environment.baseURL }/players/`, player)
     }
 
-    deletePlayer(player: Player){
-        return this.http.delete<Player>(`${ environment.baseURL }/players/${ player._id }`)
+    deletePlayer(player: Player): Observable<Player> {
+        return this.http.delete<Player>(`${ environment.baseURL }/players/${ player._id }`).pipe(
+            map( ( value: any ) => new Player(value.player.name, value.player.position, value.player.team, value.player._id) )
+        )
     }
 
     updatePlayer(player: Player){
-        console.log("id sent " + player._id)
         return this.http.patch<Player>(`${ environment.baseURL }/players/${ player._id}`, player)
     }
 }

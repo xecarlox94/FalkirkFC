@@ -26,7 +26,7 @@ export class TeamPageComponent implements OnInit {
 
   loadSquad(){
     const id = this.actRoute.snapshot.params.id;
-    this.teamService.fetchSquad(id).toPromise().then( (team: Team) => this.team = team ).catch( () => {})
+    this.teamService.fetchSquad(id).toPromise().then( (team: Team) => this.team = team )
   }
 
   onEditTeam(){
@@ -38,6 +38,6 @@ export class TeamPageComponent implements OnInit {
   }
 
   playerDeleted(){
-    console.log("player deleted")
+    this.loadSquad()
   }
 }

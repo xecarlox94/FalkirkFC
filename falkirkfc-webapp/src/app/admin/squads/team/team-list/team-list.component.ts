@@ -17,16 +17,18 @@ export class TeamListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teamService.fetchTeams().toPromise()
-        .then( (fetchedTeams: Team[]) => this.teams = fetchedTeams)
+    this.loadTeamsList().then( (teams: Team[]) => this.teams = teams)
+  }
+
+  loadTeamsList(): Promise<Team[]>{
+    return this.teamService.fetchTeams().toPromise();
   }
   
   deleteTeam(team: Team){
-    this.teamService.deleteTeam(team).subscribe( () => {}, () => {}, () => {
-      this.teamService.fetchTeams().subscribe( (teams: Team []) => {
-        this.teams = teams;
-      });
-    })
+    this.teamService.deleteTeam(team).toPromise()
+        .then( () => {
+          return this.loadTeamsList()
+        }).then( (teams: Team[]) => this.teams = teams )
   }
 
 }

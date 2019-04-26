@@ -11,6 +11,7 @@ import { FrequentQuestionsAskedComponent } from '../instituition/frequent-questi
 
 
 const appRoutes: Route[] = [
+    { path: "", pathMatch: "full", redirectTo: "/adminDashboard/teams"}, // DELETEEEEEEEEEEEEEEEEE
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
     { path: "about", component: AboutUsComponent },
@@ -18,6 +19,8 @@ const appRoutes: Route[] = [
     { path: "cookiesPolicy", component: CookiePolicyComponent },
     { path: "fqa", component: FrequentQuestionsAskedComponent }
 ]
+
+// ENABLE ROBOTO FONT ON INDEX.TS
 
 @NgModule({
     imports: [

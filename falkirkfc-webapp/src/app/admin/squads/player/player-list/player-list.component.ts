@@ -27,7 +27,7 @@ export class PlayerListComponent implements OnInit {
   }
 
   deletePlayer(player: Player){
-    this.playerService.deletePlayer(player).toPromise().then( (player) => {
+    this.playerService.deletePlayer(player).toPromise().then( (player: Player) => {
       console.log(player)
       this.onDeletedPlayer.emit()
     }).catch( (rej) => console.log(rej) )
