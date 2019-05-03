@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 var uniqueValidator = require('mongoose-unique-validator');
 
+const Match = require("./match")
 
-// add table stats
 const teamSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -19,22 +19,6 @@ const teamSchema = new mongoose.Schema({
     }
 })
 
-// virtuals players ????
-
-
-
-teamSchema.virtual("awayMatches", {
-    ref: "Match",
-    localField: "_id",
-    foreignField: "away"
-})
-
-teamSchema.virtual("homeMatches", {
-    ref: "Match",
-    localField: "_id",
-    foreignField: "home"
-})
-
 teamSchema.virtual("players", {
     ref: "Player",
     localField: "_id",
@@ -42,22 +26,23 @@ teamSchema.virtual("players", {
 })
 
 teamSchema.statics.getTable = async function() {
-    const teams = await Team.find({}).populate("awayMatches").populate("homeMatches")
+    const teams = await Team.find({})
     let tblRows = [];
     for(let i = 0; i < teams.length; i++){
+        const performance = await teams[i].getPerformance();
         tblRows[i] = {
             team: {
                 _id: teams[i]._id,
                 name: teams[i].name
             },
-            games: teams[i].performance.games,
-            wins: teams[i].performance.wins,
-            draws: teams[i].performance.draws,
-            loses: teams[i].performance.loses,
-            scored: teams[i].performance.scored,
-            conceded: teams[i].performance.conceded,
-            goalDiference: teams[i].performance.goalDiference,
-            points: teams[i].performance.points
+            games: performance.games,
+            wins: performance.wins,
+            draws: performance.draws,
+            loses: performance.loses,
+            scored: performance.scored,
+            conceded: performance.conceded,
+            goalDiference: performance.goalDiference,
+            points: performance.points
         }
     }
     tblRows.sort( (a, b) => {
@@ -72,9 +57,12 @@ teamSchema.statics.getTable = async function() {
     return tblRows;
 }
 
-teamSchema.virtual("performance").get( function() {
+
+teamSchema.methods.getPerformance = async function() {
     let games = 0; let wins = 0; let draws = 0; let loses = 0; let scored = 0; let conceded = 0;
-    let awayGames = this.awayMatches; let homeGames = this.homeMatches;
+    let awayGames = await Match.find({ away: this._id }).populate("events");
+    let homeGames = await Match.find({ home: this._id }).populate("events");
+
 
     for (const match of homeGames) {
         if( match.time - Date.now() > 0 ) continue;
@@ -100,7 +88,8 @@ teamSchema.virtual("performance").get( function() {
     
     let goalDiference = scored - conceded; let points = ( wins * 3) + draws;
     return { games, wins, draws, loses, scored, conceded, goalDiference, points };
-})
+}
+
 
 teamSchema.plugin(uniqueValidator);
 

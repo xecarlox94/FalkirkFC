@@ -10,6 +10,7 @@ import { Player } from '../../models/player.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TeamService {
   private http: HttpClient;
 
@@ -41,7 +42,7 @@ export class TeamService {
   }
 
   getTeam(id: string){
-    return this.http.get<Team>(`${ environment.baseURL }/teams/${id}`).pipe(
+    return this.http.get<Team>(`${ environment.baseURL }/teams/${ id }`).pipe(
       map( (value: any) => new Team(value.team.name, value.team.manager, value.team._id) ));
   }
 

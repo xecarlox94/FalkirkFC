@@ -42,13 +42,13 @@ router.get("/performance/:id", async (req, res) => {
     const _id = req.params.id;
 
     try {
-        const team = await Team.findById(_id).populate("awayMatches").populate("homeMatches")
+        const team = await Team.findById(_id)
+        
+        const performance =  await team.getPerformance();
 
         res.send({
             team,
-            performance: team.performance,
-            awayMatches: team.awayMatches,
-            homeMatches: team.homeMatches
+            performance
         })
     } catch (error) {
         res.status(500).send()
@@ -74,7 +74,7 @@ router.get("/:id", async (req, res) => {
 router.get("/squad/:id", async (req, res) => {
     const _id = req.params.id;
     try {
-        const team = await Team.findById(_id).populate("awayMatches").populate("homeMatches").populate("players")
+        const team = await Team.findById(_id).populate("players")
 
         res.send({
             squad: {
@@ -110,7 +110,6 @@ router.patch("/:id", async (req, res) => {
 
         res.send({ team })
     } catch (error) {
-        console.log(error)
         res.status(500).send()
     }
 })

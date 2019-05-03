@@ -1,0 +1,35 @@
+
+<form [formGroup]="matchForm" (ngSubmit)="onSubmit()" >
+  
+  <mat-form-field>
+    <mat-label>
+      Home
+    </mat-label>
+    <mat-select formControlName="homeTeam" >
+      <mat-option *ngFor="let team of teams" [value]="team._id" >
+        {{ team.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Away
+    </mat-label>
+    <mat-select formControlName="awayTeam">
+      <mat-option *ngFor="let team of teams" [value]="team._id" >
+        {{ team.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>
+      Round
+    </mat-label>
+    <input matInput type="number" formControlName="round" min="1" max="100" step="1" >
+  </mat-form-field>
+
+  <button type="submit" [disabled]="!matchForm.valid" mat-raised-button >Submit</button>
+
+</form>

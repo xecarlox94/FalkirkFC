@@ -7,6 +7,9 @@ import { TeamEditComponent } from './squads/team/team-edit/team-edit.component';
 import { PlayerPageComponent } from './squads/player/player-page/player-page.component';
 import { PlayerEditComponent } from './squads/player/player-edit/player-edit.component';
 import { TeamPageComponent } from './squads/team/team-page/team-page.component';
+import { MatchListComponent } from './matches/match-list/match-list.component';
+import { MatchPageComponent } from './matches/match-page/match-page.component';
+import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 
 const adminRoutes: Route[] = [
     {
@@ -15,10 +18,14 @@ const adminRoutes: Route[] = [
             { path: "teams/edit/:id", component: TeamEditComponent },
             { path: "teams/new", component: TeamEditComponent },
             { path: "teams/:id", component: TeamPageComponent },
-            { path: "player/new", component: PlayerEditComponent},
-            { path: "player/new/:teamID", component: PlayerEditComponent},
+            { path: "player/new", component: PlayerEditComponent },
+            { path: "player/new/:teamID", component: PlayerEditComponent },
             { path: "player/edit/:id", component: PlayerEditComponent },
-            { path: "player/:id", component: PlayerPageComponent }
+            { path: "player/:id", component: PlayerPageComponent },
+            { path: "matches", component: MatchListComponent },
+            { path: "matches/edit/:id", component: MatchEditComponent },
+            { path: "matches/new", component: MatchEditComponent },
+            { path: "matches/:id", component: MatchPageComponent }
         ]
     }
 ]

@@ -16,6 +16,7 @@ app.use(express.static(public_static))
 
 app.use("/events", routers.eventRouter);
 app.use("/matches", routers.matchRouter);
+app.use("/matchEvents", routers.matchEventRouter);
 app.use("/news", routers.newsRouter);
 app.use("/players", routers.playerRouter);
 app.use("/teams", routers.teamRouter);

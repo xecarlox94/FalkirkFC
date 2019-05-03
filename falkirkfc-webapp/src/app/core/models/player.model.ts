@@ -16,4 +16,5 @@ export class Player {
     setId(id: string){
         this._id = id;
     }
+    
 }

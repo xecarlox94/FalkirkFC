@@ -20,4 +20,5 @@ export class Team {
     getPlayers(){
         return this.players.slice();
     }
+    
 }

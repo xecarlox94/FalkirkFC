@@ -11,7 +11,7 @@ import { FrequentQuestionsAskedComponent } from '../instituition/frequent-questi
 
 
 const appRoutes: Route[] = [
-    { path: "", pathMatch: "full", redirectTo: "/adminDashboard/teams"}, // DELETEEEEEEEEEEEEEEEEE
+    { path: "", pathMatch: "full", redirectTo: "/adminDashboard/matches"}, // DELETEEEEEEEEEEEEEEEEE
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
     { path: "about", component: AboutUsComponent },

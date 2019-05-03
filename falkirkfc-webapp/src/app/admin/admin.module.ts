@@ -12,6 +12,9 @@ import { PlayerPageComponent } from './squads/player/player-page/player-page.com
 import { PlayerEditComponent } from './squads/player/player-edit/player-edit.component';
 import { PlayerListComponent } from './squads/player/player-list/player-list.component';
 import { TeamPageComponent } from './squads/team/team-page/team-page.component';
+import { MatchListComponent } from './matches/match-list/match-list.component';
+import { MatchPageComponent } from './matches/match-page/match-page.component';
+import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { TeamPageComponent } from './squads/team/team-page/team-page.component';
     PlayerPageComponent,
     PlayerEditComponent,
     PlayerListComponent,
-    TeamPageComponent
+    TeamPageComponent,
+    MatchListComponent,
+    MatchPageComponent,
+    MatchEditComponent
   ],
   imports: [
     CommonModule,

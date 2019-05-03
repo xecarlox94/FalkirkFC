@@ -4,6 +4,7 @@ const newsRouter = require("./news");
 const teamRouter = require("./team");
 const userRouter = require("./user");
 const playerRouter = require("./player");
+const matchEventRouter = require("./matchEvent");
 
 
 
@@ -13,5 +14,6 @@ module.exports = {
     newsRouter,
     teamRouter,
     userRouter,
-    playerRouter
+    playerRouter,
+    matchEventRouter
 }
