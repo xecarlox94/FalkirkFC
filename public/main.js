@@ -98,6 +98,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _squads_player_player_page_player_page_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./squads/player/player-page/player-page.component */ "./src/app/admin/squads/player/player-page/player-page.component.ts");
 /* harmony import */ var _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./squads/player/player-edit/player-edit.component */ "./src/app/admin/squads/player/player-edit/player-edit.component.ts");
 /* harmony import */ var _squads_team_team_page_team_page_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./squads/team/team-page/team-page.component */ "./src/app/admin/squads/team/team-page/team-page.component.ts");
+/* harmony import */ var _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./matches/match-list/match-list.component */ "./src/app/admin/matches/match-list/match-list.component.ts");
+/* harmony import */ var _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./matches/match-page/match-page.component */ "./src/app/admin/matches/match-page/match-page.component.ts");
+/* harmony import */ var _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./matches/match-edit/match-edit.component */ "./src/app/admin/matches/match-edit/match-edit.component.ts");
+
+
+
 
 
 
@@ -117,7 +123,11 @@ var adminRoutes = [
             { path: "player/new", component: _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_7__["PlayerEditComponent"] },
             { path: "player/new/:teamID", component: _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_7__["PlayerEditComponent"] },
             { path: "player/edit/:id", component: _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_7__["PlayerEditComponent"] },
-            { path: "player/:id", component: _squads_player_player_page_player_page_component__WEBPACK_IMPORTED_MODULE_6__["PlayerPageComponent"] }
+            { path: "player/:id", component: _squads_player_player_page_player_page_component__WEBPACK_IMPORTED_MODULE_6__["PlayerPageComponent"] },
+            { path: "matches", component: _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_9__["MatchListComponent"] },
+            { path: "matches/edit/:id", component: _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_11__["MatchEditComponent"] },
+            { path: "matches/new", component: _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_11__["MatchEditComponent"] },
+            { path: "matches/:id", component: _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_10__["MatchPageComponent"] }
         ]
     }
 ];
@@ -164,6 +174,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./squads/player/player-edit/player-edit.component */ "./src/app/admin/squads/player/player-edit/player-edit.component.ts");
 /* harmony import */ var _squads_player_player_list_player_list_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./squads/player/player-list/player-list.component */ "./src/app/admin/squads/player/player-list/player-list.component.ts");
 /* harmony import */ var _squads_team_team_page_team_page_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./squads/team/team-page/team-page.component */ "./src/app/admin/squads/team/team-page/team-page.component.ts");
+/* harmony import */ var _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./matches/match-list/match-list.component */ "./src/app/admin/matches/match-list/match-list.component.ts");
+/* harmony import */ var _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./matches/match-page/match-page.component */ "./src/app/admin/matches/match-page/match-page.component.ts");
+/* harmony import */ var _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./matches/match-edit/match-edit.component */ "./src/app/admin/matches/match-edit/match-edit.component.ts");
+
+
+
 
 
 
@@ -189,7 +205,10 @@ var AdminModule = /** @class */ (function () {
                 _squads_player_player_page_player_page_component__WEBPACK_IMPORTED_MODULE_9__["PlayerPageComponent"],
                 _squads_player_player_edit_player_edit_component__WEBPACK_IMPORTED_MODULE_10__["PlayerEditComponent"],
                 _squads_player_player_list_player_list_component__WEBPACK_IMPORTED_MODULE_11__["PlayerListComponent"],
-                _squads_team_team_page_team_page_component__WEBPACK_IMPORTED_MODULE_12__["TeamPageComponent"]
+                _squads_team_team_page_team_page_component__WEBPACK_IMPORTED_MODULE_12__["TeamPageComponent"],
+                _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_13__["MatchListComponent"],
+                _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_14__["MatchPageComponent"],
+                _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_15__["MatchEditComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -206,6 +225,201 @@ var AdminModule = /** @class */ (function () {
         })
     ], AdminModule);
     return AdminModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-edit/match-edit.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-edit/match-edit.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<form [formGroup]=\"matchForm\" (ngSubmit)=\"onSubmit()\" >\n  \n  <mat-form-field>\n    <mat-label>\n      Home\n    </mat-label>\n    <mat-select formControlName=\"homeTeam\" >\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n\n  <mat-form-field>\n    <mat-label>\n      Away\n    </mat-label>\n    <mat-select formControlName=\"awayTeam\">\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n  \n  <mat-form-field>\n    <mat-label>\n      Round\n    </mat-label>\n    <input matInput type=\"number\" formControlName=\"round\" min=\"1\" max=\"100\" step=\"1\" >\n  </mat-form-field>\n\n  <button type=\"submit\" [disabled]=\"!matchForm.valid\" mat-raised-button >Submit</button>\n\n</form>\n"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-edit/match-edit.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-edit/match-edit.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL21hdGNoZXMvbWF0Y2gtZWRpdC9tYXRjaC1lZGl0LmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-edit/match-edit.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/admin/matches/match-edit/match-edit.component.ts ***!
+  \******************************************************************/
+/*! exports provided: MatchEditComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchEditComponent", function() { return MatchEditComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/teams/team.service */ "./src/app/core/services/teams/team.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+
+var MatchEditComponent = /** @class */ (function () {
+    function MatchEditComponent(teamSrv) {
+        this.matchForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+            homeTeam: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
+            awayTeam: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
+            round: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
+        });
+        this.teamService = teamSrv;
+    }
+    MatchEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.teamService.fetchTeams().toPromise().then(function (teams) { return _this.teams = teams; });
+    };
+    MatchEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-match-edit',
+            template: __webpack_require__(/*! ./match-edit.component.html */ "./src/app/admin/matches/match-edit/match-edit.component.html"),
+            styles: [__webpack_require__(/*! ./match-edit.component.scss */ "./src/app/admin/matches/match-edit/match-edit.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_2__["TeamService"]])
+    ], MatchEditComponent);
+    return MatchEditComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-list/match-list.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-list/match-list.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-list>\n  <mat-list-item *ngFor=\"let match of matches\" >\n    <button mat-button color=\"basic\" [routerLink]=\"[ match._id ]\" >Round: {{ match.round }} --  {{ match.home.name }} - {{ match.away.name }}</button>\n    <button mat-raised-button color=\"accent\" [routerLink]=\"['edit/' + match._id ]\" >Edit</button>\n    <button mat-raised-button color=\"warn\" (click)=\"deleteMatch(match)\">Delete</button>\n  </mat-list-item>\n</mat-list>\n\n\n<button mat-button color=\"primary\" [routerLink]=\"['new']\">Create new Match</button>"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-list/match-list.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-list/match-list.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL21hdGNoZXMvbWF0Y2gtbGlzdC9tYXRjaC1saXN0LmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-list/match-list.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/admin/matches/match-list/match-list.component.ts ***!
+  \******************************************************************/
+/*! exports provided: MatchListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchListComponent", function() { return MatchListComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/matches/match.service */ "./src/app/core/services/matches/match.service.ts");
+/* harmony import */ var src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/core/services/teams/team.service */ "./src/app/core/services/teams/team.service.ts");
+
+
+
+
+var MatchListComponent = /** @class */ (function () {
+    function MatchListComponent(matchService, teamService) {
+        this.teamService = teamService;
+        this.matchService = matchService;
+    }
+    MatchListComponent.prototype.ngOnInit = function () {
+        this.loadMatches();
+    };
+    MatchListComponent.prototype.deleteMatch = function (match) {
+        console.log("deleting ", match);
+        this.loadMatches();
+    };
+    MatchListComponent.prototype.loadMatches = function () {
+        var _this = this;
+        this.matchService.fetchMatches().toPromise().then(function (matches) { return _this.matches = matches; });
+    };
+    MatchListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-match-list',
+            template: __webpack_require__(/*! ./match-list.component.html */ "./src/app/admin/matches/match-list/match-list.component.html"),
+            styles: [__webpack_require__(/*! ./match-list.component.scss */ "./src/app/admin/matches/match-list/match-list.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_2__["MatchService"], src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_3__["TeamService"]])
+    ], MatchListComponent);
+    return MatchListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/match-page.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-page.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  match-page works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/match-page.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-page.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL21hdGNoZXMvbWF0Y2gtcGFnZS9tYXRjaC1wYWdlLmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/match-page.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-page.component.ts ***!
+  \******************************************************************/
+/*! exports provided: MatchPageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchPageComponent", function() { return MatchPageComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var MatchPageComponent = /** @class */ (function () {
+    function MatchPageComponent() {
+    }
+    MatchPageComponent.prototype.ngOnInit = function () {
+    };
+    MatchPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-match-page',
+            template: __webpack_require__(/*! ./match-page.component.html */ "./src/app/admin/matches/match-page/match-page.component.html"),
+            styles: [__webpack_require__(/*! ./match-page.component.scss */ "./src/app/admin/matches/match-page/match-page.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], MatchPageComponent);
+    return MatchPageComponent;
 }());
 
 
@@ -1044,7 +1258,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container\">\r\n  <mat-sidenav\r\n      #drawer\r\n      class=\"sidenav\" \r\n      fixedInViewport=\"false\"\r\n      [ngClass]=\"{ hidden: !( isHandset$ | async ) }\"\r\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n      [opened]=\"!(isHandset$ | async)\">\r\n    <mat-toolbar>Menu</mat-toolbar>\r\n    <mat-nav-list>\r\n      <a mat-list-item href=\"#\">Link 1</a>\r\n      <a mat-list-item href=\"#\">Link 2</a>\r\n      <a mat-list-item href=\"#\">Link 3</a>\r\n    </mat-nav-list>\r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <mat-toolbar color=\"primary\">\r\n      <button\r\n        type=\"button\"\r\n        aria-label=\"Toggle sidenav\"\r\n        mat-icon-button\r\n        (click)=\"drawer.toggle()\"\r\n        *ngIf=\"isHandset$ | async\">\r\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n      </button>\r\n      <span>falkirkfc-webapp</span>\r\n      <span class=\"spacer\"></span>\r\n      <button mat-raised-button color=\"primary\" [routerLink]=\"['/','adminDashboard','teams']\" >Teams list --delete</button>\r\n    </mat-toolbar>\r\n    <ng-content></ng-content>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container\">\r\n  <mat-sidenav\r\n      #drawer\r\n      class=\"sidenav\" \r\n      fixedInViewport=\"false\"\r\n      [ngClass]=\"{ hidden: !( isHandset$ | async ) }\"\r\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n      [opened]=\"!(isHandset$ | async)\">\r\n    <mat-toolbar>Menu</mat-toolbar>\r\n    <mat-nav-list>\r\n      <a mat-list-item href=\"#\">Link 1</a>\r\n      <a mat-list-item href=\"#\">Link 2</a>\r\n      <a mat-list-item href=\"#\">Link 3</a>\r\n    </mat-nav-list>\r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <mat-toolbar color=\"primary\">\r\n      <button\r\n        type=\"button\"\r\n        aria-label=\"Toggle sidenav\"\r\n        mat-icon-button\r\n        (click)=\"drawer.toggle()\"\r\n        *ngIf=\"isHandset$ | async\">\r\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n      </button>\r\n      <span>falkirkfc-webapp</span>\r\n      <span class=\"spacer\"></span>\r\n      <button mat-raised-button color=\"primary\" [routerLink]=\"['/','adminDashboard','matches']\" >Matches list --delete</button>\r\n    </mat-toolbar>\r\n    <ng-content></ng-content>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -1183,7 +1397,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var appRoutes = [
-    { path: "", pathMatch: "full", redirectTo: "/adminDashboard/teams" },
+    { path: "", pathMatch: "full", redirectTo: "/adminDashboard/matches" },
     { path: "login", component: _auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: "register", component: _auth_register_register_component__WEBPACK_IMPORTED_MODULE_4__["RegisterComponent"] },
     { path: "about", component: _instituition_about_us_about_us_component__WEBPACK_IMPORTED_MODULE_5__["AboutUsComponent"] },
@@ -1191,7 +1405,6 @@ var appRoutes = [
     { path: "cookiesPolicy", component: _instituition_cookie_policy_cookie_policy_component__WEBPACK_IMPORTED_MODULE_7__["CookiePolicyComponent"] },
     { path: "fqa", component: _instituition_frequent_questions_asked_frequent_questions_asked_component__WEBPACK_IMPORTED_MODULE_8__["FrequentQuestionsAskedComponent"] }
 ];
-// ENABLE ROBOTO FONT ON INDEX.TS
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
@@ -1273,6 +1486,51 @@ var CoreModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/core/models/match.model.ts":
+/*!********************************************!*\
+  !*** ./src/app/core/models/match.model.ts ***!
+  \********************************************/
+/*! exports provided: Match */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Match", function() { return Match; });
+var Match = /** @class */ (function () {
+    function Match(home, away, round, time, id) {
+        if (id === void 0) { id = null; }
+        this.home = home;
+        this.away = away;
+        this.round = round;
+        this.time = time;
+        this._id = id;
+    }
+    Match.prototype.setID = function (id) {
+        this._id = id;
+    };
+    Match.prototype.setResult = function (home, away) {
+        this.homeScore = home;
+        this.awayScore = away;
+    };
+    Match.prototype.setEvents = function (events) {
+        this.events = events;
+    };
+    Match.prototype.getEvents = function () {
+        return this.events.slice();
+    };
+    Match.prototype.setHome = function (home) {
+        this.home = home;
+    };
+    Match.prototype.setAway = function (away) {
+        this.away = away;
+    };
+    return Match;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/core/models/player.model.ts":
 /*!*********************************************!*\
   !*** ./src/app/core/models/player.model.ts ***!
@@ -1342,9 +1600,11 @@ var Team = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
 var User = /** @class */ (function () {
-    function User(email, password) {
+    function User(email, password, id) {
+        if (id === void 0) { id = null; }
         this.email = email;
         this.password = password;
+        this._id = id;
     }
     return User;
 }());
@@ -1465,6 +1725,57 @@ var TokenInterceptor = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"]])
     ], TokenInterceptor);
     return TokenInterceptor;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/services/matches/match.service.ts":
+/*!********************************************************!*\
+  !*** ./src/app/core/services/matches/match.service.ts ***!
+  \********************************************************/
+/*! exports provided: MatchService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchService", function() { return MatchService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _models_match_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/match.model */ "./src/app/core/models/match.model.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _models_team_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../models/team.model */ "./src/app/core/models/team.model.ts");
+
+
+
+
+
+
+
+var MatchService = /** @class */ (function () {
+    function MatchService(http) {
+        this.http = http;
+    }
+    MatchService.prototype.fetchMatches = function () {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matches/").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (values) {
+            var matchesJSON = values.matches;
+            var matches = [];
+            for (var i = 0; i < matchesJSON.length; i++) {
+                var homeTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].home.name, matchesJSON[i].home.name, matchesJSON[i].home._id);
+                var awayTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].away.name, matchesJSON[i].away.name, matchesJSON[i].away._id);
+                matches[i] = new _models_match_model__WEBPACK_IMPORTED_MODULE_3__["Match"](homeTeam, awayTeam, matchesJSON[i].round, matchesJSON[i].time, matchesJSON[i]._id);
+            }
+            return matches;
+        }));
+    };
+    MatchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: "root" }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], MatchService);
+    return MatchService;
 }());
 
 

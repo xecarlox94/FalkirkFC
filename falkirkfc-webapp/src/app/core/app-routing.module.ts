@@ -20,8 +20,6 @@ const appRoutes: Route[] = [
     { path: "fqa", component: FrequentQuestionsAskedComponent }
 ]
 
-// ENABLE ROBOTO FONT ON INDEX.TS
-
 @NgModule({
     imports: [
         RouterModule.forRoot(appRoutes)
