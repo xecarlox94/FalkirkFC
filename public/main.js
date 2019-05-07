@@ -177,6 +177,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./matches/match-list/match-list.component */ "./src/app/admin/matches/match-list/match-list.component.ts");
 /* harmony import */ var _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./matches/match-page/match-page.component */ "./src/app/admin/matches/match-page/match-page.component.ts");
 /* harmony import */ var _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./matches/match-edit/match-edit.component */ "./src/app/admin/matches/match-edit/match-edit.component.ts");
+/* harmony import */ var _matches_match_page_match_event_list_match_event_list_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./matches/match-page/match-event-list/match-event-list.component */ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.ts");
+/* harmony import */ var _matches_match_page_new_match_event_new_match_event_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./matches/match-page/new-match-event/new-match-event.component */ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.ts");
+
+
 
 
 
@@ -208,7 +212,9 @@ var AdminModule = /** @class */ (function () {
                 _squads_team_team_page_team_page_component__WEBPACK_IMPORTED_MODULE_12__["TeamPageComponent"],
                 _matches_match_list_match_list_component__WEBPACK_IMPORTED_MODULE_13__["MatchListComponent"],
                 _matches_match_page_match_page_component__WEBPACK_IMPORTED_MODULE_14__["MatchPageComponent"],
-                _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_15__["MatchEditComponent"]
+                _matches_match_edit_match_edit_component__WEBPACK_IMPORTED_MODULE_15__["MatchEditComponent"],
+                _matches_match_page_match_event_list_match_event_list_component__WEBPACK_IMPORTED_MODULE_16__["MatchEventListComponent"],
+                _matches_match_page_new_match_event_new_match_event_component__WEBPACK_IMPORTED_MODULE_17__["NewMatchEventComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -220,7 +226,8 @@ var AdminModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatListModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatGridListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSelectModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatRadioModule"]
             ]
         })
     ], AdminModule);
@@ -238,7 +245,7 @@ var AdminModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<form [formGroup]=\"matchForm\" (ngSubmit)=\"onSubmit()\" >\n  \n  <mat-form-field>\n    <mat-label>\n      Home\n    </mat-label>\n    <mat-select formControlName=\"homeTeam\" >\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n\n  <mat-form-field>\n    <mat-label>\n      Away\n    </mat-label>\n    <mat-select formControlName=\"awayTeam\">\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n  \n  <mat-form-field>\n    <mat-label>\n      Round\n    </mat-label>\n    <input matInput type=\"number\" formControlName=\"round\" min=\"1\" max=\"100\" step=\"1\" >\n  </mat-form-field>\n\n  <button type=\"submit\" [disabled]=\"!matchForm.valid\" mat-raised-button >Submit</button>\n\n</form>\n"
+module.exports = "\n<form [formGroup]=\"matchForm\" (ngSubmit)=\"onSubmit()\" >\n  \n  <mat-form-field>\n    <mat-label>\n      Home\n    </mat-label>\n    <mat-select formControlName=\"home\" >\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n\n  <mat-form-field>\n    <mat-label>\n      Away\n    </mat-label>\n    <mat-select formControlName=\"away\">\n      <mat-option *ngFor=\"let team of teams\" [value]=\"team._id\" >\n        {{ team.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n  \n  <mat-form-field>\n    <mat-label>\n      Round\n    </mat-label>\n    <input matInput type=\"number\" formControlName=\"round\" min=\"1\" max=\"100\" step=\"1\" >\n  </mat-form-field>\n\n  <button type=\"submit\" [disabled]=\"!matchForm.valid\" mat-raised-button >{{ editMode ? \"Update\" : \"Create\" }}</button>\n\n</form>\n"
 
 /***/ }),
 
@@ -267,22 +274,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/teams/team.service */ "./src/app/core/services/teams/team.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/core/services/matches/match.service */ "./src/app/core/services/matches/match.service.ts");
+/* harmony import */ var src_app_core_models_match_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/models/match.model */ "./src/app/core/models/match.model.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
 
 
 
 
 var MatchEditComponent = /** @class */ (function () {
-    function MatchEditComponent(teamSrv) {
+    function MatchEditComponent(teamSrv, matchSrv, router, actRoute) {
         this.matchForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
-            homeTeam: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
-            awayTeam: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
+            home: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
+            away: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]),
             round: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required])
         });
+        this.activeRoute = actRoute;
+        this.router = router;
+        this.matchService = matchSrv;
         this.teamService = teamSrv;
     }
     MatchEditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.teamService.fetchTeams().toPromise().then(function (teams) { return _this.teams = teams; });
+        this.teamService.fetchTeams().toPromise().then(function (teams) {
+            _this.teams = teams;
+            _this.matchID = _this.activeRoute.snapshot.params.id;
+            if (_this.matchID) {
+                _this.editMode = true;
+                _this.matchService.fetchMatch(_this.matchID)
+                    .then(function (match) {
+                    _this.matchForm.patchValue({
+                        home: match.home._id,
+                        away: match.away._id,
+                        round: match.round
+                    });
+                    _this.matchForm.controls['home'].disable();
+                    _this.matchForm.controls['away'].disable();
+                })
+                    .catch(function () { return _this.router.navigate(['../../'], { relativeTo: _this.activeRoute }); });
+            }
+            else {
+                _this.editMode = false;
+            }
+            ;
+        });
+    };
+    MatchEditComponent.prototype.onSubmit = function () {
+        var _this = this;
+        var value = this.matchForm.value;
+        if (this.editMode) {
+            var match = new src_app_core_models_match_model__WEBPACK_IMPORTED_MODULE_5__["Match"](value.home, value.away, value.round, Date.now().toString(), this.matchID);
+            this.matchService.updateMatch(match)
+                .then(function (value) { return _this.router.navigate(['../../'], { relativeTo: _this.activeRoute }); });
+        }
+        else {
+            var match = new src_app_core_models_match_model__WEBPACK_IMPORTED_MODULE_5__["Match"](value.home, value.away, value.round, Date.now().toString());
+            this.matchService.createMatch(match)
+                .then(function (match) { return _this.navigateBack(); })
+                .catch(function (rej) { return _this.navigateBack(); });
+        }
+    };
+    MatchEditComponent.prototype.navigateBack = function () {
+        this.router.navigate(['../'], { relativeTo: this.activeRoute });
     };
     MatchEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -290,7 +345,7 @@ var MatchEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./match-edit.component.html */ "./src/app/admin/matches/match-edit/match-edit.component.html"),
             styles: [__webpack_require__(/*! ./match-edit.component.scss */ "./src/app/admin/matches/match-edit/match-edit.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_2__["TeamService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_2__["TeamService"], src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_4__["MatchService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"]])
     ], MatchEditComponent);
     return MatchEditComponent;
 }());
@@ -306,7 +361,7 @@ var MatchEditComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-list>\n  <mat-list-item *ngFor=\"let match of matches\" >\n    <button mat-button color=\"basic\" [routerLink]=\"[ match._id ]\" >Round: {{ match.round }} --  {{ match.home.name }} - {{ match.away.name }}</button>\n    <button mat-raised-button color=\"accent\" [routerLink]=\"['edit/' + match._id ]\" >Edit</button>\n    <button mat-raised-button color=\"warn\" (click)=\"deleteMatch(match)\">Delete</button>\n  </mat-list-item>\n</mat-list>\n\n\n<button mat-button color=\"primary\" [routerLink]=\"['new']\">Create new Match</button>"
+module.exports = "<mat-list>\n  <mat-list-item *ngFor=\"let match of matches\" >\n    <button mat-button color=\"basic\" [routerLink]=\"[ match._id ]\" >Round {{ match.round }}:  {{ match.home.name }} {{ match.homeScore}} - {{ match.awayScore}} {{ match.away.name }}</button>\n    <button mat-raised-button color=\"accent\" [routerLink]=\"['edit/' + match._id ]\" >Edit</button>\n    <button mat-raised-button color=\"warn\" (click)=\"deleteMatch(match)\">Delete</button>\n  </mat-list-item>\n</mat-list>\n\n\n<button mat-button color=\"primary\" [routerLink]=\"['new']\">Create new Match</button>"
 
 /***/ }),
 
@@ -348,12 +403,12 @@ var MatchListComponent = /** @class */ (function () {
         this.loadMatches();
     };
     MatchListComponent.prototype.deleteMatch = function (match) {
-        console.log("deleting ", match);
-        this.loadMatches();
+        var _this = this;
+        this.matchService.deleteMatch(match._id).then(function () { return _this.loadMatches(); });
     };
     MatchListComponent.prototype.loadMatches = function () {
         var _this = this;
-        this.matchService.fetchMatches().toPromise().then(function (matches) { return _this.matches = matches; });
+        this.matchService.fetchMatches().then(function (matches) { return _this.matches = matches; });
     };
     MatchListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -370,6 +425,89 @@ var MatchListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.html":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-event-list/match-event-list.component.html ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<mat-list>\n  <mat-list-item *ngFor=\"let matchEvent of matchEvents\" >\n      {{ matchEvent.minute }}, {{ matchEvent.typeEvent }}: {{ matchEvent.player.name }}, {{ matchEvent.player.position }} ({{ matchEvent.team.name}})\n    <button mat-raised-button color=\"warn\" (click)=\"deleteMatch(matchEvent)\">Delete</button>\n  </mat-list-item>\n</mat-list>"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.scss":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-event-list/match-event-list.component.scss ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL21hdGNoZXMvbWF0Y2gtcGFnZS9tYXRjaC1ldmVudC1saXN0L21hdGNoLWV2ZW50LWxpc3QuY29tcG9uZW50LnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.ts":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/match-event-list/match-event-list.component.ts ***!
+  \*****************************************************************************************/
+/*! exports provided: MatchEventListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchEventListComponent", function() { return MatchEventListComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_core_services_matches_matchEvent_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/matches/matchEvent.service */ "./src/app/core/services/matches/matchEvent.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+
+var MatchEventListComponent = /** @class */ (function () {
+    function MatchEventListComponent(matchEventSrv) {
+        this.mEventChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.matchEventService = matchEventSrv;
+    }
+    MatchEventListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.mEventsSubs = this.mEventsObs.subscribe(function (matchID) { return _this.loadMatchEvents(matchID); });
+    };
+    MatchEventListComponent.prototype.loadMatchEvents = function (matchID) {
+        var _this = this;
+        this.matchEventService.fetchMatchEvents(matchID).then(function (matchEvents) { return _this.matchEvents = matchEvents; });
+    };
+    MatchEventListComponent.prototype.deleteMatch = function (matchEvent) {
+        var _this = this;
+        this.matchEventService.deleteMatchEvent(matchEvent).then(function () { return _this.mEventChanges.emit(); });
+    };
+    MatchEventListComponent.prototype.ngOnDestroy = function () {
+        this.mEventsSubs.unsubscribe();
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"])
+    ], MatchEventListComponent.prototype, "mEventsObs", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], MatchEventListComponent.prototype, "mEventChanges", void 0);
+    MatchEventListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-match-event-list',
+            template: __webpack_require__(/*! ./match-event-list.component.html */ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.html"),
+            styles: [__webpack_require__(/*! ./match-event-list.component.scss */ "./src/app/admin/matches/match-page/match-event-list/match-event-list.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_matches_matchEvent_service__WEBPACK_IMPORTED_MODULE_2__["MatchEventService"]])
+    ], MatchEventListComponent);
+    return MatchEventListComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/admin/matches/match-page/match-page.component.html":
 /*!********************************************************************!*\
   !*** ./src/app/admin/matches/match-page/match-page.component.html ***!
@@ -377,7 +515,7 @@ var MatchListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  match-page works!\n</p>\n"
+module.exports = "<h1>{{ match?.home.name }}  {{ match?.homeScore }} - {{ match?.awayScore }}   {{ match?.away.name }}</h1>\n<h5>{{ match?.time | date:\"longDate\" }} at {{ match?.time | date:\"shortTime\" }}</h5>\n\n\n<app-new-match-event *ngIf=\"isCreatingMatchEvent; else normalSection\" (mEventCreated)=\"onMatchEventCreated()\" ></app-new-match-event>\n\n<ng-template #normalSection >\n    <div>\n        <button mat-button color=\"primary\" (click)=\"isCreatingMatchEvent = !isCreatingMatchEvent\" >Create Match Event</button>\n    </div>\n</ng-template>\n\n<app-match-event-list [mEventsObs]=\"matchIDSubject.asObservable()\" (mEventChanges)=\"onMatchEventsChanges()\"></app-match-event-list>"
 
 /***/ }),
 
@@ -404,12 +542,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchPageComponent", function() { return MatchPageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/matches/match.service */ "./src/app/core/services/matches/match.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
 
 
 var MatchPageComponent = /** @class */ (function () {
-    function MatchPageComponent() {
+    function MatchPageComponent(matchSrv, actRoute) {
+        this.matchIDSubject = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+        this.isCreatingMatchEvent = false;
+        this.matchService = matchSrv;
+        this.route = actRoute;
     }
     MatchPageComponent.prototype.ngOnInit = function () {
+        this.loadMatch();
+    };
+    MatchPageComponent.prototype.emitMatchIDToChild = function () {
+        this.matchIDSubject.next(this.match._id);
+    };
+    MatchPageComponent.prototype.onMatchEventsChanges = function () {
+        this.loadMatch();
+    };
+    MatchPageComponent.prototype.onMatchEventCreated = function () {
+        this.isCreatingMatchEvent = false;
+        this.loadMatch();
+    };
+    MatchPageComponent.prototype.loadMatch = function () {
+        var _this = this;
+        this.matchService.fetchMatch(this.route.snapshot.params.id).then(function (match) {
+            _this.match = match;
+            _this.emitMatchIDToChild();
+        });
     };
     MatchPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -417,9 +583,128 @@ var MatchPageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./match-page.component.html */ "./src/app/admin/matches/match-page/match-page.component.html"),
             styles: [__webpack_require__(/*! ./match-page.component.scss */ "./src/app/admin/matches/match-page/match-page.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_2__["MatchService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], MatchPageComponent);
     return MatchPageComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.html":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/new-match-event/new-match-event.component.html ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<form [formGroup]=\"mEventForm\" (ngSubmit)=\"onSubmit()\">\n\n  <mat-radio-group formControlName=\"team\" >\n    <mat-label>Teams</mat-label>\n    <mat-radio-button [value]=\"match?.home._id\">{{ match?.home.name }}</mat-radio-button>\n    <mat-radio-button [value]=\"match?.away._id\">{{ match?.away.name }}</mat-radio-button>\n  </mat-radio-group>\n\n  <mat-form-field>\n    <mat-label>Players</mat-label>\n    <mat-select formControlName=\"player\" >\n      <mat-option *ngFor=\"let player of selectedPlayers\" [value]=\"player._id\">\n        {{ player.name }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n\n  <mat-form-field>\n    <mat-label>Type Event</mat-label>\n    <mat-select formControlName=\"typeEvent\" >\n      <mat-option *ngFor=\"let event of typeEvents\" [value]=\"event\">\n        {{ event }}\n      </mat-option>\n    </mat-select>\n  </mat-form-field>\n\n  <mat-form-field>\n    <mat-label>\n      Minute\n    </mat-label>\n    <input matInput type=\"number\" formControlName=\"minute\" min=\"0\" max=\"120\" step=\"1\" >\n  </mat-form-field>\n\n  <button mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"!mEventForm.valid\" >Create</button>\n</form>\n\n<button mat-button color=\"warn\" (click)=\"onCancel()\" >Cancel</button>"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.scss":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/new-match-event/new-match-event.component.scss ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FkbWluL21hdGNoZXMvbWF0Y2gtcGFnZS9uZXctbWF0Y2gtZXZlbnQvbmV3LW1hdGNoLWV2ZW50LmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.ts":
+/*!***************************************************************************************!*\
+  !*** ./src/app/admin/matches/match-page/new-match-event/new-match-event.component.ts ***!
+  \***************************************************************************************/
+/*! exports provided: NewMatchEventComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewMatchEventComponent", function() { return NewMatchEventComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/core/services/teams/team.service */ "./src/app/core/services/teams/team.service.ts");
+/* harmony import */ var src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/core/services/matches/match.service */ "./src/app/core/services/matches/match.service.ts");
+/* harmony import */ var src_app_core_services_matches_matchEvent_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/core/services/matches/matchEvent.service */ "./src/app/core/services/matches/matchEvent.service.ts");
+/* harmony import */ var src_app_core_models_matchEvent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/core/models/matchEvent */ "./src/app/core/models/matchEvent.ts");
+
+
+
+
+
+
+
+
+var NewMatchEventComponent = /** @class */ (function () {
+    function NewMatchEventComponent(actRoute, matchSrv, teamSrv, matchEventSrv) {
+        this.mEventCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.typeEvents = ["goal", "owngoal", "yellow", "red"];
+        this.mEventForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            team: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+            player: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+            typeEvent: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+            minute: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+        });
+        this.actRoute = actRoute;
+        this.matchService = matchSrv;
+        this.teamService = teamSrv;
+        this.matchEventService = matchEventSrv;
+    }
+    NewMatchEventComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.matchService.fetchMatch(this.actRoute.snapshot.params.id)
+            .then(function (match) {
+            _this.match = match;
+            return _this.teamService.fetchSquad(_this.match.home._id).toPromise();
+        })
+            .then(function (homeTeam) {
+            _this.match.home = homeTeam;
+            return _this.teamService.fetchSquad(_this.match.away._id).toPromise();
+        })
+            .then(function (awayTeam) {
+            _this.match.away = awayTeam;
+        });
+        this.mEventForm.get("team").valueChanges.subscribe(function (teamID) {
+            _this.mEventForm.get("player").setValue("");
+            _this.mEventForm.get("typeEvent").setValue("");
+            _this.mEventForm.get("minute").setValue("");
+            if (teamID == _this.match.home._id)
+                _this.selectedPlayers = _this.match.home.getPlayers();
+            if (teamID == _this.match.away._id)
+                _this.selectedPlayers = _this.match.away.getPlayers();
+        });
+    };
+    NewMatchEventComponent.prototype.onSubmit = function () {
+        var _this = this;
+        var matchEvent = new src_app_core_models_matchEvent__WEBPACK_IMPORTED_MODULE_7__["MatchEvent"](this.mEventForm.value.typeEvent, this.mEventForm.value.minute, this.match._id);
+        matchEvent.setTeam(this.mEventForm.value.team);
+        matchEvent.setPlayer(this.mEventForm.value.player);
+        this.matchEventService.createMatchEvent(matchEvent).then(function (matchEvent) {
+            console.log(matchEvent);
+            _this.mEventCreated.emit();
+        });
+    };
+    NewMatchEventComponent.prototype.onCancel = function () {
+        this.mEventCreated.emit();
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
+    ], NewMatchEventComponent.prototype, "mEventCreated", void 0);
+    NewMatchEventComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-new-match-event',
+            template: __webpack_require__(/*! ./new-match-event.component.html */ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.html"),
+            styles: [__webpack_require__(/*! ./new-match-event.component.scss */ "./src/app/admin/matches/match-page/new-match-event/new-match-event.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_core_services_matches_match_service__WEBPACK_IMPORTED_MODULE_5__["MatchService"], src_app_core_services_teams_team_service__WEBPACK_IMPORTED_MODULE_4__["TeamService"], src_app_core_services_matches_matchEvent_service__WEBPACK_IMPORTED_MODULE_6__["MatchEventService"]])
+    ], NewMatchEventComponent);
+    return NewMatchEventComponent;
 }());
 
 
@@ -605,7 +890,7 @@ var PlayerListComponent = /** @class */ (function () {
     ], PlayerListComponent.prototype, "players", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
     ], PlayerListComponent.prototype, "onDeletedPlayer", void 0);
     PlayerListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -685,7 +970,7 @@ var PlayerPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"teamForm\" (ngSubmit)=\"onSubmit()\">\r\n\r\n  <mat-form-field >\r\n    <input matInput placeholder=\"Club\" formControlName=\"name\" >\r\n  </mat-form-field>\r\n  <mat-form-field >\r\n    <input matInput placeholder=\"Manager\" formControlName=\"manager\" >\r\n  </mat-form-field>\r\n  <button type=\"submit\" [disabled]=\"!teamForm.valid\" mat-raised-button >{{ editMode ? \"Update\" : \"Create\"}}</button>\r\n</form>\r\n\r\n\r\n<button [routerLink]=\"['/adminDashboard/teams/']\">teams list page</button>"
+module.exports = "<form [formGroup]=\"teamForm\" (ngSubmit)=\"onSubmit()\">\r\n\r\n  <mat-form-field >\r\n    <input matInput placeholder=\"Club\" formControlName=\"name\" >\r\n  </mat-form-field>\r\n  <mat-form-field >\r\n    <input matInput placeholder=\"Manager\" formControlName=\"manager\" >\r\n  </mat-form-field>\r\n  <button type=\"submit\" [disabled]=\"!teamForm.valid\" mat-raised-button >{{ editMode ? \"Update\" : \"Create\"}}</button>\r\n</form>\r\n\r\n\r\n<button mat-button color=\"primary\" [routerLink]=\"['/adminDashboard/teams/']\">teams list page</button>"
 
 /***/ }),
 
@@ -751,12 +1036,15 @@ var TeamEditComponent = /** @class */ (function () {
         var _this = this;
         if (!this.editMode) {
             var team = new src_app_core_models_team_model__WEBPACK_IMPORTED_MODULE_5__["Team"](this.teamForm.value.name, this.teamForm.value.manager);
-            this.teamService.createTeam(team).toPromise().then(function () { return _this.router.navigate(['../'], { relativeTo: _this.route }); }, function (rej) { return _this.router.navigate(['../'], { relativeTo: _this.route }); });
+            this.teamService.createTeam(team).toPromise().then(function () { return _this.navigateBack(); }, function (rej) { return _this.navigateBack(); });
         }
         else {
             var team = new src_app_core_models_team_model__WEBPACK_IMPORTED_MODULE_5__["Team"](this.teamForm.value.name, this.teamForm.value.manager, this.idTeam);
-            this.teamService.updateTeam(team).toPromise().then(function () { return _this.router.navigate(['../../'], { relativeTo: _this.route }); }, function (rej) { return _this.router.navigate(['../../'], { relativeTo: _this.route }); });
+            this.teamService.updateTeam(team).toPromise().then(function () { return _this.navigateBack(); }, function (rej) { return _this.navigateBack(); });
         }
+    };
+    TeamEditComponent.prototype.navigateBack = function () {
+        this.router.navigate(['../../'], { relativeTo: this.route });
     };
     TeamEditComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1258,7 +1546,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container class=\"sidenav-container\">\r\n  <mat-sidenav\r\n      #drawer\r\n      class=\"sidenav\" \r\n      fixedInViewport=\"false\"\r\n      [ngClass]=\"{ hidden: !( isHandset$ | async ) }\"\r\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n      [opened]=\"!(isHandset$ | async)\">\r\n    <mat-toolbar>Menu</mat-toolbar>\r\n    <mat-nav-list>\r\n      <a mat-list-item href=\"#\">Link 1</a>\r\n      <a mat-list-item href=\"#\">Link 2</a>\r\n      <a mat-list-item href=\"#\">Link 3</a>\r\n    </mat-nav-list>\r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <mat-toolbar color=\"primary\">\r\n      <button\r\n        type=\"button\"\r\n        aria-label=\"Toggle sidenav\"\r\n        mat-icon-button\r\n        (click)=\"drawer.toggle()\"\r\n        *ngIf=\"isHandset$ | async\">\r\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n      </button>\r\n      <span>falkirkfc-webapp</span>\r\n      <span class=\"spacer\"></span>\r\n      <button mat-raised-button color=\"primary\" [routerLink]=\"['/','adminDashboard','matches']\" >Matches list --delete</button>\r\n    </mat-toolbar>\r\n    <ng-content></ng-content>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+module.exports = "<mat-sidenav-container class=\"sidenav-container\">\r\n  <mat-sidenav\r\n      #drawer\r\n      class=\"sidenav\" \r\n      fixedInViewport=\"false\"\r\n      [ngClass]=\"{ hidden: !( isHandset$ | async ) }\"\r\n      [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n      [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n      [opened]=\"!(isHandset$ | async)\">\r\n    <mat-toolbar>Menu</mat-toolbar>\r\n    <mat-nav-list>\r\n      <a mat-list-item href=\"#\">Link 1</a>\r\n      <a mat-list-item href=\"#\">Link 2</a>\r\n      <a mat-list-item href=\"#\">Link 3</a>\r\n    </mat-nav-list>\r\n  </mat-sidenav>\r\n  <mat-sidenav-content>\r\n    <mat-toolbar color=\"primary\">\r\n      <button\r\n        type=\"button\"\r\n        aria-label=\"Toggle sidenav\"\r\n        mat-icon-button\r\n        (click)=\"drawer.toggle()\"\r\n        *ngIf=\"isHandset$ | async\">\r\n        <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n      </button>\r\n      <span>falkirkfc-webapp</span>\r\n      <span class=\"spacer\"></span>\r\n      <button mat-raised-button color=\"primary\" [routerLink]=\"['/','adminDashboard','matches']\" >Matches list --del</button>\r\n      <button mat-raised-button color=\"primary\" [routerLink]=\"['/','adminDashboard','teams']\" >Teams list --del</button>\r\n    </mat-toolbar>\r\n    <ng-content></ng-content>\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
 
 /***/ }),
 
@@ -1437,16 +1725,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CoreModule", function() { return CoreModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _other_core_modules_material_design_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./other-core-modules/material-design.module */ "./src/app/core/other-core-modules/material-design.module.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/core/app-routing.module.ts");
-/* harmony import */ var _auth_auth_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../auth/auth.module */ "./src/app/auth/auth.module.ts");
-/* harmony import */ var _instituition_instituition_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../instituition/instituition.module */ "./src/app/instituition/instituition.module.ts");
-/* harmony import */ var _subscriber_subscriber_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../subscriber/subscriber.module */ "./src/app/subscriber/subscriber.module.ts");
-/* harmony import */ var _admin_admin_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../admin/admin.module */ "./src/app/admin/admin.module.ts");
-/* harmony import */ var _services_http_interceptors_token_interceptor_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/http-interceptors/token-interceptor.service */ "./src/app/core/services/http-interceptors/token-interceptor.service.ts");
-
-
+/* harmony import */ var _other_core_modules_material_design_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./other-core-modules/material-design.module */ "./src/app/core/other-core-modules/material-design.module.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/core/app-routing.module.ts");
+/* harmony import */ var _auth_auth_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth/auth.module */ "./src/app/auth/auth.module.ts");
+/* harmony import */ var _instituition_instituition_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../instituition/instituition.module */ "./src/app/instituition/instituition.module.ts");
+/* harmony import */ var _subscriber_subscriber_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../subscriber/subscriber.module */ "./src/app/subscriber/subscriber.module.ts");
+/* harmony import */ var _admin_admin_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../admin/admin.module */ "./src/app/admin/admin.module.ts");
 
 
 
@@ -1456,12 +1740,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modules = [
-    _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-    _other_core_modules_material_design_module__WEBPACK_IMPORTED_MODULE_3__["MaterialDesignModule"],
-    _auth_auth_module__WEBPACK_IMPORTED_MODULE_5__["AuthModule"],
-    _instituition_instituition_module__WEBPACK_IMPORTED_MODULE_6__["InstituitionModule"],
-    _subscriber_subscriber_module__WEBPACK_IMPORTED_MODULE_7__["SubscriberModule"],
-    _admin_admin_module__WEBPACK_IMPORTED_MODULE_8__["AdminModule"]
+    _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
+    _other_core_modules_material_design_module__WEBPACK_IMPORTED_MODULE_2__["MaterialDesignModule"],
+    _auth_auth_module__WEBPACK_IMPORTED_MODULE_4__["AuthModule"],
+    _instituition_instituition_module__WEBPACK_IMPORTED_MODULE_5__["InstituitionModule"],
+    _subscriber_subscriber_module__WEBPACK_IMPORTED_MODULE_6__["SubscriberModule"],
+    _admin_admin_module__WEBPACK_IMPORTED_MODULE_7__["AdminModule"]
 ];
 var CoreModule = /** @class */ (function () {
     function CoreModule() {
@@ -1469,14 +1753,7 @@ var CoreModule = /** @class */ (function () {
     CoreModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             imports: modules.slice(),
-            exports: modules.slice(),
-            providers: [
-                {
-                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HTTP_INTERCEPTORS"],
-                    useClass: _services_http_interceptors_token_interceptor_service__WEBPACK_IMPORTED_MODULE_9__["TokenInterceptor"],
-                    multi: true
-                }
-            ]
+            exports: modules.slice()
         })
     ], CoreModule);
     return CoreModule;
@@ -1498,6 +1775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Match", function() { return Match; });
 var Match = /** @class */ (function () {
     function Match(home, away, round, time, id) {
+        if (time === void 0) { time = null; }
         if (id === void 0) { id = null; }
         this.home = home;
         this.away = away;
@@ -1512,19 +1790,53 @@ var Match = /** @class */ (function () {
         this.homeScore = home;
         this.awayScore = away;
     };
-    Match.prototype.setEvents = function (events) {
-        this.events = events;
-    };
-    Match.prototype.getEvents = function () {
-        return this.events.slice();
-    };
     Match.prototype.setHome = function (home) {
         this.home = home;
     };
     Match.prototype.setAway = function (away) {
         this.away = away;
     };
+    Match.prototype.getHome = function () { return this.home; };
+    Match.prototype.getAway = function () { return this.away; };
     return Match;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/models/matchEvent.ts":
+/*!*******************************************!*\
+  !*** ./src/app/core/models/matchEvent.ts ***!
+  \*******************************************/
+/*! exports provided: MatchEvent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchEvent", function() { return MatchEvent; });
+var MatchEvent = /** @class */ (function () {
+    function MatchEvent(typeEvent, minute, match, player, team, id) {
+        if (player === void 0) { player = null; }
+        if (team === void 0) { team = null; }
+        if (id === void 0) { id = null; }
+        this.typeEvent = typeEvent;
+        this.minute = minute;
+        this.match = match;
+        this._id = id;
+        this.team = team;
+        this.player = player;
+    }
+    MatchEvent.prototype.setTeam = function (teamID) {
+        this.team = teamID;
+    };
+    MatchEvent.prototype.setPlayer = function (playerID) {
+        this.player = playerID;
+    };
+    MatchEvent.prototype.setID = function (id) {
+        this._id = id;
+    };
+    return MatchEvent;
 }());
 
 
@@ -1691,46 +2003,6 @@ var UserAuthGuard = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/core/services/http-interceptors/token-interceptor.service.ts":
-/*!******************************************************************************!*\
-  !*** ./src/app/core/services/http-interceptors/token-interceptor.service.ts ***!
-  \******************************************************************************/
-/*! exports provided: TokenInterceptor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _users_user_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../users/user-auth.service */ "./src/app/core/services/users/user-auth.service.ts");
-
-
-
-var TokenInterceptor = /** @class */ (function () {
-    function TokenInterceptor(injector) {
-        this.injector = injector;
-    }
-    TokenInterceptor.prototype.intercept = function (req, next) {
-        var userAuthService = this.injector.get(_users_user_auth_service__WEBPACK_IMPORTED_MODULE_2__["UserAuthService"]);
-        var tokenizedReq = req.clone({
-            setHeaders: {
-                Authorization: "Bearer " + userAuthService.getToken()
-            }
-        });
-        return next.handle(tokenizedReq);
-    };
-    TokenInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"]])
-    ], TokenInterceptor);
-    return TokenInterceptor;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/core/services/matches/match.service.ts":
 /*!********************************************************!*\
   !*** ./src/app/core/services/matches/match.service.ts ***!
@@ -1764,18 +2036,108 @@ var MatchService = /** @class */ (function () {
             var matchesJSON = values.matches;
             var matches = [];
             for (var i = 0; i < matchesJSON.length; i++) {
-                var homeTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].home.name, matchesJSON[i].home.name, matchesJSON[i].home._id);
-                var awayTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].away.name, matchesJSON[i].away.name, matchesJSON[i].away._id);
+                var homeTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].home.name, matchesJSON[i].home.manager, matchesJSON[i].home._id);
+                var awayTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchesJSON[i].away.name, matchesJSON[i].away.manager, matchesJSON[i].away._id);
                 matches[i] = new _models_match_model__WEBPACK_IMPORTED_MODULE_3__["Match"](homeTeam, awayTeam, matchesJSON[i].round, matchesJSON[i].time, matchesJSON[i]._id);
+                matches[i].setResult(matchesJSON[i].homeScore, matchesJSON[i].awayScore);
             }
             return matches;
-        }));
+        })).toPromise();
+    };
+    MatchService.prototype.fetchMatch = function (id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matches/" + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) {
+            var matchReport = value.matchReport;
+            var homeTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchReport.home.name, matchReport.home.manager, matchReport.home._id);
+            var awayTeam = new _models_team_model__WEBPACK_IMPORTED_MODULE_6__["Team"](matchReport.away.name, matchReport.away.manager, matchReport.away._id);
+            var match = new _models_match_model__WEBPACK_IMPORTED_MODULE_3__["Match"](homeTeam, awayTeam, matchReport.round, matchReport.time, matchReport._id);
+            match.setResult(matchReport.homeScore, matchReport.awayScore);
+            return match;
+        })).toPromise();
+    };
+    MatchService.prototype.updateMatch = function (match) {
+        return this.http.patch(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matches/" + match._id, match).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) { return new _models_match_model__WEBPACK_IMPORTED_MODULE_3__["Match"](value.match.home, value.match.away, value.match.round, value.match.time, value.match._id); })).toPromise();
+    };
+    MatchService.prototype.createMatch = function (match) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matches/", match).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) { return new _models_match_model__WEBPACK_IMPORTED_MODULE_3__["Match"](value.home, value.away, value.round, value.time, value._id); })).toPromise();
+    };
+    MatchService.prototype.deleteMatch = function (id) {
+        return this.http.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matches/" + id).toPromise();
     };
     MatchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: "root" }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], MatchService);
     return MatchService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/core/services/matches/matchEvent.service.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/core/services/matches/matchEvent.service.ts ***!
+  \*************************************************************/
+/*! exports provided: MatchEventService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MatchEventService", function() { return MatchEventService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _models_matchEvent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/matchEvent */ "./src/app/core/models/matchEvent.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _models_player_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../models/player.model */ "./src/app/core/models/player.model.ts");
+/* harmony import */ var _models_team_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../models/team.model */ "./src/app/core/models/team.model.ts");
+
+
+
+
+
+
+
+
+var MatchEventService = /** @class */ (function () {
+    function MatchEventService(http) {
+        this.http = http;
+    }
+    MatchEventService.prototype.fetchMatchEvents = function (matchID) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matchEvents/match/" + matchID).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (values) {
+            var matchEvents = [];
+            for (var i = 0; i < values.length; i++) {
+                var player = new _models_player_model__WEBPACK_IMPORTED_MODULE_6__["Player"](values[i].player.name, values[i].player.position, values[i].player.team, values[i].player._id);
+                var team = new _models_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"](values[i].team.name, values[i].team.manager, values[i].team._id);
+                matchEvents[i] = new _models_matchEvent__WEBPACK_IMPORTED_MODULE_3__["MatchEvent"](values[i].typeEvent, values[i].minute, values[i].match, player, team, values[i]._id);
+            }
+            return matchEvents;
+        })).toPromise();
+    };
+    MatchEventService.prototype.deleteMatchEvent = function (matchEvent) {
+        return this.http.delete(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matchEvents/" + matchEvent._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) {
+            var mEvent = value.matchEvent;
+            var player = new _models_player_model__WEBPACK_IMPORTED_MODULE_6__["Player"](mEvent.player.name, mEvent.player.position, mEvent.player.team, mEvent.player._id);
+            var team = new _models_team_model__WEBPACK_IMPORTED_MODULE_7__["Team"](mEvent.team.name, mEvent.team.manager, mEvent.team._id);
+            return new _models_matchEvent__WEBPACK_IMPORTED_MODULE_3__["MatchEvent"](mEvent.typeEvent, mEvent.minute, mEvent.match, player, team, mEvent._id);
+        })).toPromise();
+    };
+    MatchEventService.prototype.createMatchEvent = function (matchEvent) {
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseURL + "/matchEvents/", matchEvent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (value) {
+            var matchEventJSON = value.matchEvent;
+            var matchEvent = new _models_matchEvent__WEBPACK_IMPORTED_MODULE_3__["MatchEvent"](matchEventJSON.typeEvent, matchEventJSON.minute, matchEventJSON.match);
+            matchEvent.setTeam(matchEventJSON.team);
+            matchEvent.setPlayer(matchEventJSON.player);
+            matchEvent.setID(matchEventJSON._id);
+            return matchEvent;
+        })).toPromise();
+    };
+    MatchEventService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: "root" }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], MatchEventService);
+    return MatchEventService;
 }());
 
 
