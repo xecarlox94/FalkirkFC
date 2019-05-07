@@ -63,6 +63,12 @@ const matchEventSchema = new mongoose.Schema({
 })
 
 
+matchEventSchema.statics.getEventsMatch = async function( match_id ){
+    let match_events = await MatchEvent.find({ match: match_id }).populate("team").populate("player")
+    match_events.sort((a, b) => a.minute - b.minute )
+    return match_events;
+}
+
 
 const MatchEvent = mongoose.model("MatchEvent", matchEventSchema);
 

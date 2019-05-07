@@ -1,3 +1,13 @@
-<p>
-  match-page works!
-</p>
+<h1>{{ match?.home.name }}  {{ match?.homeScore }} - {{ match?.awayScore }}   {{ match?.away.name }}</h1>
+<h5>{{ match?.time | date:"longDate" }} at {{ match?.time | date:"shortTime" }}</h5>
+
+
+<app-new-match-event *ngIf="isCreatingMatchEvent; else normalSection" (mEventCreated)="onMatchEventCreated()" ></app-new-match-event>
+
+<ng-template #normalSection >
+    <div>
+        <button mat-button color="primary" (click)="isCreatingMatchEvent = !isCreatingMatchEvent" >Create Match Event</button>
+    </div>
+</ng-template>
+
+<app-match-event-list [mEventsObs]="matchIDSubject.asObservable()" (mEventChanges)="onMatchEventsChanges()"></app-match-event-list>

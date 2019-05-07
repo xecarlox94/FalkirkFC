@@ -4,16 +4,15 @@ import { Team } from './team.model';
 
 
 export class Match {
-    home: Team | string;
-    away: Team | string;
+    home: Team;
+    away: Team;
     round: number;
     time: string;
-    events?: MatchEvent[];
     homeScore?: number;
     awayScore?: number;
     _id?: string;
 
-    constructor(home: Team | string, away: Team | string, round: number, time: string, id: string = null){
+    constructor(home: Team, away: Team, round: number, time: string = null, id: string = null){
         this.home = home;
         this.away = away;
         this.round = round;
@@ -30,14 +29,6 @@ export class Match {
         this.awayScore = away;
     }
 
-    setEvents(events: MatchEvent[]): void {
-        this.events = events;
-    }
-
-    getEvents(): MatchEvent[] {
-        return this.events.slice()
-    }
-
     setHome(home: Team){
         this.home = home;
     }
@@ -45,5 +36,9 @@ export class Match {
     setAway(away: Team){
         this.away = away;
     }
+
+    getHome() { return this.home }
+
+    getAway() { return this.away }
 
 }

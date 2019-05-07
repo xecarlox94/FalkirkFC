@@ -23,12 +23,12 @@ export class MatchListComponent implements OnInit {
   }
 
   deleteMatch(match: Match){
-    console.log("deleting ", match)
-    this.loadMatches()
+    this.matchService.deleteMatch(match._id).then( () => this.loadMatches())    
   }
 
   loadMatches(){
-    this.matchService.fetchMatches().toPromise().then( ( matches: Match[] ) => this.matches = matches )
+    this.matchService.fetchMatches().then( ( matches: Match[] ) => this.matches = matches )
   }
 
 }
+ 

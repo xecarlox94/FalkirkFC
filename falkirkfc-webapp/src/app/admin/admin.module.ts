@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatGridListModule, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatGridListModule, MatSelectModule, MatRadioModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -15,6 +15,8 @@ import { TeamPageComponent } from './squads/team/team-page/team-page.component';
 import { MatchListComponent } from './matches/match-list/match-list.component';
 import { MatchPageComponent } from './matches/match-page/match-page.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
+import { MatchEventListComponent } from './matches/match-page/match-event-list/match-event-list.component';
+import { NewMatchEventComponent } from './matches/match-page/new-match-event/new-match-event.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MatchEditComponent } from './matches/match-edit/match-edit.component';
     TeamPageComponent,
     MatchListComponent,
     MatchPageComponent,
-    MatchEditComponent
+    MatchEditComponent,
+    MatchEventListComponent,
+    NewMatchEventComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,8 @@ import { MatchEditComponent } from './matches/match-edit/match-edit.component';
     MatButtonModule,
     MatListModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule
   ]
 })
 

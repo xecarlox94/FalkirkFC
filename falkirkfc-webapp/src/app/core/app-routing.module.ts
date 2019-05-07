@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Route, RouterModule, PreloadingStrategy, PreloadAllModules } from "@angular/router";
+import { Route, RouterModule } from "@angular/router";
 
 
 import { LoginComponent } from '../auth/login/login.component';

@@ -3,26 +3,33 @@ const router = new express.Router()
 
 const MatchEvent = require("../models/matchEvent");
 
-
-router.post("/match/:match", async (req, res) => {
-    const match_id = req.params.match;
-    let body =  req.body;
-    body.match = match_id;
-
+router.delete("/:id", async (req, res) => {
+    const _id = req.params.id;
     try {
-        const updates = Object.keys(body)
-        const allowedUpdates = [ "typeEvent", "minute", "match", "player", "team" ];
-        const isvalidOperation = updates.every( (update) => allowedUpdates.includes(update) )
-        if(!isvalidOperation) throw new Error()
+        const matchEvent = await MatchEvent.findByIdAndDelete(_id).populate("player").populate("team")
+
+        res.send({ matchEvent })
+    } catch (error) {
+        res.status(500).send()
+    }
+})
+
+router.post("/", async (req, res) => {
+    let body =  req.body;
+    try {
+        const matchEvent = new MatchEvent({
+            typeEvent: body.typeEvent,
+            minute: body.minute,
+            match:  body.match,
+            team:  body.team,
+            player: body.player
+        });
         
-        const matchEvent = new MatchEvent(body);
-
         await matchEvent.save()
-
+        
         res.send({ matchEvent })
         
     } catch (error) {
-        console.log(error)
         res.status(500).send()
     }
 })
@@ -31,10 +38,11 @@ router.get("/match/:match", async (req, res) => {
     const match_id = req.params.match;
 
     try {
-        const matchEvents = await MatchEvent.find({ match: match_id })
+        const matchEvents = await MatchEvent.getEventsMatch(match_id)
 
         res.send(matchEvents)
     } catch (error) {
+        console.log(error)
         res.status(500).send()
     }
 })

@@ -5,13 +5,14 @@ const Match = require("../models/match")
 
 router.post("/", async (req, res) => {
     const body = req.body;
-    const match = new Match({
-        home: body.home,
-        away: body.away,
-        round: body.round
-    })
     
     try {
+        const match = new Match({
+            home: body.home,
+            away: body.away,
+            round: body.round
+        })
+        
         await match.save()
         res.send(match)
     } catch (error) {
@@ -22,8 +23,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const matches = await Match.find({}).populate("home").populate("away")
-        
+        const matches = await Match.getMatches()
+        if(!matches) throw new Error()
 
         res.send({ matches })
 
@@ -37,7 +38,6 @@ router.delete("/:id", async (req, res) => {
     const _id = req.params.id;
     try {
         const match = await Match.findByIdAndDelete({ _id })
-        
         if(!match) throw new Error()
 
         res.send({match})
@@ -66,9 +66,6 @@ router.patch("/:id", async (req, res) => {
 
     try {
         const updates = Object.keys(body)
-        const allowedUpdates = ["time", "round", "away", "home"];
-        const isvalidOperation = updates.every( (update) => allowedUpdates.includes(update) )
-        if(!isvalidOperation) throw new Error()
         
         const match = await Match.findById({ _id })
         updates.forEach( update =>  match[update] = body[update]);
@@ -77,6 +74,7 @@ router.patch("/:id", async (req, res) => {
 
         res.send({ match })
     } catch (error) {
+        console.log(error)
         res.status(500).send()
     }
 })

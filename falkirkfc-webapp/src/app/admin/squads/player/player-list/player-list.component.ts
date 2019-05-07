@@ -12,7 +12,7 @@ export class PlayerListComponent implements OnInit {
   playerService: PlayerService;
   router: Router;
   @Input() players: Player[];
-  @Output() onDeletedPlayer = new EventEmitter<void>();
+  @Output() onDeletedPlayer: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(playerSrv: PlayerService, router: Router) {
     this.playerService = playerSrv;

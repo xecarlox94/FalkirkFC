@@ -43,7 +43,8 @@ export class TeamService {
 
   getTeam(id: string){
     return this.http.get<Team>(`${ environment.baseURL }/teams/${ id }`).pipe(
-      map( (value: any) => new Team(value.team.name, value.team.manager, value.team._id) ));
+      map( (value: any) => new Team(value.team.name, value.team.manager, value.team._id) )
+    );
   }
 
   fetchSquad(id: string): Observable<Team>{
