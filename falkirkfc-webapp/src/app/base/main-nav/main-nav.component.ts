@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { UserAuthService } from 'src/app/core/services/users/user-auth.service';
 
 @Component({
@@ -11,15 +11,20 @@ import { UserAuthService } from 'src/app/core/services/users/user-auth.service';
 })
 export class MainNavComponent {
   userAuthService: UserAuthService;
+  isHandset: boolean;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
 
   constructor(private breakpointObserver: BreakpointObserver, userAuthSrv: UserAuthService) {
     this.userAuthService = userAuthSrv;
   }
+
+  
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      tap( result => this.isHandset = result.matches ),
+      map( result => result.matches )
+    );
+  
 
   logout(){
     this.userAuthService.logout()

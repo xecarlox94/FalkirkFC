@@ -63,8 +63,6 @@ export class UserAuthService {
         this.setBearerToken(next.token)
         this.setAdmin(user)
         this.setSubscription(user)
-        console.log(this.getAdmin())
-        console.log(this.getSubscription())
     }
     
     setBearerToken(token: string){
@@ -81,7 +79,7 @@ export class UserAuthService {
         localStorage.setItem("subscription", user.getSubscription())
     }
 
-    getAdmin(): boolean {
+    isAdmin(): boolean {
         return localStorage.getItem("admin") === "true"
     }
     
@@ -89,7 +87,7 @@ export class UserAuthService {
         return localStorage.getItem("subscription");
     }
 
-    getToken(){
+    getToken(): string {
         return localStorage.getItem("auth-token")
     }
     

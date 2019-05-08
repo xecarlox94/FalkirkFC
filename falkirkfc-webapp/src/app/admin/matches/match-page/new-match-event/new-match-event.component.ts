@@ -71,10 +71,7 @@ export class NewMatchEventComponent implements OnInit {
     const matchEvent = new MatchEvent(this.mEventForm.value.typeEvent, this.mEventForm.value.minute, this.match._id)
     matchEvent.setTeam(this.mEventForm.value.team)
     matchEvent.setPlayer(this.mEventForm.value.player)
-    this.matchEventService.createMatchEvent(matchEvent).then( (matchEvent: MatchEvent) => {
-      console.log(matchEvent)
-      this.mEventCreated.emit()
-    })
+    this.matchEventService.createMatchEvent(matchEvent).then( (matchEvent: MatchEvent) => this.mEventCreated.emit() )
   }
 
   onCancel(){

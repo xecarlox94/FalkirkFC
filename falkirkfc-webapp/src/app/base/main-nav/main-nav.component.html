@@ -24,13 +24,17 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>falkirkfc-webapp</span>
+      <div class="logo_wrapper">
+        <a [routerLink]="['/']" >
+          <img src="assets/img/logos/falkirk-brightLogo.png" alt="logo" />
+        </a>
+      </div>
       <span class="spacer"></span>
-      <button mat-raised-button color="primary" [routerLink]="['/','adminDashboard','matches']" >Matches list --del</button>
-      <button mat-raised-button color="primary" [routerLink]="['/','adminDashboard','teams']" >Teams list --del</button>
-      <button mat-raised-button color="primary" [routerLink]="['/','login' ]" >Login --del</button>
-      <button mat-raised-button color="primary" [routerLink]="['/','register' ]" >Register --del</button>
-      <button mat-raised-button color="primary" (click)="logout()" >Logout --del</button>
+      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','adminDashboard','matches']" >Matches</button>
+      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','adminDashboard','teams']" >Teams</button>
+      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','login' ]" >Login</button>
+      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','register' ]" >Register</button>
+      <button *ngIf="!isHandset" mat-raised-button color="primary" (click)="logout()" >Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
