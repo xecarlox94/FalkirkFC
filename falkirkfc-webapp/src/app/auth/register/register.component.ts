@@ -28,11 +28,7 @@ export class RegisterComponent implements OnInit {
       const user = new User(email, password)
 
       this.userAuthService.register(user)
-        .subscribe( res => {
-          console.log("response", res)
-          localStorage.setItem("token", res.token)
-          this.router.navigate(["/about"])
-        }, err => console.log("ERROR:", err))
+        .subscribe( res => this.router.navigate([ "/", "adminDashboard","teams"]) , err => console.log("ERROR:", err))
     }
   }
 }

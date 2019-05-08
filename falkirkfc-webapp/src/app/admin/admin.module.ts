@@ -17,6 +17,12 @@ import { MatchPageComponent } from './matches/match-page/match-page.component';
 import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 import { MatchEventListComponent } from './matches/match-page/match-event-list/match-event-list.component';
 import { NewMatchEventComponent } from './matches/match-page/new-match-event/new-match-event.component';
+import { EventListComponent } from './events/event-list/event-list.component';
+import { EventEditComponent } from './events/event-edit/event-edit.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
+import { SubscribersEditComponent } from './subscribers/subscribers-edit/subscribers-edit.component';
+import { SubscribersListComponent } from './subscribers/subscribers-list/subscribers-list.component';
+import { ArticleEditComponent } from './news/article-edit/article-edit.component';
 
 
 @NgModule({
@@ -32,7 +38,13 @@ import { NewMatchEventComponent } from './matches/match-page/new-match-event/new
     MatchPageComponent,
     MatchEditComponent,
     MatchEventListComponent,
-    NewMatchEventComponent
+    NewMatchEventComponent,
+    EventListComponent,
+    EventEditComponent,
+    NewsListComponent,
+    ArticleEditComponent,
+    SubscribersEditComponent,
+    SubscribersListComponent
   ],
   imports: [
     CommonModule,

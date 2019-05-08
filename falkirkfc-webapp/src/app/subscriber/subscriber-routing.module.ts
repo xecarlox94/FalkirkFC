@@ -7,7 +7,10 @@ import { UserAuthGuard } from '../core/services/guards/user-auth.guard';
 
 const subscriberRoutes: Route[] = [
     {
-        path: "dashboard", component: DashboardComponent, canActivate: [ UserAuthGuard ], canActivateChild: [UserAuthGuard], children: 
+        path: "dashboard",
+        component: DashboardComponent,
+        canActivate: [ UserAuthGuard ],
+        children: 
         [
             { path: "team", component: TeamComponent }
         ]

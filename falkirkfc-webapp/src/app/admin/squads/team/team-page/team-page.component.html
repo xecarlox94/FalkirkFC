@@ -4,4 +4,4 @@
 <button mat-button color="primary" (click)="onEditTeam()">Edit team</button>
 <button mat-button color="primary" (click)="addPlayerToTeam()">add player to team</button>
 <br>
-<app-player-list [players]="team?.getPlayers()" (onDeletedPlayer)="playerDeleted($event)"></app-player-list>
+<app-player-list [players]="team?.getPlayers()" (onDeletedPlayer)="playerDeleted()"></app-player-list>

@@ -2,9 +2,10 @@ const express = require('express')
 const router = new express.Router()
 
 const User = require("../models/user")
-const authMiddleware = require("../middleware/auth")
 
-router.get("/", authMiddleware, async (req, res) => {
+const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
+
+router.get("/", adminAuthMiddleware, async (req, res) => {
     try {
         
         const users = await User.find({})
@@ -16,22 +17,51 @@ router.get("/", authMiddleware, async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    const body = req.body;
 
     try {
-        const user = new User(body)
+        const newUser = new User(req.body)
 
-        await user.save()
+        if( newUser.admin ) {
+            if( req.body._adminSecret === process.env.ADMIN_SECRET ) newUser.typeSubscription = "platinum"
+            else throw new Error()
+        }
+
+        await newUser.save()
+
+        const user = await User.findByCredentials(req.body.email, req.body.password)
 
         const token = await user.generateAuthToken()
 
         res.status(201).send({ user, token })
 
     } catch (error) {
+        console.log(error)
         res.status(500).send()
     }
 })
 
+
+router.patch("/", userAuthMiddleware, async (req, res) => {
+    const updates = Object.keys(req.body)
+    try {
+        updates.forEach( (update) => req.user[update] = req.body[update] )
+
+        if( req.user.admin ) {
+            if( req.body._adminSecret === process.env.ADMIN_SECRET ) req.user.typeSubscription = "platinum"
+            else throw new Error()
+        }
+
+        await req.user.save()
+
+        res.send({ user: req.user })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).send()
+    }
+})
+
+router.get("/me", userAuthMiddleware, async(req, res) => res.send({ user: req.user }) )
 
 router.post("/login", async (req, res) => {
     const body = req.body;
@@ -47,7 +77,7 @@ router.post("/login", async (req, res) => {
 })
 
 
-router.delete("/logout", authMiddleware, async (req, res) => {
+router.delete("/logout", userAuthMiddleware, async (req, res) => {
     try {
 
         req.user.tokens = req.user.tokens.filter( (token) => {
@@ -56,7 +86,7 @@ router.delete("/logout", authMiddleware, async (req, res) => {
 
         await req.user.save()
 
-        res.send();
+        res.send({ user: req.user })
         
     } catch (error) {
         res.send()
@@ -64,13 +94,14 @@ router.delete("/logout", authMiddleware, async (req, res) => {
 })
 
 
-router.delete("/logoutAll", authMiddleware, async (req, res) => {
+router.delete("/logoutAll", userAuthMiddleware, async (req, res) => {
     try {
         req.user.tokens = []
 
         await req.user.save()
 
-        res.send()
+        res.send({ user: req.user })
+
     } catch (error) {
         console.log(error)
         res.status(500).send()

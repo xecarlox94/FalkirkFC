@@ -1,17 +1,23 @@
 const jwt = require("jsonwebtoken")
 const User = require("../models/user")
 
-const authMiddleware = async (req, res, next) => {
+const findUserByToken = async (token) => {
+    
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+    const user = await User.findOne( { _id: decoded._id, "tokens.token": token })
+
+    if(!user) throw new Error()
+
+    return user;
+}
+
+
+const userAuthMiddleware = async (req, res, next) => {
     try {
         const token = req.header("Authorization").replace("Bearer ", "")
         
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-        const user = await User.findOne( { _id: decoded._id, "tokens.token": token })
-
-        if(!user) throw new Error()
-
-        req.user = user
+        req.user = await findUserByToken(token)
         req.token = token
 
         next()
@@ -21,4 +27,23 @@ const authMiddleware = async (req, res, next) => {
     }
 }
 
-module.exports = authMiddleware
+const adminAuthMiddleware = async (req, res, next) => {
+    try {
+        const token = req.header("Authorization").replace("Bearer ", "")
+
+        req.user = await findUserByToken(token)
+        req.token = token
+
+        if( !req.user.admin ) throw new Error()
+
+        next()
+
+    } catch (error) {
+        res.status(401).send({ error: "Not Admin user"})
+    }
+}
+
+module.exports = {
+    userAuthMiddleware,
+    adminAuthMiddleware
+}

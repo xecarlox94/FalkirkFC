@@ -16,11 +16,17 @@ const userSchema = new mongoose.Schema({
         max: 15,
         trim: true
     },
-    // typeSubscription: {
-    //     type: String,
-    //     enum: [ "partial", "platinum" ]
-    // },
-    // admin: Boolean,
+    typeSubscription: {
+        type: String,
+        required: true,
+        enum: [ "partial", "platinum" ],
+        default: "partial"
+    },
+    admin: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     tokens: [
         {
             token: {

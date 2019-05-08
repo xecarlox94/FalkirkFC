@@ -13,7 +13,10 @@ import { MatchEditComponent } from './matches/match-edit/match-edit.component';
 
 const adminRoutes: Route[] = [
     {
-        path: "adminDashboard", component: AdminDashboardComponent, children: [
+        path: "adminDashboard",
+        component: AdminDashboardComponent,
+        // canActivate: [  ],
+        children: [
             { path: "teams", component: TeamListComponent },
             { path: "teams/edit/:id", component: TeamEditComponent },
             { path: "teams/new", component: TeamEditComponent },
