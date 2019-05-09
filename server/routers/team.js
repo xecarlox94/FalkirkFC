@@ -3,6 +3,8 @@ const router = new express.Router()
 
 const Team = require("../models/team")
 
+const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
+
 
 router.post("/", async (req, res) => {
     const body = req.body;

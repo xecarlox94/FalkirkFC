@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Subject } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 
-
-import { User } from '../../models/user.model';
 import { environment } from 'src/environments/environment';
+
+import { Session } from '../../models/session.model';
+import { User } from '../../models/user.model';
 
 
 
@@ -18,14 +19,11 @@ import { environment } from 'src/environments/environment';
 export class UserAuthService {
     private http: HttpClient;
     private router: Router;
+    session: Subject<Session> = new Subject<Session>();
 
     constructor(http: HttpClient, router: Router){
         this.router = router;
         this.http = http;
-    }
-
-    isLoggedIn() {
-        return !!this.getToken();
     }
     
     register(user: User){
@@ -43,8 +41,12 @@ export class UserAuthService {
     }
 
     logout(){
-        localStorage.clear()
-        this.router.navigate(["/", "login"])
+        return this.http.delete<any>(`${ environment.baseURL }/users/logoutAll`).toPromise()
+                    .then( () => {
+                        localStorage.clear()
+                        this.router.navigate(["/", "login"])
+                        this.onSessionChanges()
+                    })
     }
 
 
@@ -56,19 +58,18 @@ export class UserAuthService {
     
 
     setCoockies(next: any){
-        console.log(next)
         const user = new User(next.user.email, next.user.password, next.user._id)
         user.setAdmin(next.user.admin)
         user.setSubscription(next.user.typeSubscription)
         this.setBearerToken(next.token)
         this.setAdmin(user)
         this.setSubscription(user)
+        this.onSessionChanges()
     }
     
     setBearerToken(token: string){
         const bearerToken = "Bearer " + token;
         localStorage.setItem("auth-token", bearerToken)
-        console.log(bearerToken)
     }
 
     setAdmin(user: User) {
@@ -79,6 +80,10 @@ export class UserAuthService {
         localStorage.setItem("subscription", user.getSubscription())
     }
 
+    isLoggedIn() {
+        return !!this.getBearerToken();
+    }
+
     isAdmin(): boolean {
         return localStorage.getItem("admin") === "true"
     }
@@ -87,8 +92,16 @@ export class UserAuthService {
         return localStorage.getItem("subscription");
     }
 
-    getToken(): string {
+    getBearerToken(): string {
         return localStorage.getItem("auth-token")
+    }
+
+    onSessionChanges(){
+        this.session.next(this.getSession())
+    }
+
+    getSession(){
+        return new Session( this.isLoggedIn(), this.isAdmin(), this.getSubscription())   
     }
     
 }

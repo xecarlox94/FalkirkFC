@@ -3,6 +3,9 @@ const router = new express.Router()
 
 const Match = require("../models/match")
 
+
+const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
+
 router.post("/", async (req, res) => {
     const body = req.body;
     

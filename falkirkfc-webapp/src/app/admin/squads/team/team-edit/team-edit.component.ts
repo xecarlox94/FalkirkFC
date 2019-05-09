@@ -46,19 +46,16 @@ export class TeamEditComponent implements OnInit {
     if(!this.editMode) {
       const team: Team = new Team(this.teamForm.value.name, this.teamForm.value.manager);
       this.teamService.createTeam(team).toPromise().then(
-        () =>  this.navigateBack(),
-        rej =>  this.navigateBack()
+        () =>  this.router.navigate(['../'], { relativeTo: this.route }),
+        rej =>  this.router.navigate(['../'], { relativeTo: this.route })
         )
     } else {
       const team = new Team(this.teamForm.value.name, this.teamForm.value.manager, this.idTeam)
       this.teamService.updateTeam(team).toPromise().then(
-        () =>  this.navigateBack(),
-        rej =>  this.navigateBack()
+        () =>  this.router.navigate(['../../'], { relativeTo: this.route }),
+        rej =>  this.router.navigate(['../../'], { relativeTo: this.route })
         )
     }
   }
   
-  navigateBack() {
-    this.router.navigate(['../../'], { relativeTo: this.route })
-  }
 }

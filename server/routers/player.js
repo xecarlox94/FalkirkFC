@@ -3,6 +3,8 @@ const router = new express.Router()
 
 const Player = require("../models/player")
 
+const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
+
 router.get("/", async (req, res) => {
     try {
         const players = await Player.find({})

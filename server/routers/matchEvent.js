@@ -3,6 +3,9 @@ const router = new express.Router()
 
 const MatchEvent = require("../models/matchEvent");
 
+
+const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
+
 router.delete("/:id", async (req, res) => {
     const _id = req.params.id;
     try {

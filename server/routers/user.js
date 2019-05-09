@@ -56,7 +56,6 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
         res.send({ user: req.user })
         
     } catch (error) {
-        console.log(error)
         res.status(500).send()
     }
 })
@@ -72,6 +71,7 @@ router.post("/login", async (req, res) => {
 
         res.status(200).send({ user, token })
     } catch (error) {
+        console.log(error)
         res.status(500).send()
     }
 })
@@ -103,7 +103,6 @@ router.delete("/logoutAll", userAuthMiddleware, async (req, res) => {
         res.send({ user: req.user })
 
     } catch (error) {
-        console.log(error)
         res.status(500).send()
     }
 })
