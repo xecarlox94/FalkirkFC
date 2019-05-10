@@ -1,9 +1,9 @@
 <br>
 <p>name: {{ team?.name }}</p>
 <p>manager: {{ team?.manager }}</p>
-<button mat-raised-button color="primary" (click)="addPlayerToTeam()">add player to team</button>
-<br><br>
+
 <button mat-raised-button color="accent" (click)="onEditTeam()">Edit team</button>
-<button mat-raised-button color="warn" (click)="deleteTeam()">Delete team</button>
-<br>
+<button mat-button color="warn" (click)="deleteTeam()">Delete team</button>
+<br><br>
+<button mat-raised-button color="primary" (click)="addPlayerToTeam()">add player to team</button>
 <app-player-list [players]="team?.getPlayers()" ></app-player-list>

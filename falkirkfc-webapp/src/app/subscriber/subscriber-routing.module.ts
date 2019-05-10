@@ -6,6 +6,8 @@ import { TeamComponent } from './squads/team/team.component';
 import { UserAuthGuard } from '../core/services/guards/user-auth.guard';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { NewsListComponent } from './news/news-list/news-list.component';
+import { EventListComponent } from './events/event-list/event-list.component';
 
 const subscriberRoutes: Route[] = [
     {
@@ -16,8 +18,10 @@ const subscriberRoutes: Route[] = [
         [
             { path: "", pathMatch: "full", redirectTo: "profile" },
             { path: "profile", component: ProfileViewComponent },
-            { path: "profile/edit", component: ProfileEditComponent }
-            // { path: "team", component: TeamComponent }
+            { path: "profile/edit", component: ProfileEditComponent },
+            { path: "news", component: NewsListComponent },
+            { path: "events", component: EventListComponent },
+            { path: "teams/:id", component: TeamComponent }
         ]
     }
 ]

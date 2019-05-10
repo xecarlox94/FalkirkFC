@@ -2,9 +2,9 @@
 <mat-list>
   <mat-list-item *ngFor="let matchEvent of matchEvents" >
       {{ matchEvent.minute }}, {{ matchEvent.typeEvent }}: , 
-      <button mat-button color="basic" (click)="visitPlayerPage(matchEvent.player)"> {{ matchEvent.player.name }} </button>
+      <button mat-button color="primary" (click)="visitPlayerPage(matchEvent.player)"> {{ matchEvent.player.name }} </button>
       {{ matchEvent.player.position }} 
-      <button mat-button color="basic" (click)="visitTeamPage(matchEvent.team)"> ({{ matchEvent.team.name }}) </button>
+      <button mat-button color="primary" (click)="visitTeamPage(matchEvent.team)"> ({{ matchEvent.team.name }}) </button>
     <button mat-button color="warn" (click)="deleteMatch(matchEvent)">Delete</button>
   </mat-list-item>
 </mat-list>

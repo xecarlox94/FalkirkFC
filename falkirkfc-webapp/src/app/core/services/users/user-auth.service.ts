@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { shareReplay, tap, map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
@@ -46,13 +46,19 @@ export class UserAuthService {
     }
 
 
-    getCurrentUser() {
-        return this.http.get<User>(`${ environment.baseURL }/users/me`).toPromise()
-                        .then( (value: any) => console.log(value))
+    getCurrentUser(): Promise<User> {
+        return this.http.get<User>(`${ environment.baseURL }/users/me`).pipe(
+            map( (value: any) => {
+                const user = new User(value.user.email, value.user._id)
+                user.setAdmin(value.user.admin)
+                user.setSubscription(value.user.typeSubscription)
+                return user;
+            })
+        ).toPromise()
     }
 
     setCoockies(next: any){
-        const user = new User(next.user.email, next.user.password, next.user._id)
+        const user = new User(next.user.email, next.user._id)
         user.setAdmin(next.user.admin)
         user.setSubscription(next.user.typeSubscription)
         this.setBearerToken(next.token)
@@ -102,4 +108,10 @@ export class UserAuthService {
         localStorage.clear()
         this.router.navigate(["/", "login"])
     }
+
+    afterLoginIn(){
+        if(this.isAdmin()) this.router.navigate([ "/adminDashboard" ]) , err => console.log("ERROR:", err)
+        else this.router.navigate([ "/dashboard" ]) , err => console.log("ERROR:", err)
+    }
+    
 }

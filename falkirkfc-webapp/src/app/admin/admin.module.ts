@@ -26,6 +26,18 @@ import { ArticleEditComponent } from './news/article-edit/article-edit.component
 
 
 @NgModule({
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatListModule,
+    MatSelectModule,
+    MatRadioModule
+  ],
   declarations: [
     AdminDashboardComponent,
     TeamEditComponent,
@@ -45,19 +57,6 @@ import { ArticleEditComponent } from './news/article-edit/article-edit.component
     ArticleEditComponent,
     SubscribersEditComponent,
     SubscribersListComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatListModule,
-    MatGridListModule,
-    MatSelectModule,
-    MatRadioModule
   ]
 })
 

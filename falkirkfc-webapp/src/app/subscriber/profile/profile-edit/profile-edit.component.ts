@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from 'src/app/core/services/users/user-auth.service';
+import { User } from 'src/app/core/models/user.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-edit',
@@ -6,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-edit.component.scss']
 })
 export class ProfileEditComponent implements OnInit {
+  userAuthService: UserAuthService;
+  user: User;
+  changePassword: boolean = false;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(userAuthService: UserAuthService) {
+    this.userAuthService = userAuthService;
   }
 
+  ngOnInit() {
+    this.userAuthService.getCurrentUser().then( (user: User) => {
+      this.user = user
+      console.log(user)
+    })
+  }
+
+  onSubmit(profileForm: NgForm){
+    console.log(profileForm)
+  }
 }

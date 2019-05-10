@@ -2,19 +2,22 @@
 
 export class User {
     email: string;
-    password: string;
+    password?: string;
     _id?: string;
     admin?: boolean;
     typeSubscription?: string;
 
-    constructor(email: string, password: string, id: string = null){
+    constructor(email: string, id: string = null){
         this.email = email;
-        this.password = password;
         this._id = id;
     }
 
     setAdmin(value: boolean){
         this.admin = value;
+    }
+
+    setPassword(password: string){
+        this.password = password;
     }
     
     setSubscription(value: string){
@@ -28,4 +31,5 @@ export class User {
     getSubscription(){
         return this.typeSubscription;
     }
+    
 }

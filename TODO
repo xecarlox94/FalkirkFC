@@ -1,0 +1,27 @@
+-socket io service live match backend and frontend
+-livefeed realtime component
+
+-events (admin / subscriber) backend and frontend
+-news (admin / subscriber) backend and frontend
+-users resources admin backend and frontend
+-upgrade subscription feature frontend
+
+-images teams, users, events and news
+-set default asset images to teams, users, events and news
+
+-notications component ( live match / events )
+-add all league match backend validation, frontend handling the errors
+-add aditional feature in news to display a small match report
+-add two password input in registration
+
+-set middleware on all models to delete instances of other models
+-upgrade subscription feature backend
+-add simple backend testing
+-add simple frontend testing
+-catch all errors on backend and front end
+-enable modules lazy loading
+
+-add form validation to all forms
+-pop-up fade notifications to alert user of any app events
+-finish navbar
+-add bulma and finish styling

@@ -31,10 +31,7 @@ export class PlayerPageComponent implements OnInit {
 
   deletePlayer(){
     this.playerService.deletePlayer(this.player).toPromise()
-        .then( (player: Player) => {
-          console.log(player)
-          this.router.navigate(["../../", "teams", this.player.team ], { relativeTo: this.actRoute })
-        })
+        .then( (player: Player) => this.router.navigate(["../../", "teams", this.player.team ], { relativeTo: this.actRoute }) )
   }
 
 }

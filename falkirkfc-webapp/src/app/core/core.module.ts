@@ -3,7 +3,6 @@ import { MaterialDesignModule } from './other-core-modules/material-design.modul
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from '../auth/auth.module';
-import { InstituitionModule } from '../instituition/instituition.module';
 import { SubscriberModule } from '../subscriber/subscriber.module';
 import { AdminModule } from '../admin/admin.module';
 
@@ -11,7 +10,6 @@ const modules = [
     AppRoutingModule,
     MaterialDesignModule,
     AuthModule,
-    InstituitionModule,
     SubscriberModule,
     AdminModule
 ]

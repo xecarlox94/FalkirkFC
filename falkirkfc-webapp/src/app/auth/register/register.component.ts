@@ -25,10 +25,10 @@ export class RegisterComponent implements OnInit {
     const email = this.form.value.email;
     const password = this.form.value.password;
     if(this.form.valid){
-      const user = new User(email, password)
-
+      const user = new User(email)
+      user.setPassword(password)
       this.userAuthService.register(user)
-        .subscribe( res => this.router.navigate([ "/", "adminDashboard","teams"]) , err => console.log("ERROR:", err))
+        .subscribe( res => this.userAuthService.afterLoginIn() )
     }
   }
 }

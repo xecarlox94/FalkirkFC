@@ -3,6 +3,7 @@ import { Match } from 'src/app/core/models/match.model';
 import { MatchService } from 'src/app/core/services/matches/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { Team } from 'src/app/core/models/team.model';
 
 @Component({
   selector: 'app-match-page',
@@ -56,7 +57,12 @@ export class MatchPageComponent implements OnInit {
   }
 
   editMatch(){
-    this.router.navigate(["../", "edit", this.match._id ], { relativeTo: this.route })
+    this.router.navigate([ "../", "edit", this.match._id ], { relativeTo: this.route })
+  }
+
+  visitTeamPage(team: Team){
+    console.log(team._id)
+    this.router.navigate([ "/adminDashboard", "teams", team._id ], { relativeTo: this.route })
   }
 
 }
