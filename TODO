@@ -4,6 +4,7 @@
 -events (admin / subscriber) backend and frontend
 -news (admin / subscriber) backend and frontend
 -users resources admin backend and frontend
+-set middleware on all models to delete instances of other models
 -upgrade subscription feature frontend
 
 -images teams, users, events and news
@@ -14,7 +15,6 @@
 -add aditional feature in news to display a small match report
 -add two password input in registration
 
--set middleware on all models to delete instances of other models
 -upgrade subscription feature backend
 -add simple backend testing
 -add simple frontend testing
@@ -22,6 +22,7 @@
 -enable modules lazy loading
 
 -add form validation to all forms
+-check middleware on all models to delete instances of other models
 -pop-up fade notifications to alert user of any app events
 -finish navbar
 -add bulma and finish styling

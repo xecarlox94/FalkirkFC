@@ -21,9 +21,12 @@ router.post("/", async (req, res) => {
     try {
         const newUser = new User(req.body)
 
+        console.log("ADMIN_SECRET: ",process.env.ADMIN_SECRET)
+        console.log("new User: ", newUser)
+
         if( newUser.admin ) {
             if( req.body._adminSecret === process.env.ADMIN_SECRET ) newUser.typeSubscription = "platinum"
-            else throw new Error()
+            else throw new Error("incorrect secret!!")
         }
 
         await newUser.save()
@@ -36,7 +39,7 @@ router.post("/", async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send()
+        res.status(500).send({ error })
     }
 })
 
