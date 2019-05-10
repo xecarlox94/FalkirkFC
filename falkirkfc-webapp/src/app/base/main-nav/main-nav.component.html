@@ -15,8 +15,9 @@
       </div>
 
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/','adminDashboard','matches']" >Matches</a>
-      <a mat-list-item [routerLink]="['/','adminDashboard','teams']" >Teams</a>
+      <a mat-list-item [routerLink]="['/','adminDashboard','matches']" *ngIf="session?.admin" >Matches</a>
+      <a mat-list-item [routerLink]="['/','adminDashboard','teams']" *ngIf="session?.admin" >Teams</a>
+      <a mat-list-item [routerLink]="['/','dashboard','profile']" *ngIf="session?.loggedIn" >Profile</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -34,20 +35,29 @@
           <img src="assets/falkirk-brightLogo.png" alt="logo" />
         </a>
       </div>
-      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','adminDashboard','matches']" >
+      <button
+          *ngIf="!isHandset && session?.admin"
+          mat-raised-button color="primary"
+          [routerLink]="['/','adminDashboard','matches']" >
         Matches
       </button>
-      <button *ngIf="!isHandset" mat-raised-button color="primary" [routerLink]="['/','adminDashboard','teams']" >
+      <button
+          *ngIf="!isHandset && session?.admin"
+          mat-raised-button color="primary"
+          [routerLink]="['/','adminDashboard','teams']" >
         Teams
       </button>
-      <span class="spacer"></span>
-      <button mat-raised-button color="primary" [routerLink]="['/','login' ]" *ngIf="!session?.loggedIn" >
+      <button *ngIf="!isHandset && session?.loggedIn" mat-raised-button color="primary" [routerLink]="['/','dashboard','profile']" >
+        Profile
+      </button>
+      <span class="_spacer"></span>
+      <button mat-raised-button color="primary" [routerLink]="['/','login' ]" *ngIf="!session?.loggedIn" id="_login" >
         Login
       </button>
-      <button mat-raised-button color="primary" [routerLink]="['/','register' ]" *ngIf="!session?.loggedIn" id="register">
+      <button mat-raised-button color="primary" [routerLink]="['/','register' ]" *ngIf="!session?.loggedIn">
         Register
       </button>
-      <button mat-raised-button color="warn" (click)="logout()" *ngIf="session?.loggedIn" >
+      <button mat-raised-button color="warn" (click)="logout()" *ngIf="session?.loggedIn" id="_logout">
         Logout
       </button>
     </mat-toolbar>

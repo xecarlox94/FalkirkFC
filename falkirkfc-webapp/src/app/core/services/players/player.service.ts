@@ -4,6 +4,7 @@ import { Player } from '../../models/player.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Team } from '../../models/team.model';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class PlayerService {
 
     getPlayer(id: string): Observable<Player> {
         return this.http.get<Player>(`${ environment.baseURL }/players/${id}`).pipe(
-            map( (value: any) => new Player(value.player.name, value.player.position, value.player.team, value.player._id))
+            map( (value: any) => new Player(value.player.name, value.player.position, value.player.team, value.player._id) )
         )
     }
 

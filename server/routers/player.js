@@ -5,7 +5,7 @@ const Player = require("../models/player")
 
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
-router.get("/", async (req, res) => {
+router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const players = await Player.find({})
         res.send({ players })
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", adminAuthMiddleware, async (req, res) => {
     const body = req.body;
     try {
         const player = new Player(body)
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const player = await Player.findById({ _id })
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
 })
 
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     const body = req.body;
     
@@ -58,7 +58,7 @@ router.patch("/:id", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
 

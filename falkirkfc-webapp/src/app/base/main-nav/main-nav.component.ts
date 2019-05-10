@@ -29,6 +29,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sessionSubscription = this.userAuthService.session.subscribe( (session: Session) => this.session = session )
+    this.userAuthService.onSessionChanges()
   }
   
 

@@ -30,6 +30,10 @@ export class UserAuthInterceptor implements HttpInterceptor {
 
         return next.handle(req).pipe(
             catchError( (event: HttpErrorResponse) => {
+                if(event.status === 401) {
+                    this.userAuthService.clearCoockiesToLogin()
+                    return null;
+                }
                 return throwError(event);
             })
         );

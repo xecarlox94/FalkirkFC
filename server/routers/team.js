@@ -6,7 +6,7 @@ const Team = require("../models/team")
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
 
-router.post("/", async (req, res) => {
+router.post("/", adminAuthMiddleware, async (req, res) => {
     const body = req.body;
     const team = new Team(body)
 
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.get("/", async (req, res) => {
+router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const teams = await Team.find({})
         res.send({teams})
@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 })
 
 
-router.get("/table", async (req, res) => {
+router.get("/table", userAuthMiddleware, async (req, res) => {
     try {
         const tableRows = await Team.getTable()
         res.send({
@@ -40,7 +40,7 @@ router.get("/table", async (req, res) => {
 })
 
 // add route for away, home and overall games
-router.get("/performance/:id", async (req, res) => {
+router.get("/performance/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
 
     try {
@@ -57,7 +57,7 @@ router.get("/performance/:id", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
 
     try {
@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
 
 
 
-router.get("/squad/:id", async (req, res) => {
+router.get("/squad/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const team = await Team.findById(_id).populate("players")
@@ -89,7 +89,7 @@ router.get("/squad/:id", async (req, res) => {
     }
 })
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const body = req.body;
     const _id = req.params.id;
     delete body._id
@@ -116,7 +116,7 @@ router.patch("/:id", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const team = await Team.findByIdAndDelete({ _id })

@@ -23,12 +23,5 @@ export class TeamListComponent implements OnInit {
   loadTeamsList(): Promise<Team[]>{
     return this.teamService.fetchTeams().toPromise();
   }
-  
-  deleteTeam(team: Team){
-    this.teamService.deleteTeam(team).toPromise()
-        .then( () => {
-          return this.loadTeamsList()
-        }).then( (teams: Team[]) => this.teams = teams )
-  }
 
 }

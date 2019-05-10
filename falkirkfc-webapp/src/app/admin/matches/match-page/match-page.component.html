@@ -2,11 +2,14 @@
 <h5>{{ match?.time | date:"longDate" }} at {{ match?.time | date:"shortTime" }}</h5>
 
 
+<button mat-raised-button color="accent" (click)="editMatch()" >Edit Match</button>
+<button mat-raised-button color="warn" (click)="deleteMatch()">Delete Match</button><br><br>
+
 <app-new-match-event *ngIf="isCreatingMatchEvent; else normalSection" (mEventCreated)="onMatchEventCreated()" ></app-new-match-event>
 
 <ng-template #normalSection >
     <div>
-        <button mat-button color="primary" (click)="isCreatingMatchEvent = !isCreatingMatchEvent" >Create Match Event</button>
+        <button mat-raised-button color="primary" (click)="isCreatingMatchEvent = !isCreatingMatchEvent" >Create Match Event</button>
     </div>
 </ng-template>
 

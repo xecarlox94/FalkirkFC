@@ -4,7 +4,5 @@
 <mat-list>
   <mat-list-item *ngFor="let team of teams">
     <button mat-button color="basic" [routerLink]="[ team._id ]" >{{ team.name }}</button>
-    <button mat-raised-button color="accent" [routerLink]="['edit/' + team._id ]" >Edit</button>
-    <button mat-raised-button color="warn" (click)="deleteTeam(team)">Delete</button>
   </mat-list-item>
 </mat-list>

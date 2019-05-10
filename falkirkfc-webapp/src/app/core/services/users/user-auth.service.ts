@@ -9,12 +9,9 @@ import { environment } from 'src/environments/environment';
 import { Session } from '../../models/session.model';
 import { User } from '../../models/user.model';
 
-
-
 @Injectable({
     providedIn: "root"
 })
-
 
 export class UserAuthService {
     private http: HttpClient;
@@ -43,19 +40,16 @@ export class UserAuthService {
     logout(){
         return this.http.delete<any>(`${ environment.baseURL }/users/logoutAll`).toPromise()
                     .then( () => {
-                        localStorage.clear()
-                        this.router.navigate(["/", "login"])
+                        this.clearCoockiesToLogin()
                         this.onSessionChanges()
                     })
     }
 
 
-
-
-
-
-
-    
+    getCurrentUser() {
+        return this.http.get<User>(`${ environment.baseURL }/users/me`).toPromise()
+                        .then( (value: any) => console.log(value))
+    }
 
     setCoockies(next: any){
         const user = new User(next.user.email, next.user.password, next.user._id)
@@ -104,4 +98,8 @@ export class UserAuthService {
         return new Session( this.isLoggedIn(), this.isAdmin(), this.getSubscription())   
     }
     
+    clearCoockiesToLogin(){
+        localStorage.clear()
+        this.router.navigate(["/", "login"])
+    }
 }

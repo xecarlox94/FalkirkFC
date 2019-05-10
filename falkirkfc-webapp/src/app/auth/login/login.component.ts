@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     if(this.form.valid){
       const user = new User(email, password)
       this.userAuthService.login(user)
-        .subscribe( res => this.router.navigate([ "/", "adminDashboard", "matches" ]) , err => console.log("ERROR:", err))
+        .subscribe( res => this.router.navigate([ "/", "dashboard" ]) , err => console.log("ERROR:", err))
     }
   }
 }

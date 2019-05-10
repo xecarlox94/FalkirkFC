@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Match } from 'src/app/core/models/match.model';
 import { MatchService } from 'src/app/core/services/matches/match.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -11,15 +11,17 @@ import { Subject } from 'rxjs';
 })
 export class MatchPageComponent implements OnInit {
   matchIDSubject: Subject<string> = new Subject<string>();
+  router: Router;
   route: ActivatedRoute;
   match: Match;
   matchService: MatchService;
   isCreatingMatchEvent: boolean;
 
-  constructor(matchSrv: MatchService, actRoute: ActivatedRoute) {
+  constructor(matchSrv: MatchService, actRoute: ActivatedRoute, router: Router) {
     this.isCreatingMatchEvent = false;
     this.matchService = matchSrv;
     this.route = actRoute;
+    this.router = router;
   }
 
   ngOnInit() {
@@ -44,6 +46,17 @@ export class MatchPageComponent implements OnInit {
       this.match = match;
       this.emitMatchIDToChild()
     })
+  }
+
+  
+  deleteMatch(){
+    this.matchService.deleteMatch(this.match._id).then( () => {
+      this.router.navigate(["../"], { relativeTo: this.route })
+    })
+  }
+
+  editMatch(){
+    this.router.navigate(["../", "edit", this.match._id ], { relativeTo: this.route })
   }
 
 }

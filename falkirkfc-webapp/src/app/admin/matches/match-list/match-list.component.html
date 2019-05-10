@@ -1,8 +1,10 @@
 <mat-list>
   <mat-list-item *ngFor="let match of matches" >
-    <button mat-button color="basic" [routerLink]="[ match._id ]" >Round {{ match.round }}:  {{ match.home.name }} {{ match.homeScore}} - {{ match.awayScore}} {{ match.away.name }}</button>
-    <button mat-raised-button color="accent" [routerLink]="['edit/' + match._id ]" >Edit</button>
-    <button mat-raised-button color="warn" (click)="deleteMatch(match)">Delete</button>
+    Round {{ match.round }}: 
+    <button mat-button color="basic" (click)="visitTeamPage(match.home)" > {{ match.home.name }} </button>
+    {{ match.homeScore}} - {{ match.awayScore}}
+    <button mat-button color="basic" (click)="visitTeamPage(match.away)" > {{ match.away.name }} </button>
+    <button mat-raised-button color="primary" [routerLink]="[ match._id ]" >Match Report</button>
   </mat-list-item>
 </mat-list>
 

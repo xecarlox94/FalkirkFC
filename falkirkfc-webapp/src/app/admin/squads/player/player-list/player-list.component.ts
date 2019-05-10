@@ -12,7 +12,6 @@ export class PlayerListComponent implements OnInit {
   playerService: PlayerService;
   router: Router;
   @Input() players: Player[];
-  @Output() onDeletedPlayer: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(playerSrv: PlayerService, router: Router) {
     this.playerService = playerSrv;
@@ -22,15 +21,9 @@ export class PlayerListComponent implements OnInit {
   ngOnInit() {
   }
 
-  editPlayer(player: Player){
-    this.router.navigate([ './adminDashboard/player/edit/', player._id ])
+  visitPlayerPage(player: Player){
+    this.router.navigate(['./adminDashboard/player/', player._id])
   }
-
-  deletePlayer(player: Player){
-    this.playerService.deletePlayer(player).toPromise().then( (player: Player) => {
-      console.log(player)
-      this.onDeletedPlayer.emit()
-    }).catch( (rej) => console.log(rej) )
-  }
-
+  
+  
 }

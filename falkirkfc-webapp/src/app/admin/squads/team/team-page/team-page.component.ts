@@ -36,8 +36,13 @@ export class TeamPageComponent implements OnInit {
   addPlayerToTeam(){
     this.router.navigate([ './adminDashboard/player/new/', this.team._id ])
   }
+  
 
-  playerDeleted(){
-    this.loadSquad()
+  deleteTeam(){
+    this.teamService.deleteTeam(this.team).toPromise()
+        .then( () => {
+          this.router.navigate([ "../"], { relativeTo: this.actRoute })
+        })
   }
+
 }

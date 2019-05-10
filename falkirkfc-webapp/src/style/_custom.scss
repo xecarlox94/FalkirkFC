@@ -1,0 +1,16 @@
+
+
+._spacer {
+    flex: 1 1 auto;
+}
+
+
+
+#_login {
+    background-color: white;
+    color: map-get($map: $my-primary, $key: 500);
+}
+#_logout {
+    background-color: white;
+    color: map-get($map: $my-primary, $key: 500);
+}

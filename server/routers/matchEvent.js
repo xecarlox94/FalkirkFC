@@ -6,7 +6,7 @@ const MatchEvent = require("../models/matchEvent");
 
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const matchEvent = await MatchEvent.findByIdAndDelete(_id).populate("player").populate("team")
@@ -17,7 +17,7 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", adminAuthMiddleware, async (req, res) => {
     let body =  req.body;
     try {
         const matchEvent = new MatchEvent({
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.get("/match/:match", async (req, res) => {
+router.get("/match/:match", userAuthMiddleware, async (req, res) => {
     const match_id = req.params.match;
 
     try {

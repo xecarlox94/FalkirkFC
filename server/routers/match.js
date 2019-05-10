@@ -6,7 +6,7 @@ const Match = require("../models/match")
 
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
-router.post("/", async (req, res) => {
+router.post("/", adminAuthMiddleware, async (req, res) => {
     const body = req.body;
     
     try {
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 })
 
 
-router.get("/", async (req, res) => {
+router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const matches = await Match.getMatches()
         if(!matches) throw new Error()
@@ -37,7 +37,7 @@ router.get("/", async (req, res) => {
 })
 
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const match = await Match.findByIdAndDelete({ _id })
@@ -50,7 +50,7 @@ router.delete("/:id", async (req, res) => {
 })
 
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const matchReport = await Match.getMatchReport(_id)
@@ -62,7 +62,7 @@ router.get("/:id", async (req, res) => {
 })
 
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const body = req.body
     const _id = req.params.id;
     
@@ -83,7 +83,7 @@ router.patch("/:id", async (req, res) => {
 })
 
 
-router.get("/round/:round", async (req, res) => {
+router.get("/round/:round", userAuthMiddleware, async (req, res) => {
     const round = Number(req.params.round);
     
     try {
