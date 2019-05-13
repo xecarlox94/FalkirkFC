@@ -9,10 +9,8 @@ import { AppComponent } from './app.component';
 import { MainNavComponent } from './base/main-nav/main-nav.component';
 import { PolicyModalComponent } from './base/policy-modal/policy-modal.component';
 import { UserAuthInterceptor } from './core/services/http-interceptors/user-auth-interceptor.service';
-import { AboutUsComponent } from './instituition/about-us/about-us.component';
-import { ContactUsComponent } from './instituition/contact-us/contact-us.component';
-import { CookiePolicyComponent } from './instituition/cookie-policy/cookie-policy.component';
-import { FrequentQuestionsAskedComponent } from './instituition/frequent-questions-asked/frequent-questions-asked.component';
+import { AboutUsComponent } from './base/instituition/about-us/about-us.component';
+import { CookiePolicyComponent } from './base/instituition/cookie-policy/cookie-policy.component';
 
 
 @NgModule({
@@ -34,9 +32,7 @@ import { FrequentQuestionsAskedComponent } from './instituition/frequent-questio
     MainNavComponent,
     PolicyModalComponent,
     AboutUsComponent,
-    ContactUsComponent,
-    CookiePolicyComponent,
-    FrequentQuestionsAskedComponent
+    CookiePolicyComponent
   ],
   bootstrap: [AppComponent]
 })

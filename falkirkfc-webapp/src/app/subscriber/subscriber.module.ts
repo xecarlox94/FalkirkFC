@@ -6,7 +6,6 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRadioModule } f
 import { SquadsModule } from './squads/squads.module';
 import { NewsModule } from './news/news.module';
 import { EventsModule } from './events/events.module';
-import { CompetitionsModule } from './competitions/competitions.module';
 import { DashboardComponent } from './dashboard.component';
 import { SubscriberRoutingModule } from './subscriber-routing.module';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
@@ -24,7 +23,6 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
         SquadsModule,
         NewsModule,
         EventsModule,
-        CompetitionsModule,
         SubscriberRoutingModule,
         MatRadioModule
     ],
