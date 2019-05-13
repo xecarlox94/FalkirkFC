@@ -11,7 +11,7 @@ import { EventListComponent } from './events/event-list/event-list.component';
 
 const subscriberRoutes: Route[] = [
     {
-        path: "dashboard",
+        path: "",
         component: DashboardComponent,
         canActivate: [ UserAuthGuard ],
         children: 

@@ -5,6 +5,7 @@
 -users resources admin backend and frontend
 -images teams, users, events and news
 -set default asset images to teams, users, events and news
+-add simple backend testing
 
 -livefeed realtime component
 -socket io service live match backend and frontend
@@ -12,15 +13,17 @@
 
 -add all league match backend validation, frontend handling the errors
 -add two password input in registration
+-change the logoutAll route for logout in the logout system
 
 -upgrade subscription feature backend and frontend
 -add form validation to all forms
+-Breadcrumb on falkirk app
 -pop-up fade notifications to alert user of any app events
 -catch all errors on backend and front end
 -integrate bulma collumn sytem
--add simple backend testing
 
--enable modules lazy loading
+
 -add comments to code
+-Correct name on tab name
 -finish navbar
 -finish styling
