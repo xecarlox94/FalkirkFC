@@ -36,9 +36,10 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
 
         const isAdminCurrently = req.user.admin;
     
-        const updates = Object.keys(req.body)
-        updates.forEach( (update) => {
-            if(req.body[update] !== null) req.user[update] = req.body[update]
+        const updates = Object.keys(body);
+        const notAllowed = [ "_id", "email" ]
+        updates.forEach( update => {
+            if(!notAllowed.includes(update)) user[update] = body[update]
         })
 
 
@@ -114,13 +115,57 @@ router.delete("/logoutAll", userAuthMiddleware, async (req, res) => {
 
 router.get("/", adminAuthMiddleware, async (req, res) => {
     try {
-        const users = await User.find({})
+        const fetchedUsers = await User.find({})
+
+        const users = fetchedUsers.filter( (user) => user._id.toString() !== req.user._id.toString() )
 
         res.send({users})
+    } catch (error) {
+        res.status(500).send({ error })
+    }
+})
+
+router.get("/:id", adminAuthMiddleware, async (req, res) => {
+    const _id = req.params.id
+    try {
+        const user = await User.findById(_id)
+
+        res.send({ user })
     } catch (error) {
         res.status(500).send()
     }
 })
 
+
+router.patch("/:id", adminAuthMiddleware, async (req, res) => {
+    const _id = req.params.id
+    const body = req.body;
+    try {
+        const user = await User.findById(_id)
+    
+        const updates = Object.keys(body);
+        const notAllowed = [ "_id", "admin", "typeSubscription", "email" ]
+        updates.forEach( update => {
+            if(!notAllowed.includes(update)) user[update] = body[update]
+        })
+        
+        await user.save()
+
+        res.send({ user })
+    } catch (error) {
+        res.status(500).send({ error })
+    }
+})
+
+router.delete("/:id", adminAuthMiddleware, async (req, res) => {
+    const _id = req.params.id
+    try {
+        const user = await User.findByIdAndDelete(_id)
+
+        res.send({user})
+    } catch (error) {
+        res.status(500).send()
+    }
+})
 
 module.exports = router

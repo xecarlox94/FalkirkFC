@@ -10,11 +10,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
     const body = req.body;
     
     try {
-        const match = new Match({
-            home: body.home,
-            away: body.away,
-            round: body.round
-        })
+        const match = new Match(body)
         
         await match.save()
         res.send(match)
@@ -71,7 +67,9 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         const updates = Object.keys(body)
         
         const match = await Match.findById({ _id })
-        updates.forEach( update =>  match[update] = body[update]);
+        updates.forEach( (update) => {
+            if(update !== "_id") req.user[update] = req.body[update]
+        })
 
         await match.save()
 

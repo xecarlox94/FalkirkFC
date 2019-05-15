@@ -21,7 +21,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await player.save()
         res.send({ player })
     } catch (error) {
-        res.status(500).send()
+        console.log(error)
+        res.status(500).send({error})
     }
 })
 
@@ -46,7 +47,9 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
 
         const player = await Player.findById({ _id })
 
-        updates.forEach( update => player[update] = body[update] )
+        updates.forEach( (update) => {
+            if(update !== "_id") req.user[update] = req.body[update]
+        })
 
         await player.save()
 

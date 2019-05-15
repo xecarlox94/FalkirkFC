@@ -61,7 +61,6 @@ export class MatchPageComponent implements OnInit {
   }
 
   visitTeamPage(team: Team){
-    console.log(team._id)
     this.router.navigate([ "/adminDashboard", "teams", team._id ], { relativeTo: this.route })
   }
 

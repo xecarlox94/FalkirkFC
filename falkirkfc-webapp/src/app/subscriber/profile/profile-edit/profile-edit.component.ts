@@ -56,8 +56,6 @@ export class ProfileEditComponent implements OnInit {
     user.setContactInfo(this.profileForm.value.firstName, this.profileForm.value.lastName, this.profileForm.value.gender, this.profileForm.value.mobilePhone, this.profileForm.value.address)
     this.userAuthService.updateCurrentUser(user)
         .then( (updatedUser) => {
-          console.log("updated user admin " + updatedUser.admin)
-          console.log("old user admin " + this.user.admin)
           if( updatedUser.admin && !this.user.admin || !updatedUser.admin && this.user.admin ) this.userAuthService.logoutAll()
           else this.router.navigate(["/dashboard", "profile"])
         } )

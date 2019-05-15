@@ -20,13 +20,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
 router.post("/", adminAuthMiddleware, async (req, res) => {
     let body =  req.body;
     try {
-        const matchEvent = new MatchEvent({
-            typeEvent: body.typeEvent,
-            minute: body.minute,
-            match:  body.match,
-            team:  body.team,
-            player: body.player
-        });
+        const matchEvent = new MatchEvent(body);
         
         await matchEvent.save()
         

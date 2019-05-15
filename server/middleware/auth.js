@@ -23,7 +23,7 @@ const userAuthMiddleware = async (req, res, next) => {
         next()
 
     } catch (error) {
-        res.status(401).send({ error: "please authenticate"})
+        res.status(401).send({ error })
     }
 }
 
@@ -39,7 +39,6 @@ const adminAuthMiddleware = async (req, res, next) => {
         next()
 
     } catch (error) {
-        console.log(error)
         res.status(401).send({ error })
     }
 }

@@ -20,9 +20,12 @@ import { NewMatchEventComponent } from './matches/match-page/new-match-event/new
 import { EventListComponent } from './events/event-list/event-list.component';
 import { EventEditComponent } from './events/event-edit/event-edit.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
-import { SubscribersEditComponent } from './subscribers/subscribers-edit/subscribers-edit.component';
-import { SubscribersListComponent } from './subscribers/subscribers-list/subscribers-list.component';
 import { ArticleEditComponent } from './news/article-edit/article-edit.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserPageComponent } from './users/user-page/user-page.component';
+import { ArticlePageComponent } from './news/article-page/article-page.component';
+import { EventPageComponent } from './events/event-page/event-page.component';
 
 
 @NgModule({
@@ -55,8 +58,11 @@ import { ArticleEditComponent } from './news/article-edit/article-edit.component
     EventEditComponent,
     NewsListComponent,
     ArticleEditComponent,
-    SubscribersEditComponent,
-    SubscribersListComponent
+    UserListComponent,
+    UserEditComponent,
+    UserPageComponent,
+    ArticlePageComponent,
+    EventPageComponent
   ]
 })
 

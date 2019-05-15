@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscribersEditComponent } from './subscribers-edit.component';
+import { EventPageComponent } from './event-page.component';
 
-describe('SubscribersEditComponent', () => {
-  let component: SubscribersEditComponent;
-  let fixture: ComponentFixture<SubscribersEditComponent>;
+describe('EventPageComponent', () => {
+  let component: EventPageComponent;
+  let fixture: ComponentFixture<EventPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubscribersEditComponent ]
+      declarations: [ EventPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubscribersEditComponent);
+    fixture = TestBed.createComponent(EventPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

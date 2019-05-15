@@ -106,7 +106,9 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         const team = await Team.findOne({ _id })
         if(!team) throw new Error()
 
-        updates.forEach( update => team[update] = body[update])
+        updates.forEach( (update) => {
+            if(update !== "_id") req.user[update] = req.body[update]
+        })
         
         await team.save()
 

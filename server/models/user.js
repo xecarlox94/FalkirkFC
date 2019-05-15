@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true,
         validate(value) {
-            if(validator.isMobilePhone(value, ['en-GB', 'en-US'])) return true
+            if(validator.isMobilePhone(value, ['en-GB', 'en-US', 'pt-BR', 'pt-PT', 'pl-PL', 'it-IT', 'es-ES', 'en-AU' ])) return true
             else throw new Error("The mobile phone num is not from United Kigdom or United States")
         }
     },
