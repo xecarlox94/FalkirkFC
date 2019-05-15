@@ -14,7 +14,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await team.save()
         res.send(team)
     } catch (error) {
-        res.status(500).send()
+        res.status(500).send({error})
     }
 })
 

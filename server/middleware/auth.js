@@ -7,7 +7,7 @@ const findUserByToken = async (token) => {
 
     const user = await User.findOne( { _id: decoded._id, "tokens.token": token })
 
-    if(!user) throw new Error()
+    if(!user) throw new Error("No user found")
 
     return user;
 }
@@ -34,12 +34,13 @@ const adminAuthMiddleware = async (req, res, next) => {
         req.user = await findUserByToken(token)
         req.token = token
 
-        if( !req.user.admin ) throw new Error()
+        if( !req.user.admin ) throw new Error("Not Admin user")
 
         next()
 
     } catch (error) {
-        res.status(401).send({ error: "Not Admin user"})
+        console.log(error)
+        res.status(401).send({ error })
     }
 }
 

@@ -8,8 +8,6 @@ const modules = [
     AppRoutingModule,
     MaterialDesignModule,
     AuthModule
-    //SubscriberModule,
-    //AdminModule
 ]
 
 @NgModule({

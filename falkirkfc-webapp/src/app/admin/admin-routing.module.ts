@@ -18,7 +18,11 @@ const adminRoutes: Route[] = [
         component: AdminDashboardComponent,
         canActivate: [ AdminAuthGuard ],
         children: [
-            { path: "", pathMatch: "full", redirectTo: "teams"},
+            { path: "", pathMatch: "full", redirectTo: "matches"},
+            { path: "matches", component: MatchListComponent },
+            { path: "matches/edit/:id", component: MatchEditComponent },
+            { path: "matches/new", component: MatchEditComponent },
+            { path: "matches/:id", component: MatchPageComponent },
             { path: "teams", component: TeamListComponent },
             { path: "teams/edit/:id", component: TeamEditComponent },
             { path: "teams/new", component: TeamEditComponent },
@@ -26,11 +30,7 @@ const adminRoutes: Route[] = [
             { path: "player/new", component: PlayerEditComponent },
             { path: "player/new/:teamID", component: PlayerEditComponent },
             { path: "player/edit/:id", component: PlayerEditComponent },
-            { path: "player/:id", component: PlayerPageComponent },
-            { path: "matches", component: MatchListComponent },
-            { path: "matches/edit/:id", component: MatchEditComponent },
-            { path: "matches/new", component: MatchEditComponent },
-            { path: "matches/:id", component: MatchPageComponent }
+            { path: "player/:id", component: PlayerPageComponent }
         ]
     }
 ]

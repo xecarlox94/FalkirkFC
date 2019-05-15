@@ -4,7 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatRadioModule } from '@angular/material';
 import { MatButtonModule} from '@angular/material/button';
 
 @NgModule({
@@ -17,7 +17,8 @@ import { MatButtonModule} from '@angular/material/button';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule
   ]
 })
 

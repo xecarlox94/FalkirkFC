@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
 
 import { SquadsModule } from './squads/squads.module';
 import { NewsModule } from './news/news.module';
@@ -13,18 +13,22 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 
 
 
+// player tables with most goals, assists, own goals, yellow and red cards
+
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatCheckboxModule,
+        MatRadioModule,
         SquadsModule,
         NewsModule,
         EventsModule,
         SubscriberRoutingModule,
-        MatRadioModule
     ],
     declarations: [
         DashboardComponent,
@@ -33,6 +37,5 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
     ]
 })
 
-// player tables with most goals, assists, own goals, yellow and red cards
 
 export class SubscriberModule { }

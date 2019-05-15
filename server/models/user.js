@@ -1,13 +1,32 @@
 const mongoose = require("mongoose");
-var uniqueValidator = require('mongoose-unique-validator');
+const validator = require("validator")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 
 const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        trim: true,
+        min: 2,
+        max: 30,
+        required: true
+    },
+    lastName: {
+        type: String,
+        trim: true,
+        min: 2,
+        max: 30,
+        required: true
+    },
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        trim: true,
+        validate(value) {
+            if(validator.isEmail(value)) return true
+            else throw new Error("The value is not a email")
+        }
     },
     password: {
         type: String,
@@ -26,6 +45,27 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    gender: {
+        type: String,
+        required: true,
+        enum: [ "male", "female" ]
+    },
+    mobilePhone: {
+        type: String,
+        trim: true,
+        required: true,
+        validate(value) {
+            if(validator.isMobilePhone(value, ['en-GB', 'en-US'])) return true
+            else throw new Error("The mobile phone num is not from United Kigdom or United States")
+        }
+    },
+    address: {
+        type: String,
+        trim: true,
+        min: 5,
+        max: 30,
+        required: true
     },
     tokens: [
         {
@@ -82,7 +122,6 @@ userSchema.pre("save", async function(next) {
 })
 
 
-userSchema.plugin(uniqueValidator);
 const User = mongoose.model("User", userSchema);
 
 

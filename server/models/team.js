@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var uniqueValidator = require('mongoose-unique-validator');
 
 const Match = require("./match")
 
@@ -90,8 +89,6 @@ teamSchema.methods.getPerformance = async function() {
     return { games, wins, draws, loses, scored, conceded, goalDiference, points };
 }
 
-
-teamSchema.plugin(uniqueValidator);
 
 const Team = mongoose.model("Team", teamSchema);
 

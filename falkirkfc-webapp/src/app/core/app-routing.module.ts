@@ -9,13 +9,13 @@ import { CookiePolicyComponent } from '../base/instituition/cookie-policy/cookie
 
 
 const appRoutes: Route[] = [
-    { path: "", pathMatch: "full", redirectTo: "/login"}, // DELETEEEEEEEEEEEEEEEEE
-    { path: "adminDashboard", loadChildren: "../admin/admin.module#AdminModule"},
-    { path: "dashboard", loadChildren: "../subscriber/subscriber.module#SubscriberModule" },
+    { path: "", pathMatch: "full", redirectTo: "falkirk"}, // DELETEEEEEEEEEEEEEEEEE
+    { path: "falkirk", component: AboutUsComponent },
+    { path: "cookiesPolicy", component: CookiePolicyComponent },
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
-    { path: "about", component: AboutUsComponent },
-    { path: "cookiesPolicy", component: CookiePolicyComponent }
+    { path: "adminDashboard", loadChildren: "../admin/admin.module#AdminModule"},
+    { path: "dashboard", loadChildren: "../subscriber/subscriber.module#SubscriberModule" }
 ]
 
 @NgModule({

@@ -1,26 +1,39 @@
--set middleware on all models to delete instances of other models
--events (admin / subscriber) backend and frontend
--news (admin / subscriber) backend and frontend
--add aditional feature in news to display a small match report
--users resources admin backend and frontend
--images teams, users, events and news
--set default asset images to teams, users, events and news
--add simple backend testing
 
--livefeed realtime component
+
+-news (admin / subscriber) backend and frontend
+-events (admin / subscriber) backend and frontend
+-match model update as well as edit and update forms
+-team model update as well as edit and update forms
+-player model update as well as edit and update forms
+-users resources admin backend and frontend
+-custom unique validators (users, teams)
+-set middleware on all models to delete instances of other models
+
+
+
 -socket io service live match backend and frontend
 -notications component ( live match / events )
+-do all subscriber's competition, events, news, livefeed realtime and squads pages components
+-pop-up fade notifications to alert user of any app events
+-images teams, users, events and news
+-set default asset images to teams, users, events and news
+-add aditional feature in news to display a small match report
+
+
 
 -add all league match backend validation, frontend handling the errors
+-add simple backend testing
 -add two password input in registration
+-add address postcode input
+-add calendar and hour to determine time in matches and events
 -change the logoutAll route for logout in the logout system
-
--upgrade subscription feature backend and frontend
+-upgrade subscription feature backend and frontend, add delete own account option (view profile)
 -add form validation to all forms
+-can deactivate guards on all forms
 -Breadcrumb on falkirk app
--pop-up fade notifications to alert user of any app events
+-remove login and register buttons if the user is in register or login page
 -catch all errors on backend and front end
--integrate bulma collumn sytem
+-integrate bulma collumn system
 
 
 -add comments to code
