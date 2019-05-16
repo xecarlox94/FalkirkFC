@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Match } from 'src/app/core/models/match.model';
 import { MatchService } from 'src/app/core/services/matches/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Team } from 'src/app/core/models/team.model';
+import { SocketClientService } from 'src/app/core/services/livestream/socket-client.service';
 
 @Component({
   selector: 'app-match-page',
   templateUrl: './match-page.component.html',
   styleUrls: ['./match-page.component.scss']
 })
-export class MatchPageComponent implements OnInit {
+export class MatchPageComponent implements OnInit, OnDestroy {
+  socketClientService: SocketClientService;
   matchIDSubject: Subject<string> = new Subject<string>();
   router: Router;
   route: ActivatedRoute;
@@ -18,11 +20,12 @@ export class MatchPageComponent implements OnInit {
   matchService: MatchService;
   isCreatingMatchEvent: boolean;
 
-  constructor(matchSrv: MatchService, actRoute: ActivatedRoute, router: Router) {
+  constructor(matchSrv: MatchService, actRoute: ActivatedRoute, router: Router, socketClientSrv: SocketClientService) {
     this.isCreatingMatchEvent = false;
     this.matchService = matchSrv;
     this.route = actRoute;
     this.router = router;
+    this.socketClientService = socketClientSrv; 
   }
 
   ngOnInit() {
@@ -45,6 +48,7 @@ export class MatchPageComponent implements OnInit {
   loadMatch(){
     this.matchService.fetchMatch(this.route.snapshot.params.id).then( (match: Match) => {
       this.match = match;
+      this.socketClientService.emitMatchStream(this.match._id, true)
       this.emitMatchIDToChild()
     })
   }
@@ -62,6 +66,11 @@ export class MatchPageComponent implements OnInit {
 
   visitTeamPage(team: Team){
     this.router.navigate([ "/adminDashboard", "teams", team._id ], { relativeTo: this.route })
+  }
+
+  
+  ngOnDestroy(): void {
+    this.socketClientService.emitMatchStream(this.match._id, false)
   }
 
 }

@@ -6,7 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-
+  tabLinks: { path: string, label: string}[] = [
+    {
+      path: "news",
+      label: "News"
+    },
+    {
+      path: "events",
+      label: "Events"
+    },
+    {
+      path: "matches",
+      label: "Matches"
+    },
+    {
+      path: "teams",
+      label: "Teams"
+    }
+  ]
+  
   constructor() { }
 
   ngOnInit() {

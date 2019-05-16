@@ -4,7 +4,7 @@
       {{ news.title }} </button>
       ( {{ news.topic }} )
   </mat-list-item>
+  <mat-list-item>
+    <button mat-raised-button color="primary" [routerLink]="['new']">Create new Article</button>
+  </mat-list-item>
 </mat-list>
-
-<br><br>
-<button mat-raised-button color="primary" [routerLink]="['new']">Create new Article</button>

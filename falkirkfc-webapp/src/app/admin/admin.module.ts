@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatGridListModule, MatSelectModule, MatRadioModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatGridListModule, MatSelectModule, MatRadioModule, MatTabsModule } from '@angular/material';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -39,7 +39,8 @@ import { EventPageComponent } from './events/event-page/event-page.component';
     MatButtonModule,
     MatListModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTabsModule
   ],
   declarations: [
     AdminDashboardComponent,

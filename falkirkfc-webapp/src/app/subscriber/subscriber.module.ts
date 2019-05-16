@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule, MatTabsModule, MatSidenavModule } from '@angular/material';
 
-import { SquadsModule } from './squads/squads.module';
+import { SquadsModule } from './league/squads/squads.module';
 import { NewsModule } from './news/news.module';
 import { EventsModule } from './events/events.module';
 import { DashboardComponent } from './dashboard.component';
 import { SubscriberRoutingModule } from './subscriber-routing.module';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { LeagueComponent } from './league/league.component';
+import { FixturesComponent } from './league/fixtures/fixtures.component';
+import { TableComponent } from './league/table/table.component';
+import { MatchReportComponent } from './league/match-report/match-report.component';
 
 
 
@@ -29,11 +33,16 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
         NewsModule,
         EventsModule,
         SubscriberRoutingModule,
+        MatTabsModule
     ],
     declarations: [
         DashboardComponent,
         ProfileViewComponent,
-        ProfileEditComponent
+        ProfileEditComponent,
+        LeagueComponent,
+        FixturesComponent,
+        TableComponent,
+        MatchReportComponent
     ]
 })
 
