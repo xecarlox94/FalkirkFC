@@ -15,6 +15,11 @@ const io = socketIO(server)
 io.on("connection", (socket) => {
     console.log("USER CONNECTED")
 
+    socket.on("live-match", ( matchStream ) => {
+        console.log("match stream received!!!!!!!!!!!!!!!! ", matchStream)
+        socket.broadcast.emit("live-match-broadcast", matchStream )
+    })
+
     socket.on("disconnect", () => {
         console.log("user disconnected")
     })

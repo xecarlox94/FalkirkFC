@@ -1,7 +1,9 @@
 
--socket io service live match backend and frontend
+-add matchEvent to matchstream
 -notications component ( live match / events )
 -pop-up fade notifications to alert user of any app events
+
+
 -news admin edit/new frontend
 -events admin edit/new frontend
 -users resources admin edit/new frontend (remove email input in edit profile)
@@ -9,11 +11,13 @@
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
 -Breadcrumb on falkirk app
 -do all subscriber's competition, events, news, livefeed realtime and squads pages components
+-do all sections when logged out
 -add simple backend testing
 -add policy modal and cookie policy page
 -add about us page
 -finish styling app and navbar integrate bulma
 -add comments to code
+-add footer
 
 
 
