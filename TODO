@@ -1,23 +1,23 @@
 
 -add matchEvent to matchstream
+-implement live score system
 -notications component ( live match / events )
 -pop-up fade notifications to alert user of any app events
-
-
 -news admin edit/new frontend
 -events admin edit/new frontend
 -users resources admin edit/new frontend (remove email input in edit profile)
+
+-do all subscriber's competition, events, news, livefeed realtime and squads pages components
 -user to get entry in event
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
--Breadcrumb on falkirk app
--do all subscriber's competition, events, news, livefeed realtime and squads pages components
--do all sections when logged out
--add simple backend testing
 -add policy modal and cookie policy page
 -add about us page
+-do all sections when logged out
+-Breadcrumb on falkirk app
+-add simple backend testing
+-add footer
 -finish styling app and navbar integrate bulma
 -add comments to code
--add footer
 
 
 
@@ -35,6 +35,6 @@
 -add calendar and hour to determine time in matches, events and news ( as well as players and users birthdays)
 -add all league match backend validation, frontend handling the errors
 -set middleware on all models to delete instances of other models
+-custom unique validators (users, teams)
 -can deactivate guards on all forms
 -add form validation to all forms
--custom unique validators (users, teams)

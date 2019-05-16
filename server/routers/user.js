@@ -38,6 +38,7 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
     
         const updates = Object.keys(body);
         const notAllowed = [ "_id", "email" ]
+
         updates.forEach( update => {
             if(!notAllowed.includes(update)) user[update] = body[update]
         })
@@ -60,6 +61,7 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
         res.send({ user: req.user })
         
     } catch (error) {
+        console.log(error)
         res.status(500).send({ error })
     }
 })
