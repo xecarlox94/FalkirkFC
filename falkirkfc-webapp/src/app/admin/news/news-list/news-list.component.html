@@ -1,3 +1,10 @@
-<p>
-  news-list works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let news of newsletter">
+    <button mat-button color="primary" [routerLink]="[ news._id ]" >
+      {{ news.title }} </button>
+      ( {{ news.topic }} )
+  </mat-list-item>
+</mat-list>
+
+<br><br>
+<button mat-raised-button color="primary" [routerLink]="['new']">Create new Article</button>

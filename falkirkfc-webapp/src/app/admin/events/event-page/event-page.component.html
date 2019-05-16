@@ -1,3 +1,14 @@
-<p>
-  event-page works!
-</p>
+<h1>{{ event?.title }}</h1>
+
+<h3>{{ event?.subtitle }}</h3>
+
+<h5>{{ event?.subtitle }}</h5>
+
+
+<p>{{ event?.body }}</p>
+
+
+
+
+<button mat-raised-button color="accent" (click)="editEvent()" >Edit</button>
+<button mat-raised-button color="warn" (click)="deleteEvent()" >Delete</button>

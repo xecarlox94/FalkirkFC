@@ -58,7 +58,7 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         updates = Object.keys(body)
 
         updates.forEach( (update) => {
-            if(update !== "_id") req.user[update] = req.body[update]
+            if(update !== "_id") event[update] = req.body[update]
         })
 
         await event.save()

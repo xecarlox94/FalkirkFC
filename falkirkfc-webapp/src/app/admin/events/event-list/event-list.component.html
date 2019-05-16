@@ -1,3 +1,11 @@
-<p>
-  event-list works!
-</p>
+<mat-list>
+  <mat-list-item *ngFor="let event of events">
+    <button mat-button color="primary" [routerLink]="[ event._id ]" >
+      {{ event.title }} </button>
+      ( {{ event.time }} )
+  </mat-list-item>
+</mat-list>
+
+
+<br><br>
+<button mat-raised-button color="primary" [routerLink]="['new']">Create new Event</button>

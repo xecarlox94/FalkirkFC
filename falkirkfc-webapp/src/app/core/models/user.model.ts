@@ -72,5 +72,11 @@ export class User {
         this.setMobilePhone(mPhone)
         this.setAddress(address)
     }
+
+    setAccountInfo(admin: boolean, email: string, subscription: string){
+        this.setAdmin(admin)
+        this.setEmail(email)
+        this.setSubscription(subscription)
+    }
     
 }

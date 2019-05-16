@@ -1,40 +1,36 @@
 
-
--news admin frontend
--events admin backend and frontend
--users resources admin backend and frontend (remove email input in edit profile)
--match model update as well as edit and update forms
--team model update as well as edit and update forms
--player model update as well as edit and update forms
--custom unique validators (users, teams)
-
-
-
 -socket io service live match backend and frontend
 -notications component ( live match / events )
 -pop-up fade notifications to alert user of any app events
--do all subscriber's competition, events, news, livefeed realtime and squads pages components
--add two password input in registration and profile edit
--set default asset images to teams, users, events and news
--images teams (logo and stadium), players, users, events and news
--add nationality ( and place of birth) and flag to players and user profile
--add calendar and hour to determine time in matches, events and news ( as well as players and users birthdays)
+-news admin edit/new frontend
+-events admin edit/new frontend
+-users resources admin edit/new frontend (remove email input in edit profile)
 -user to get entry in event
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
-
-
-
--add all league match backend validation, frontend handling the errors
--set middleware on all models to delete instances of other models
--add simple backend testing
--add form validation to all forms
--can deactivate guards on all forms
 -Breadcrumb on falkirk app
--catch all errors on backend and front end
--integrate bulma collumn system
--add comments to code
--add date and time components for matches, events, news and players
+-do all subscriber's competition, events, news, livefeed realtime and squads pages components
+-add simple backend testing
 -add policy modal and cookie policy page
 -add about us page
--finish navbar
--finish styling
+-finish styling app and navbar integrate bulma
+-add comments to code
+
+
+
+
+
+-match model update as well as edit and update forms
+-team model update as well as edit and update forms
+-player model update as well as edit and update forms ( add nationality  and place of birth)
+-set default asset images to teams, users, events and news
+-images teams (logo and stadium), players, users, events and news
+-catch all errors on backend and front end
+-add two password input in registration and profile edit
+
+-flag to players and user profile
+-add calendar and hour to determine time in matches, events and news ( as well as players and users birthdays)
+-add all league match backend validation, frontend handling the errors
+-set middleware on all models to delete instances of other models
+-can deactivate guards on all forms
+-add form validation to all forms
+-custom unique validators (users, teams)

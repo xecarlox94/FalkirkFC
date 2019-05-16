@@ -9,6 +9,13 @@ const eventSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 35
     },
+    subtitle: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 5,
+        maxlength: 45
+    },
     time: {
         type: Date,
         required: true,
