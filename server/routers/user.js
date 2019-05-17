@@ -41,7 +41,7 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
         const notAllowed = [ "_id", "email" ]
 
         updates.forEach( update => {
-            if(!notAllowed.includes(update)) user[update] = body[update]
+            if(!notAllowed.includes(update)) req.user[update] = body[update]
         })
 
 

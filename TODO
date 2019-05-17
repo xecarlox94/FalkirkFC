@@ -10,6 +10,7 @@
 -do all subscriber's competition, events, news, livefeed realtime and squads pages components
 -user to get entry in event
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
+-test heroku server
 -add policy modal and cookie policy page
 -add about us page
 -do all sections when logged out
