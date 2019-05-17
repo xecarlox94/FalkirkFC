@@ -32,6 +32,7 @@ router.post("/", async (req, res) => {
 
 
 router.patch("/", userAuthMiddleware, async (req, res) => {
+    const body = req.body;
     try {
 
         const isAdminCurrently = req.user.admin;
@@ -61,8 +62,6 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
         res.send({ user: req.user })
         
     } catch (error) {
-        console.log(error)
-        
         res.status(500).send({ error })
     }
 })
