@@ -30,6 +30,12 @@ export class EventsService {
         ).toPromise()
     }
 
+    createEvent(event: Event){
+        return this.http.post<Event>(`${ environment.baseURL }/events/`, event).pipe(
+            map( (value: any) => new Event(value.event.title, value.event.subtitle, value.event.time, value.event.body, value.event._id) )
+        ).toPromise()
+    }
+
     getEvent(id: string){
         return this.http.get<Event>(`${ environment.baseURL }/events/${ id }`).pipe(
             map( (value: any) => new Event(value.event.title, value.event.subtitle, value.event.time, value.event.body, value.event._id) )

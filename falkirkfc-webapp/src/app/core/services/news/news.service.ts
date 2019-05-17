@@ -18,6 +18,12 @@ export class NewsService {
         this.http = http;
     }
 
+    createArticle(article: News){
+        return this.http.post<News>(`${ environment.baseURL }/news`, article).pipe(
+            map( (value: any) => new News(value.news.title, value.news.subtitle, value.news.topic, value.news.time, value.news.body, value.news._id) )
+        ).toPromise()
+    }
+
     getNewsletter(){
         return this.http.get<News[]>(`${ environment.baseURL }/news`).pipe(
             map( (values: any) => {

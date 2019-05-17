@@ -15,6 +15,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 
         res.send({ event })
     } catch (error) {
+        console.log(error)
         res.status(500).send({ error })
     }
 })
@@ -61,6 +62,9 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
             if(update !== "_id") event[update] = req.body[update]
         })
 
+        event.time = Date.now()
+
+        
         await event.save()
 
         res.send({ event })

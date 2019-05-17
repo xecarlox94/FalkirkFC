@@ -37,7 +37,6 @@ const adminRoutes: Route[] = [
             { path: "events/edit/:id", component: EventEditComponent },
             { path: "events/:id", component: EventPageComponent },
             { path: "users", component: UserListComponent },
-            { path: "users/new", component: UserEditComponent },
             { path: "users/edit/:id", component: UserEditComponent },
             { path: "users/:id", component: UserPageComponent },
             { path: "matches", component: MatchListComponent },

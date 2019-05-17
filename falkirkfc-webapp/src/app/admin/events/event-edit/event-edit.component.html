@@ -1,3 +1,22 @@
-<p>
-  event-edit works!
-</p>
+
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+        <input matInput type="text" placeholder="Title" formControlName="title" >
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput type="text" placeholder="Subtitle" formControlName="subtitle" >
+      </mat-form-field>
+      
+      <br>
+      <mat-form-field style=" width: 100%; ">
+          <textarea matInput placeholder="Body text" formControlName="body" ></textarea>
+      </mat-form-field>
+      <br>
+
+  <button type="submit" mat-raised-button color="primary" [disabled]="!eventForm.valid" >{{ editMode ? 'Update' : 'Create' }}</button>
+</form>
+
+
+

@@ -59,8 +59,8 @@ teamSchema.statics.getTable = async function() {
 
 teamSchema.methods.getPerformance = async function() {
     let games = 0; let wins = 0; let draws = 0; let loses = 0; let scored = 0; let conceded = 0;
-    let awayGames = await Match.find({ away: this._id }).populate("events");
-    let homeGames = await Match.find({ home: this._id }).populate("events");
+    let awayGames = await Match.getMatches({ away: this._id })
+    let homeGames = await Match.getMatches({ home: this._id })
 
 
     for (const match of homeGames) {

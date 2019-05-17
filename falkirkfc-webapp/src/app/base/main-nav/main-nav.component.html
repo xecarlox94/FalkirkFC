@@ -14,10 +14,11 @@
         </a>
       </div>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/','adminDashboard']" *ngIf="session?.admin" >Admin</a>
       <a mat-list-item [routerLink]="['/','dashboard','profile']" *ngIf="session?.loggedIn" >Profile</a>
-      <a mat-list-item [routerLink]="['/','dashboard','news']" *ngIf="session?.loggedIn" >News</a>
-      <a mat-list-item [routerLink]="['/','dashboard','events']" *ngIf="session?.loggedIn" >Events</a>
+      <a mat-list-item [routerLink]="['/','adminDashboard']" *ngIf="session?.admin" >Admin</a>
+      <a mat-list-item [routerLink]="['/','adminDashboard', 'users']" *ngIf="session?.admin" >Users</a>
+      <a mat-list-item [routerLink]="['/','dashboard','news']" *ngIf="session?.loggedIn && !session?.admin" >News</a>
+      <a mat-list-item [routerLink]="['/','dashboard','events']" *ngIf="session?.loggedIn && !session?.admin" >Events</a>
       <a mat-list-item [routerLink]="['/','dashboard','league']" *ngIf="session?.loggedIn" >League</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -37,25 +38,31 @@
         </a>
       </div>
       <button
-          *ngIf="!isHandset && session?.admin"
-          mat-raised-button color="primary"
-          [routerLink]="[ '/','adminDashboard' ]" >
-        Admin
-      </button>
-      <button
           *ngIf="!isHandset && session?.loggedIn"
           mat-raised-button color="primary"
           [routerLink]="['/','dashboard','profile']" >
         Profile
       </button>
       <button
-          *ngIf="!isHandset && session?.loggedIn"
+          *ngIf="!isHandset && session?.admin"
+          mat-raised-button color="primary"
+          [routerLink]="[ '/','adminDashboard' ]" >
+        Admin
+      </button>
+      <button
+          *ngIf="!isHandset && session?.admin"
+          mat-raised-button color="primary"
+          [routerLink]="[ '/','adminDashboard', 'users' ]" >
+        Users
+      </button>
+      <button
+          *ngIf="!isHandset && session?.loggedIn && !session?.admin"
           mat-raised-button color="primary"
           [routerLink]="['/','dashboard','news']" >
         News
       </button>
       <button
-          *ngIf="!isHandset && session?.loggedIn"
+          *ngIf="!isHandset && session?.loggedIn && !session?.admin"
           mat-raised-button color="primary"
           [routerLink]="['/','dashboard','events']" >
         Events

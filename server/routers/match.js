@@ -22,7 +22,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
-        const matches = await Match.getMatches()
+        const matches = await Match.getMatches({})
         if(!matches) throw new Error()
 
         res.send({ matches })

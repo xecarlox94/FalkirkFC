@@ -2,10 +2,10 @@
 
 <h3>{{ event?.subtitle }}</h3>
 
-<h5>{{ event?.subtitle }}</h5>
+<h5>{{ event?.time | date:"medium" }}</h5>
 
 
-<p>{{ event?.body }}</p>
+<p style="white-space: pre-wrap; "  >{{ event?.body }}</p>
 
 
 

@@ -60,6 +60,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
             if(update !== "_id") news[update] = req.body[update]
         })
 
+        news.time = Date.now()
+
         await news.save()
 
         res.send({ news })

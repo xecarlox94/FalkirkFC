@@ -20,8 +20,8 @@ const newsSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 5,
-        maxlength: 15
+        minlength: 3,
+        maxlength: 20
     },
     time: {
         type: Date,

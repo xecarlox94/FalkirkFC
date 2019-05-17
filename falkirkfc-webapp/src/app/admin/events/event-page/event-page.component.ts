@@ -22,10 +22,7 @@ export class EventPageComponent implements OnInit {
 
   ngOnInit() {
     const id = this.actRoute.snapshot.params.id;
-    this.eventsService.getEvent(id).then( (event: Event) => {
-      this.event = event
-      console.log(event)
-    })
+    this.eventsService.getEvent(id).then( (event: Event) => this.event = event )
   }
 
 

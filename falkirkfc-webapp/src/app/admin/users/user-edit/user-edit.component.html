@@ -1,3 +1,44 @@
-<p>
-  user-edit works!
-</p>
+
+<h1>{{ user?.email }}</h1>
+<h2>{{ user?.admin ? "Admin" : "Subscriber" }}</h2>
+<h2 *ngIf="!user?.admin"> {{ user?.typeSubscription }}</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
+
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="First name" formControlName="firstName" >
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput type="text" placeholder="Last name" formControlName="lastName" >
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" formControlName="password" >
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput type="text" placeholder="Mobile phone" formControlName="mobilePhone" >
+    </mat-form-field>
+    
+    <mat-radio-group required formControlName="gender" >
+      <mat-radio-button value="female">Female</mat-radio-button>
+      <mat-radio-button value="male">Male</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Address" formControlName="address" >
+    </mat-form-field>
+
+
+    <br>
+    
+<button mat-button color="primary" (click)="tooglePasswordInput()" type="button" >
+  Change Password
+</button>
+<button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid" >
+  Update
+</button>
+
+</form>

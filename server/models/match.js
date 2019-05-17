@@ -37,8 +37,8 @@ matchSchema.virtual("events", {
 })
 
 
-matchSchema.statics.getMatches = async function() {
-    let fetchedMatches = await Match.find({}).populate("events").populate("home").populate("away")
+matchSchema.statics.getMatches = async function( query ) {
+    let fetchedMatches = await Match.find( query ).populate("events").populate("home").populate("away")
     let matches = [];
     for(let i = 0; i < fetchedMatches.length; i++ ){
         matches[i] = {};

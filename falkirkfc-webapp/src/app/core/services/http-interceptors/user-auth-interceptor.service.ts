@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { UserAuthService } from '../users/user-auth.service';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
@@ -11,8 +12,11 @@ import { catchError } from 'rxjs/operators';
 
 export class UserAuthInterceptor implements HttpInterceptor {
     userAuthService: UserAuthService;
-    constructor(userAuthSrv: UserAuthService){
+    router: Router;
+
+    constructor(userAuthSrv: UserAuthService, router: Router){
         this.userAuthService = userAuthSrv;
+        this.router = router;
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -33,6 +37,8 @@ export class UserAuthInterceptor implements HttpInterceptor {
                 if(event.status === 401) {
                     this.userAuthService.clearCoockiesToLogin()
                     return null;
+                } else {
+                    //this.router.navigate([ "/login" ])
                 }
                 return throwError(event);
             })

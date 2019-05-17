@@ -15,4 +15,8 @@ export class Event {
         this.body = body;
         this._id = _id;
     }
+
+    setId(id: string){
+        this._id = id;
+    }
 }
