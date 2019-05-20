@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // loads the mongoose dependency
 
 
-const newsSchema = new mongoose.Schema({
+const newsSchema = new mongoose.Schema({ // creates a the newsSchema and sets its properties
     title: {
         type: String,
         required: true,
@@ -26,7 +26,7 @@ const newsSchema = new mongoose.Schema({
     time: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now() // sets the date for the time it was created
     },
     body: {
         type: String,
@@ -37,7 +37,7 @@ const newsSchema = new mongoose.Schema({
 })
 
 
-const News = mongoose.model("News", newsSchema);
+const News = mongoose.model("News", newsSchema); // creates Match model from the newsSchema
 
 
 
