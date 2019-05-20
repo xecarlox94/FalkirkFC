@@ -1,6 +1,6 @@
-const socketIO = require("socket.io")
-const app = require('./app')
-const port = process.env.PORT
+const socketIO = require("socket.io") // load socket io module
+const app = require('./app'); // load application variable
+const port = process.env.PORT; // get port variable
 
 
 
