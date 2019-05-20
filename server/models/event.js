@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // loads the mongoose dependency
 
 
-const eventSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({ // creates a the eventSchema and sets its properties
     title: {
         type: String,
         required: true,
@@ -19,7 +19,7 @@ const eventSchema = new mongoose.Schema({
     time: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now() // sets the date for the time it was created
     },
     body: {
         type: String,
@@ -30,8 +30,8 @@ const eventSchema = new mongoose.Schema({
 })
 
 
-const Event = mongoose.model("Event", eventSchema);
+const Event = mongoose.model("Event", eventSchema); // creates a mongoose model called "Event" using the eventSchema
 
 
 
-module.exports = Event;
+module.exports = Event; // exports the Event model
