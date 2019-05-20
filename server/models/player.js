@@ -1,14 +1,14 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // loads the mongoose dependency
 
 
-const playerSchema = new mongoose.Schema({
+const playerSchema = new mongoose.Schema({ // creates a the matchSchema and sets its properties
     name: {
         type: String,
         required: true
     },
     position: {
         type: String,
-        enum: [ "goalkeeper", "defender", "midfielder", "attacker"],
+        enum: [ "goalkeeper", "defender", "midfielder", "attacker"], // string validation
         required: true
     },
     team: {
@@ -21,6 +21,6 @@ const playerSchema = new mongoose.Schema({
 
 
 
-const Player = mongoose.model("Player", playerSchema);
+const Player = mongoose.model("Player", playerSchema); // create match event model
 
 module.exports = Player;
