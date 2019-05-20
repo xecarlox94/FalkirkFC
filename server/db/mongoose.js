@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose'); // loads mongoose module
 
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect(process.env.MONGODB_URL, { // connects 
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
@@ -14,9 +14,9 @@ mongoose.connect(process.env.MONGODB_URL, {
 // On Connection
 mongoose.connection.on('connected', () => {
     console.log('Connected to database');
-  });
-  
-  // On Error
-  mongoose.connection.on('error', (err) => {
+});
+
+// On Error
+mongoose.connection.on('error', (err) => {
     console.log('Database error: '+err);
-  });
+});
