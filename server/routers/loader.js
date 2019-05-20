@@ -6,9 +6,10 @@ const userRouter = require("./user");
 const playerRouter = require("./player");
 const matchEventRouter = require("./matchEvent");
 
+// loads all files
 
 
-module.exports = {
+module.exports = { // exports all files in one
     eventRouter,
     matchRouter,
     newsRouter,
