@@ -4,44 +4,28 @@
 -add matchEvent to matchstream
 -implement live score system
 -notications component ( live match / events )
+-add simple backend testing
 -implement stack, queue or linkedList for the notifications
 -pop-up fade notifications to alert user of any app events
 -do all subscriber's competition, events, news, livefeed realtime and squads pages components
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
 -user to get entry in event
 
-
--add simple backend testing
--test heroku server
 -add policy modal and cookie policy page
 -add about us page
+-catch all errors on backend and front end
 -do all sections when logged out
 -front end testing
 -Breadcrumb on falkirk app
+-add form validation to all forms
 -add footer
 -finish styling app and navbar integrate bulma
 
 
-
-
-
--match model update as well as edit and update forms
--match event update (to include assists)
--team model update as well as edit and update forms
 -player model update as well as edit and update forms ( add nationality and place of birth)
 -set default asset images to teams, users, events and news
 -images teams (logo and stadium), players, users, events and news
--add form validation to all forms
--catch all errors on backend and front end
 -add comments to code
 -improve testing heroku server
 
--flag to players and user profile
 -add calendar and hour to determine time in matches and events ( as well as players and users birthdays)
--add all league match backend validation, frontend handling the errors
--set middleware on all models to delete instances of other models
--include players best goal scorer, assist and most yellow in the subscriber's league section
--custom unique validators (users, teams)
--add match event icons
--can deactivate guards on all forms
--can load guards on pages
