@@ -1,15 +1,15 @@
 
 
--users resources admin edit/new frontend (remove email input in edit profile)
--add matchEvent to matchstream
+-do all subscriber's competition, events, news, livefeed realtime and squads pages components
+-upgrade subscription feature backend and frontend, add delete own account option (view profile)
+-user to get entry in event
+-set default asset images to teams, users, events and news
+-images teams (logo and stadium), players, users, events and news
 -implement live score system
 -notications component ( live match / events )
 -add simple backend testing
 -implement stack, queue or linkedList for the notifications
 -pop-up fade notifications to alert user of any app events
--do all subscriber's competition, events, news, livefeed realtime and squads pages components
--upgrade subscription feature backend and frontend, add delete own account option (view profile)
--user to get entry in event
 
 -add policy modal and cookie policy page
 -add about us page
@@ -23,9 +23,4 @@
 
 
 -player model update as well as edit and update forms ( add nationality and place of birth)
--set default asset images to teams, users, events and news
--images teams (logo and stadium), players, users, events and news
--add comments to code
--improve testing heroku server
-
 -add calendar and hour to determine time in matches and events ( as well as players and users birthdays)
