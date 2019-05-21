@@ -16,7 +16,7 @@ import { MatchEvent } from 'src/app/core/models/matchEvent';
   styleUrls: ['./new-match-event.component.scss']
 })
 export class NewMatchEventComponent implements OnInit {
-  @Output() mEventCreated: EventEmitter<void> = new EventEmitter<void>();
+  @Output() mEventCreated: EventEmitter<MatchEvent> = new EventEmitter<MatchEvent>();
 
   matchService: MatchService;
   matchEventService: MatchEventService;
@@ -71,7 +71,7 @@ export class NewMatchEventComponent implements OnInit {
     const matchEvent = new MatchEvent(this.mEventForm.value.typeEvent, this.mEventForm.value.minute, this.match._id)
     matchEvent.setTeam(this.mEventForm.value.team)
     matchEvent.setPlayer(this.mEventForm.value.player)
-    this.matchEventService.createMatchEvent(matchEvent).then( (matchEvent: MatchEvent) => this.mEventCreated.emit() )
+    this.matchEventService.createMatchEvent(matchEvent).then( (matchEvent: MatchEvent) => this.mEventCreated.emit(matchEvent) )
   }
 
   onCancel(){

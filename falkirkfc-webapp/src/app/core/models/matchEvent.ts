@@ -1,4 +1,3 @@
-import { Match } from './match.model';
 import { Team } from './team.model';
 import { Player } from './player.model';
 

@@ -17,7 +17,7 @@ export class LeagueComponent implements OnInit {
     },
     {
       path: "match",
-      label: "Live Match DELETE"
+      label: "Match?"
     }
   ]
 

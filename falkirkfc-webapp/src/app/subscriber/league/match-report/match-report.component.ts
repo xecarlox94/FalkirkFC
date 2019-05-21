@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-match-report',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./match-report.component.scss']
 })
 export class MatchReportComponent implements OnInit {
+  actRoute: ActivatedRoute;
 
-  constructor() { }
+  constructor(actRoute: ActivatedRoute) {
+    this.actRoute = actRoute;
+  }
 
   ngOnInit() {
+    const queryParams = this.actRoute.snapshot.queryParams;
+    console.log(queryParams)
   }
 
 }

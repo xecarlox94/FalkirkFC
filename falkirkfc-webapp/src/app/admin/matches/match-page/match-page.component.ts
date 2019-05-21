@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Team } from 'src/app/core/models/team.model';
 import { SocketClientService } from 'src/app/core/services/livestream/socket-client.service';
+import { MatchEvent } from 'src/app/core/models/matchEvent';
+import { MatchStream } from 'src/app/core/models/matchStream.model';
 
 @Component({
   selector: 'app-match-page',
@@ -40,16 +42,20 @@ export class MatchPageComponent implements OnInit, OnDestroy {
     this.loadMatch();
   }
 
-  onMatchEventCreated(){
+  onMatchEventCreated(matchEvent: MatchEvent){
     this.isCreatingMatchEvent = false;
-    this.loadMatch()
+    this.loadMatch(matchEvent)
   }
 
-  loadMatch(){
+  loadMatch(matchEvent?: MatchEvent){
     this.matchService.fetchMatch(this.route.snapshot.params.id).then( (match: Match) => {
       this.match = match;
-      this.socketClientService.emitMatchStream(this.match._id, true)
       this.emitMatchIDToChild()
+    
+      const matchStream = new MatchStream(this.match._id, true)
+      if(matchEvent) matchStream.setMatchEvent(matchEvent);
+      
+      this.socketClientService.emitMatchStream(matchStream);
     })
   }
 
@@ -70,7 +76,7 @@ export class MatchPageComponent implements OnInit, OnDestroy {
 
   
   ngOnDestroy(): void {
-    this.socketClientService.emitMatchStream(this.match._id, false)
+    this.socketClientService.emitMatchStream( new MatchStream(this.match._id, false) );
   }
 
 }

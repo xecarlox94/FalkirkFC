@@ -38,6 +38,12 @@
         </a>
       </div>
       <button
+          *ngIf="session?.loggedIn && isMatchLive"
+          mat-raised-button color="primary"
+          [routerLink]="['/','dashboard','league', 'match' ]" [queryParams]="{ live: true, id: matchStream?.match_id }" >
+        Live Match
+      </button>
+      <button
           *ngIf="!isHandset && session?.loggedIn"
           mat-raised-button color="primary"
           [routerLink]="['/','dashboard','profile']" >

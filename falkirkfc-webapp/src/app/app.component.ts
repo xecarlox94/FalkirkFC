@@ -9,26 +9,10 @@ import { MatchStream } from './core/models/matchStream.model';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit, OnDestroy {
-  socketClientService: SocketClientService
-  subscription: Subscription;
+export class AppComponent {
 
-  constructor(socketClientSrv: SocketClientService){
-    this.socketClientService = socketClientSrv;
-  }
+  constructor( ){ }
   
-  ngOnInit(): void {
-    this.subscription = this.socketClientService.receiveMatchStream()
-        .subscribe( (matchStream: MatchStream) => {
-          console.log(matchStream)
-        },
-        (error) => console.error("ERRRROORRRRR!!!!!!!!!!!!!!!!!!!!!!!! " + error),
-        () => console.log("COMPLETED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!") )
-  }
-
-  
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
-  }
+  ngOnInit() { }
 
 }

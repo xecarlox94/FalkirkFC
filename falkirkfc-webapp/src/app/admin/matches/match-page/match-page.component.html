@@ -10,7 +10,7 @@
 
 <app-match-event-list [mEventsObs]="matchIDSubject.asObservable()" (mEventChanges)="onMatchEventsChanges()"></app-match-event-list>
 
-<app-new-match-event *ngIf="isCreatingMatchEvent; else normalSection" (mEventCreated)="onMatchEventCreated()" ></app-new-match-event>
+<app-new-match-event *ngIf="isCreatingMatchEvent; else normalSection" (mEventCreated)="onMatchEventCreated($event)" ></app-new-match-event>
 
 <ng-template #normalSection >
     <div>
