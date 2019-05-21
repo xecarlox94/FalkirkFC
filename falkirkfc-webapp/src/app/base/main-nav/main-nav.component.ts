@@ -5,7 +5,6 @@ import { map, tap } from 'rxjs/operators';
 import { UserAuthService } from 'src/app/core/services/users/user-auth.service';
 import { Session } from 'src/app/core/models/session.model';
 import { LiveMatchService } from 'src/app/core/services/livestream/live-match.service';
-import { MatchStream } from 'src/app/core/models/matchStream.model';
 
 @Component({
   selector: 'app-main-nav',
@@ -13,14 +12,13 @@ import { MatchStream } from 'src/app/core/models/matchStream.model';
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit, OnDestroy {
+  matchStatus: {live: boolean, matchStatus: string, _id: string} = null;
   userAuthService: UserAuthService;
-  sessionSubscription: Subscription;
-  liveMatchSubscription: Subscription;
   liveMatchService: LiveMatchService;
+  sessionSubscription: Subscription;
+  matchStatusSubscription: Subscription;
   isHandset: boolean;
-  isMatchLive: boolean;
   session: Session;
-  matchStream: MatchStream;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -31,20 +29,15 @@ export class MainNavComponent implements OnInit, OnDestroy {
   constructor(private breakpointObserver: BreakpointObserver, userAuthSrv: UserAuthService, liveMatchSrv: LiveMatchService) {
     this.userAuthService = userAuthSrv;
     this.liveMatchService = liveMatchSrv;
-    this.isMatchLive = false;
   }
 
 
   ngOnInit(): void {
     this.sessionSubscription = this.userAuthService.session.subscribe( (session: Session) => this.session = session )
     this.userAuthService.onSessionChanges()
-    this.liveMatchSubscription = this.liveMatchService.liveMatchSubject
-                                     .subscribe( (matchStream: MatchStream) => {
-                                       this.matchStream = matchStream
-                                       console.log(matchStream)
-                                       if(matchStream.live) this.isMatchLive = true
-                                       else this.isMatchLive = false
-                                      })
+    this.matchStatusSubscription = this.liveMatchService.statusSubject.subscribe( (matchStatus: {live: boolean, matchStatus: string, _id: string}) => {
+      this.matchStatus = matchStatus
+    })
   }
   
 
@@ -55,7 +48,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     this.sessionSubscription.unsubscribe()
-    this.liveMatchSubscription.unsubscribe()
+    this.matchStatusSubscription.unsubscribe()
   }
 
 }

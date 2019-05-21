@@ -20,6 +20,7 @@ export class MatchPageComponent implements OnInit, OnDestroy {
   route: ActivatedRoute;
   match: Match;
   matchService: MatchService;
+  eventDeleted: boolean = false;
   isCreatingMatchEvent: boolean;
 
   constructor(matchSrv: MatchService, actRoute: ActivatedRoute, router: Router, socketClientSrv: SocketClientService) {
@@ -39,6 +40,7 @@ export class MatchPageComponent implements OnInit, OnDestroy {
   }
 
   onMatchEventsChanges(){
+    this.eventDeleted = true;
     this.loadMatch();
   }
 
@@ -53,9 +55,12 @@ export class MatchPageComponent implements OnInit, OnDestroy {
       this.emitMatchIDToChild()
     
       const matchStream = new MatchStream(this.match._id, true)
-      if(matchEvent) matchStream.setMatchEvent(matchEvent);
+
+      if(matchEvent) matchStream.setMatchEvent(matchEvent)
+      else if(this.eventDeleted) matchStream.setEventDeleted(this.eventDeleted);
       
       this.socketClientService.emitMatchStream(matchStream);
+      this.eventDeleted = false;
     })
   }
 

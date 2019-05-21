@@ -5,7 +5,8 @@ import { MatchEvent } from './matchEvent';
 export class MatchStream {
     match_id: string;
     live: boolean;
-    matchEvent: MatchEvent;
+    matchEvent?: MatchEvent;
+    mEventDeleted?: boolean;
     
     constructor(match_id: string, live: boolean){
         this.match_id = match_id;
@@ -16,5 +17,8 @@ export class MatchStream {
         this.matchEvent = matchEvent;
     }
     
+    setEventDeleted(wasDeleted: boolean){
+        this.mEventDeleted = wasDeleted;
+    }
     
 }

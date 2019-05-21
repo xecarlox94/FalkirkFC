@@ -34,6 +34,7 @@ export class SocketClientService {
                     const matchEvent = new MatchEvent(mEvent.typeEvent, mEvent.minute, mEvent.match, mEvent.player, mEvent.team)
                     matchStream.setMatchEvent(matchEvent)
                 }
+                if(value.mEventDeleted) matchStream.setEventDeleted(true)
                 if(!matchStream) observer.error("NO MATCH EVENT")
                 observer.next(matchStream)
             })

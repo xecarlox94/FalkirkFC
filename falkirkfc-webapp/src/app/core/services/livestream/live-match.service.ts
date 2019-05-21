@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { SocketClientService } from './socket-client.service';
 import { MatchStream } from '../../models/matchStream.model';
 import { Subject } from 'rxjs';
@@ -13,16 +13,27 @@ import { Subject } from 'rxjs';
 
 export class LiveMatchService {
     private socketClientService: SocketClientService;
-    liveMatchSubject: Subject<MatchStream> = new Subject<MatchStream>()
+    streamSubject: Subject<MatchStream> = new Subject<MatchStream>();
+    statusSubject: Subject<{live: boolean, matchStatus: string, _id: string}> = new Subject<{live: boolean, matchStatus: string, _id: string}>();
 
     constructor(socketClientSrv: SocketClientService){
         this.socketClientService = socketClientSrv;
         this.socketClientService.receiveMatchStream()
             .subscribe(
                 (matchStream: MatchStream) => {
-                    this.liveMatchSubject.next(matchStream)
+                    let live: boolean = true;
+                    let matchStatus: string = "ongoing"
+                    const _id = matchStream.match_id;
+
+                    if( !matchStream.live ) {
+                        live = false;
+                        matchStatus = "finished"
+                    } else if ( !matchStream.mEventDeleted && !matchStream.matchEvent) matchStatus = "started"
+                    this.streamSubject.next(matchStream)
+                    this.statusSubject.next({ live, matchStatus, _id })
                 }, (error: any) => {
-                    this.liveMatchSubject.error(error)
+                    this.streamSubject.error(error)
+                    this.statusSubject.error(error)
                 })
     }
     
