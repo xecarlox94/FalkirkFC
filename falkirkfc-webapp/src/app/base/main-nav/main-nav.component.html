@@ -40,8 +40,9 @@
       <button
           *ngIf="session?.loggedIn && matchStatus?.live"
           mat-raised-button color="primary"
+          class="blinking"
           [routerLink]="['/','dashboard','league', 'match' ]" [queryParams]="{ live: true, id: matchStatus?._id }" >
-        Live
+        Live Match
       </button>
       <button
           *ngIf="!isHandset && session?.loggedIn"
