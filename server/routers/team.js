@@ -1,18 +1,16 @@
-const express = require('express')
-const router = new express.Router()
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const Team = require("../models/team") // loads Team model
 
-const Team = require("../models/team")
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
-
 router.post("/", adminAuthMiddleware, async (req, res) => {
-    const body = req.body;
-    const team = new Team(body)
-
     try {
+        const team = new Team(req.body)
+
         await team.save()
-        res.send(team)
+        res.send({ team })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })
@@ -22,39 +20,33 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const teams = await Team.find({})
-        res.send({teams})
+
+        res.send({ teams })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
-
 
 router.get("/table", userAuthMiddleware, async (req, res) => {
     try {
-        const tableRows = await Team.getTable()
-        res.send({
-            table: tableRows
-        })
+        const table = await Team.getTable()
+
+        res.send({ table })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
 
-// add route for away, home and overall games
 router.get("/performance/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
 
     try {
         const team = await Team.findById(_id)
-        
         const performance =  await team.getPerformance();
 
-        res.send({
-            team,
-            performance
-        })
+        res.send({ team, performance })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })
@@ -67,9 +59,7 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
     try {
         const team = await Team.findById(_id)
 
-        res.send({
-            team
-        })
+        res.send({ team })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })
@@ -96,24 +86,14 @@ router.get("/squad/:id", userAuthMiddleware, async (req, res) => {
 })
 
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
-    const body = req.body;
     const _id = req.params.id;
-    delete body._id
-
-    const allowedUpdates = [ "name", "manager" ]
-    const updates = Object.keys(body)
-    const isValid = updates.every( update => {
-        return allowedUpdates.includes(update)
-    })
-
     try {
-        if(!isValid) throw new Error()
-
         const team = await Team.findOne({ _id })
-        if(!team) throw new Error()
-
+        if(!team) throw new Error("Team not found")
+        
+        const updates = Object.keys(req.body)
         updates.forEach( (update) => {
-            if(update !== "_id") req.user[update] = req.body[update]
+            if(update !== "_id") team[update] = req.body[update]
         })
         
         await team.save()
@@ -130,7 +110,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     try {
         const team = await Team.findByIdAndDelete({ _id })
 
-        if(!team) throw new Error()
+        if(!team) throw new Error("Team not found")
 
         res.send({ team })
 

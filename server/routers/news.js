@@ -1,12 +1,9 @@
-const express = require('express')
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const News = require("../models/news") // loads the News model
 
-const router = new express.Router()
-
-const News = require("../models/news")
-
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
-
 
 router.post("/", adminAuthMiddleware, async (req, res) => {
     try {
@@ -21,11 +18,10 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const newsLetter = await News.find({})
-
+        // if not found, send error
         if(newsLetter.length === 0) throw new Error("No news available")
 
         res.send({ newsLetter })
@@ -35,11 +31,9 @@ router.get("/", userAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.get("/:id", userAuthMiddleware, async (req, res) => {
     try {
         const news = await News.findById(req.params.id)
-
         if(!news) throw new Error("News article not found")
 
         res.send({ news })
@@ -51,20 +45,16 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-    const body = req.body;
     try {
         const news = await News.findById(_id)
-
         if(!news) throw new Error("News article not found")
 
-        const updates = Object.keys(body)
-
+        const updates = Object.keys(req.body)
         updates.forEach( (update) => {
             if(update !== "_id") news[update] = req.body[update]
         })
 
         news.time = Date.now()
-
         await news.save()
 
         res.send({ news })

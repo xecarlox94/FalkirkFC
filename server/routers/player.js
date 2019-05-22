@@ -1,8 +1,8 @@
-const express = require('express')
-const router = new express.Router()
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const Player = require("../models/player") // loads Player model
 
-const Player = require("../models/player")
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
 router.get("/", userAuthMiddleware, async (req, res) => {
@@ -41,16 +41,12 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-    const body = req.body;
-    
-    const updates = Object.keys(body)
-
     try {
-
         const player = await Player.findById({ _id })
 
+        const updates = Object.keys(req.body)
         updates.forEach( (update) => {
-            if(update !== "_id") req.user[update] = req.body[update]
+            if(update !== "_id") player[update] = req.body[update]
         })
 
         await player.save()

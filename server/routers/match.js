@@ -1,16 +1,13 @@
-const express = require('express')
-const router = new express.Router()
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const Match = require("../models/match") // loads Match model
 
-const Match = require("../models/match")
-
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
 router.post("/", adminAuthMiddleware, async (req, res) => {
-    const body = req.body;
-    
     try {
-        const match = new Match(body)
+        const match = new Match(req.body)
         
         await match.save()
         res.send(match)
@@ -19,7 +16,6 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         res.status(500).send({ error })
     }
 })
-
 
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
@@ -34,7 +30,6 @@ router.get("/", userAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
@@ -48,7 +43,6 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
@@ -61,18 +55,14 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
-    const body = req.body
     const _id = req.params.id;
-    
-
     try {
-        const updates = Object.keys(body)
+        const updates = Object.keys(req.body)
         
         const match = await Match.findById({ _id })
         updates.forEach( (update) => {
-            if(update !== "_id") req.user[update] = req.body[update]
+            if(update !== "_id") match[update] = req.body[update]
         })
 
         await match.save()
@@ -84,15 +74,12 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.get("/round/:round", userAuthMiddleware, async (req, res) => {
     const round = Number(req.params.round);
-    
     try {
         const matches = await Match.getRoundMatches(round)
 
         res.send({ matches })
-
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })

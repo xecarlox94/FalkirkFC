@@ -1,15 +1,12 @@
-const express = require('express')
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const Event = require("../models/event") // loads Event model
 
-const router = new express.Router()
-
-const Event = require("../models/event")
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
-
 
 router.post("/", adminAuthMiddleware, async (req, res) => {
     try {
-        // creates a new event
         const event = new Event(req.body)
 
         // saves the event and sends it
@@ -24,9 +21,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
-        // gets all events
         const events = await Event.find({})
-        
         // if there is no events, throw error
         if(events.length === 0) throw new Error("Events not available")
 
@@ -42,7 +37,7 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
     try {
         const event = await Event.findById(_id)
-
+        // if there is no events, throw error
         if(!event) throw new Error("Event not found")
 
         res.send({ event })
@@ -52,25 +47,19 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
     }
 })
 
-
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-    const body = req.body;
-
     try {
         const event = await Event.findById(_id)
-
+        // if there is no event, throw error
         if(!event) throw new Error("Event not found")
 
-        updates = Object.keys(body)
-
+        updates = Object.keys(req.body)
         updates.forEach( (update) => {
             if(update !== "_id") event[update] = req.body[update]
         })
 
         event.time = Date.now()
-
-        
         await event.save()
 
         res.send({ event })
@@ -86,11 +75,10 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
 
     try {
         const event = await Event.findByIdAndDelete(_id)
-
+        // if there is no event, throw error
         if(!event) throw new Error("Event not found")
 
         res.send({ event })
-
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
         res.status(500).send({ error })

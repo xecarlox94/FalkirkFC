@@ -1,9 +1,8 @@
-const express = require("express");
-const router = new express.Router()
+const express = require('express') // loads module
+const router = new express.Router() // creates an router
+const MatchEvent = require("../models/matchEvent"); // loads match event model
 
-const MatchEvent = require("../models/matchEvent");
-
-
+// loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
 router.delete("/:id", adminAuthMiddleware, async (req, res) => {

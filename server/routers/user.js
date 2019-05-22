@@ -1,6 +1,5 @@
 const express = require('express') // loads module
 const router = new express.Router() // creates an router
-
 const User = require("../models/user") // loads user model
 
 // loads authentication middleware
