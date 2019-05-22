@@ -14,8 +14,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await team.save()
         res.send(team)
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send({error})
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -24,8 +24,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
         const teams = await Team.find({})
         res.send({teams})
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -37,8 +37,8 @@ router.get("/table", userAuthMiddleware, async (req, res) => {
             table: tableRows
         })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -56,8 +56,8 @@ router.get("/performance/:id", userAuthMiddleware, async (req, res) => {
             performance
         })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -71,8 +71,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
             team
         })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -90,8 +90,8 @@ router.get("/squad/:id", userAuthMiddleware, async (req, res) => {
             }
         })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -120,8 +120,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({ team })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -135,8 +135,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         res.send({ team })
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 

@@ -9,26 +9,30 @@ const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth"
 
 router.post("/", adminAuthMiddleware, async (req, res) => {
     try {
+        // creates a new event
         const event = new Event(req.body)
 
+        // saves the event and sends it
         await event.save()
-
         res.send({ event })
+
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
 
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
+        // gets all events
         const events = await Event.find({})
-
+        
+        // if there is no events, throw error
         if(events.length === 0) throw new Error("Events not available")
 
         res.send({ events })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -43,7 +47,7 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
         res.send({ event })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -72,7 +76,7 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         res.send({ event })
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -88,7 +92,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         res.send({ event })
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })

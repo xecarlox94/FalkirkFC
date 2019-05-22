@@ -15,8 +15,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await match.save()
         res.send(match)
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -29,8 +29,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
         res.send({ matches })
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -43,8 +43,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({match})
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -56,8 +56,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
         res.send({ matchReport })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -79,8 +79,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({ match })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -94,8 +94,8 @@ router.get("/round/:round", userAuthMiddleware, async (req, res) => {
         res.send({ matches })
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 

@@ -13,8 +13,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({ matchEvent })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -28,8 +28,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         res.send({ matchEvent })
         
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -41,8 +41,8 @@ router.get("/match/:match", userAuthMiddleware, async (req, res) => {
 
         res.send(matchEvents)
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 

@@ -1,5 +1,6 @@
 
 
+-add simple backend testing
 -do all subscriber's competition, events, news, livefeed realtime and squads pages components
 -upgrade subscription feature backend and frontend, add delete own account option (view profile)
 -user to get entry in event
@@ -7,20 +8,15 @@
 -images teams (logo and stadium), players, users, events and news
 -implement live score system
 -notications component ( live match / events )
--add simple backend testing
 -implement stack, queue or linkedList for the notifications
 -pop-up fade notifications to alert user of any app events
 
--add policy modal and cookie policy page
--add about us page
+-add Falkirk page
 -catch all errors on backend and front end
 -do all sections when logged out
 -front end testing
 -Breadcrumb on falkirk app
 -add form validation to all forms
 -add footer
--finish styling app and navbar integrate bulma
-
-
--player model update as well as edit and update forms ( add nationality and place of birth)
--add calendar and hour to determine time in matches and events ( as well as players and users birthdays)
+-finish styling app
+-update documentation

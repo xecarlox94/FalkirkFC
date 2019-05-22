@@ -15,48 +15,42 @@ const matchEventSchema = new mongoose.Schema({
         max: 120,
         required: true
     },
-    match: {
-        ref: "Match", // creates a property which stores Match model object ids, and it makes it required
+    match: { // creates a property which stores Match model object ids, and it makes it required
+        ref: "Match",
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    team: {
-        ref: "Team", // creates a property which stores Team model object ids, and it makes it required
+    team: { // creates a property which stores Team model object ids, and it makes it required
+        ref: "Team", 
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        validate: function(team_id){ // it validates if the team is part the home or away team
-            
+        validate: function(team_id){ 
             const match_id = this.match;
             return new Promise( function(resolve, reject) {
-                
+                // it validates if the team is part the home or away team
                 Match.findById(match_id)
                      .then( (match) => {
                         if( (team_id == match.home.toHexString()) || (team_id == match.away.toHexString()) ) resolve()
                         else reject("Not Found")
                      })
-                     .catch( (rej) => {
-                         throw new Error(rej)
-                     })
+                     .catch( (rej) => reject(rej) )
             })
         }
     },
-    player: {
-        ref: "Player", // creates a property which stores PLayer model object ids, and it makes it required
+    player: { // creates a property which stores PLayer model object ids, and it makes it required
+        ref: "Player", 
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        validate: function(player_id){ // it validates if the player is part of the team the event is for
-            
+        validate: function(player_id){
             const team_id = this.team
             return new Promise( function(resolve, reject) {
-                
+                // it validates if the player is part of the team the event is for
                 Player.findById(player_id)
                       .then( (player)=> {
                           if( player.team.toHexString() == team_id) resolve()
-                          else reject()
+                          else reject("Not Found")
                       })
-                      .catch( (rej) => {
-                          throw new Error(rej)
-                      })
+                      .catch( (rej) => reject(rej) )
             })
         }
     }
@@ -66,18 +60,19 @@ const matchEventSchema = new mongoose.Schema({
     }
 })
 
+// get all events from each match
+matchEventSchema.statics.getEventsMatch = async function( match_id ){
+    // get matches all populate virtual properties
+    let match_events = await MatchEvent.find({ match: match_id }).populate("team").populate("player")
 
-matchEventSchema.statics.getEventsMatch = async function( match_id ){ // get all events from each match
-    
-    let match_events = await MatchEvent.find({ match: match_id }).populate("team").populate("player") // get matches all populate virtual properties
-    
-    match_events.sort((a, b) => a.minute - b.minute ) // sort the match events by minute
+    // sort the match events by minute
+    match_events.sort((a, b) => a.minute - b.minute ) 
     
     return match_events;
 }
 
-
-const MatchEvent = mongoose.model("MatchEvent", matchEventSchema); // create match event model
+// create match event model
+const MatchEvent = mongoose.model("MatchEvent", matchEventSchema);
 
 
 module.exports = MatchEvent;

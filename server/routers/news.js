@@ -16,8 +16,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 
         res.send( { news } )
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send({error})
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -30,7 +30,7 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 
         res.send({ newsLetter })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -44,7 +44,7 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
         res.send({ news })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -69,7 +69,7 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({ news })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })
@@ -83,7 +83,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
 
         res.send({ news })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
+        // sends 500 internal error with the error message
         res.status(500).send({ error })
     }
 })

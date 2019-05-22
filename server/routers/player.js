@@ -10,8 +10,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
         const players = await Player.find({})
         res.send({ players })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -22,8 +22,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await player.save()
         res.send({ player })
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send({error})
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -33,8 +33,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
         const player = await Player.findById({ _id })
         res.send({player})
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -58,8 +58,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         res.send({player})
 
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
@@ -72,8 +72,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         res.send({player})
         
     } catch (error) { // catches any error in the try block
-        // sends 500 internal error
-        res.status(500).send()
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
     }
 })
 
