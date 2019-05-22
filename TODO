@@ -8,7 +8,7 @@
 -images teams (logo and stadium), players, users, events and news
 -implement live score system
 -notications component ( live match / events )
--implement stack, queue or linkedList for the notifications
+-implement stack, queue or linkedList for the notifications ( update data structures on documentation )
 -pop-up fade notifications to alert user of any app events
 
 -add Falkirk page
