@@ -5,17 +5,6 @@ const Player = require("../models/player") // loads Player model
 // loads authentication middleware
 const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth")
 
-router.get("/", userAuthMiddleware, async (req, res) => {
-    try {
-        const players = await Player.find({})
-
-        res.send({ players })
-    } catch (error) { // catches any error in the try block
-        // sends 500 internal error with the error message
-        res.status(500).send({ error })
-    }
-})
-
 router.post("/", adminAuthMiddleware, async (req, res) => {
     try {
         const player = new Player(req.body)
