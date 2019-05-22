@@ -5,26 +5,31 @@ const port = process.env.PORT; // get port variable
 
 
 const server = app.listen(port, () => {
-    console.log('Server is up on port ' + port) // logs if the server is successfully initialized
+    // logs if the server is successfully initialized
+    console.log('Server is up on port ' + port) 
 })
 
 
 const io = socketIO(server) // initializes the websocket
 
+//listens to client web sockets connecting
+io.on("connection", (socket) => { 
 
-io.on("connection", (socket) => { //listens to client web sockets connecting
-    
-    console.log("user connected") // logs if a websocket client is connected
+    // logs if a websocket client is connected
+    console.log("user connected") 
 
-    socket.on("live-match", ( matchStream ) => { // listens for the "live-match" event and stores the matchStream data
-        
-        socket.broadcast.emit("live-match-broadcast", matchStream ) // broadcasts the data in 
+    // listens for the "live-match" event and stores the matchStream data
+    socket.on("live-match", ( matchStream ) => { 
+
+        // broadcasts the data to all users
+        socket.broadcast.emit("live-match-broadcast", matchStream ) 
         
     })
 
-    socket.on("disconnect", () => { //listens to client web sockets disconnecting
-        
-        console.log("user disconnected") // logs if a websocket client is connected
+    //listens to client web sockets disconnecting
+    socket.on("disconnect", () => { 
+        // logs if a websocket client is connected
+        console.log("user disconnected") 
         
     })
 })

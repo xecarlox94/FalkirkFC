@@ -1,7 +1,5 @@
-// loads the json web tokens module
-const jwt = require("jsonwebtoken")
-// loads the User model
-const User = require("../models/user")
+const jwt = require("jsonwebtoken") // loads the json web tokens module
+const User = require("../models/user") // loads the User model
 
 
 // finds user by auth token
@@ -19,7 +17,7 @@ const findUserByToken = async (token) => {
     return user;
 }
 
-// authenticates admin and subscribers
+// authenticates all types of users
 const userAuthMiddleware = async (req, res, next) => {
     try {
         // gets the token from the Bearer auth string
