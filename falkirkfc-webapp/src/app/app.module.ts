@@ -7,36 +7,30 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './base/main-nav/main-nav.component';
-import { PolicyModalComponent } from './base/policy-modal/policy-modal.component';
 import { UserAuthInterceptor } from './core/services/http-interceptors/user-auth-interceptor.service';
-import { AboutUsComponent } from './base/instituition/about-us/about-us.component';
-import { CookiePolicyComponent } from './base/instituition/cookie-policy/cookie-policy.component';
+import { AboutUsComponent } from './base/about-us/about-us.component';
 
 
 @NgModule({
-  imports: [
+  imports: [ // all needed modules
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule
   ],
-  providers: [
+  providers: [ // services
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserAuthInterceptor,
       multi: true
     }
   ],
-  declarations: [
+  declarations: [ // components 
     AppComponent,
     MainNavComponent,
-    PolicyModalComponent,
-    AboutUsComponent,
-    CookiePolicyComponent
+    AboutUsComponent
   ],
   bootstrap: [AppComponent]
 })
-
-// Notification badge component in the navbar which takes a subscriber to a notification page
 
 export class AppModule { }

@@ -14,7 +14,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         
         await match.save()
         res.send(match)
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -27,7 +28,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 
         res.send({ matches })
 
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -40,7 +42,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         if(!match) throw new Error()
 
         res.send({match})
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -52,7 +55,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
         const matchReport = await Match.getMatchReport(_id)
 
         res.send({ matchReport })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -74,8 +78,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         await match.save()
 
         res.send({ match })
-    } catch (error) {
-        console.log(error)
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -89,7 +93,8 @@ router.get("/round/:round", userAuthMiddleware, async (req, res) => {
 
         res.send({ matches })
 
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })

@@ -15,7 +15,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         await news.save()
 
         res.send( { news } )
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send({error})
     }
 })
@@ -28,7 +29,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
         if(newsLetter.length === 0) throw new Error("No news available")
 
         res.send({ newsLetter })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send({ error })
     }
 })
@@ -41,7 +43,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
         if(!news) throw new Error("News article not found")
 
         res.send({ news })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send({ error })
     }
 })
@@ -65,7 +68,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         await news.save()
 
         res.send({ news })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send({ error })
     }
 })
@@ -78,7 +82,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         if(!news) throw new Error("News article not found")
 
         res.send({ news })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send({ error })
     }
 })

@@ -22,7 +22,8 @@ const userAuthMiddleware = async (req, res, next) => {
 
         next()
 
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 401 authentication code
         res.status(401).send({ error })
     }
 }
@@ -38,7 +39,8 @@ const adminAuthMiddleware = async (req, res, next) => {
 
         next()
 
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 401 authentication code
         res.status(401).send({ error })
     }
 }

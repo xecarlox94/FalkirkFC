@@ -4,14 +4,12 @@ import { Route, RouterModule, PreloadAllModules } from "@angular/router";
 
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
-import { AboutUsComponent } from '../base/instituition/about-us/about-us.component';
-import { CookiePolicyComponent } from '../base/instituition/cookie-policy/cookie-policy.component';
+import { AboutUsComponent } from '../base/about-us/about-us.component';
 
 
 const appRoutes: Route[] = [
     { path: "", pathMatch: "full", redirectTo: "falkirk"}, // DELETEEEEEEEEEEEEEEEEE
     { path: "falkirk", component: AboutUsComponent },
-    { path: "cookiesPolicy", component: CookiePolicyComponent },
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
     { path: "adminDashboard", loadChildren: "../admin/admin.module#AdminModule"},

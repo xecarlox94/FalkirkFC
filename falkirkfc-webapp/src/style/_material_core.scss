@@ -1,14 +1,10 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
+// imports all theming components, including sass functions
 @import '~@angular/material/theming';
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+// loads angular material core theme
 @include mat-core();
 
+// primary pallete of colours
 $my-primary: (
     50 : #0f51dc,
     100 : #0e48c4,
@@ -42,6 +38,7 @@ $my-primary: (
     )
 );
 
+// accent pallete of colours
 $my-accent: (
     50 : #c3a400,
     100 : #dcb900,
@@ -75,6 +72,7 @@ $my-accent: (
     )
 );
 
+// warn pallete of colours
 $my-warn: (
     50 : #ea8889,
     100 : #e77273,
@@ -108,24 +106,17 @@ $my-warn: (
     )
 );
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
+// storing palletes in variables
 $falkirkfc-webapp-primary: mat-palette($my-primary);
 $falkirkfc-webapp-accent: mat-palette($my-accent, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
 $falkirkfc-webapp-warn: mat-palette($my-warn);
 
-// Create the theme object (a Sass map containing all of the palettes).
+// creating a light theme with the custom palletes
 $falkirkfc-webapp-theme: mat-light-theme($falkirkfc-webapp-primary, $falkirkfc-webapp-accent, $falkirkfc-webapp-warn);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
+// include custom theme in the angular material theme
 @include angular-material-theme($falkirkfc-webapp-theme);
 
-/* You can add global styles to this file, and also import other style files */
-
+// sets global styles for angular material app
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

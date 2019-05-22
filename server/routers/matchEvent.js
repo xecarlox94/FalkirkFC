@@ -12,7 +12,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
         const matchEvent = await MatchEvent.findByIdAndDelete(_id).populate("player").populate("team")
 
         res.send({ matchEvent })
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -26,7 +27,8 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
         
         res.send({ matchEvent })
         
-    } catch (error) {
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })
@@ -38,8 +40,8 @@ router.get("/match/:match", userAuthMiddleware, async (req, res) => {
         const matchEvents = await MatchEvent.getEventsMatch(match_id)
 
         res.send(matchEvents)
-    } catch (error) {
-        console.log(error)
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error
         res.status(500).send()
     }
 })

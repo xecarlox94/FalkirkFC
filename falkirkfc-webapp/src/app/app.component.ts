@@ -1,7 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SocketClientService } from './core/services/livestream/socket-client.service';
-import { Observable, Subscription } from 'rxjs';
-import { MatchStream } from './core/models/matchStream.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
