@@ -17,7 +17,7 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
     }
 })
 
-router.get("/", userAuthMiddleware, async (req, res) => {
+router.get("/", adminAuthMiddleware, async (req, res) => {
     try {
         const matches = await Match.getMatches({})
 
