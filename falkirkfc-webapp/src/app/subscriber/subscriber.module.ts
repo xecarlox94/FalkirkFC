@@ -16,9 +16,6 @@ import { TableComponent } from './league/table/table.component';
 import { MatchReportComponent } from './league/match-report/match-report.component';
 
 
-
-// player tables with most goals, assists, own goals, yellow and red cards
-
 @NgModule({
     imports: [
         CommonModule,
@@ -29,11 +26,11 @@ import { MatchReportComponent } from './league/match-report/match-report.compone
         MatInputModule,
         MatCheckboxModule,
         MatRadioModule,
+        MatTabsModule,
         SquadsModule,
         NewsModule,
         EventsModule,
-        SubscriberRoutingModule,
-        MatTabsModule
+        SubscriberRoutingModule
     ],
     declarations: [
         DashboardComponent,

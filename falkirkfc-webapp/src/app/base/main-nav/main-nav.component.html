@@ -81,10 +81,10 @@
         League
       </button>
       <span class="_spacer"></span>
-      <button mat-raised-button color="primary" [routerLink]="['/','login' ]" *ngIf="!session?.loggedIn" id="_login" >
+      <button mat-raised-button color="primary" [routerLink]="['/', 'auth','login' ]" *ngIf="!session?.loggedIn" id="_login" >
         Login
       </button>
-      <button mat-raised-button color="primary" [routerLink]="['/','register' ]" *ngIf="!session?.loggedIn">
+      <button mat-raised-button color="primary" [routerLink]="['/', 'auth','register' ]" *ngIf="!session?.loggedIn">
         Register
       </button>
       <button mat-raised-button color="warn" (click)="logout()" *ngIf="session?.loggedIn" id="_logout">

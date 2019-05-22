@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule, MatRadioModule } from '@angular/material';
 import { MatButtonModule} from '@angular/material/button';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MatButtonModule} from '@angular/material/button';
   imports: [
     CommonModule,
     FormsModule,
+    AuthRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

@@ -18,7 +18,7 @@ import { AboutUsComponent } from './base/about-us/about-us.component';
     HttpClientModule,
     CoreModule
   ],
-  providers: [ // services
+  providers: [ // services, including interceptors
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserAuthInterceptor,

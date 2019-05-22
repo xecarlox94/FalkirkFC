@@ -4,7 +4,6 @@ import { Player } from '../../models/player.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Team } from '../../models/team.model';
 
 
 @Injectable({
