@@ -22,8 +22,6 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const events = await Event.find({})
-        // if there is no events, throw error
-        if(events.length === 0) throw new Error("Events not available")
 
         res.send({ events })
     } catch (error) { // catches any error in the try block
@@ -34,7 +32,6 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 
 router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-
     try {
         const event = await Event.findById(_id)
         // if there is no events, throw error
@@ -72,7 +69,6 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
 
 router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-
     try {
         const event = await Event.findByIdAndDelete(_id)
         // if there is no event, throw error

@@ -8,6 +8,7 @@ const { userAuthMiddleware, adminAuthMiddleware } = require("../middleware/auth"
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const players = await Player.find({})
+
         res.send({ players })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
@@ -16,10 +17,11 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 })
 
 router.post("/", adminAuthMiddleware, async (req, res) => {
-    const body = req.body;
     try {
-        const player = new Player(body)
+        const player = new Player(req.body)
+
         await player.save()
+
         res.send({ player })
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
@@ -31,6 +33,9 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const player = await Player.findById({ _id })
+        // if player not found, throw error
+        if(!player) throw new Error("Player not found")
+
         res.send({player})
     } catch (error) { // catches any error in the try block
         // sends 500 internal error with the error message
@@ -43,6 +48,8 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const player = await Player.findById({ _id })
+        // if player not found, throw error
+        if(!player) throw new Error("Player not found")
 
         const updates = Object.keys(req.body)
         updates.forEach( (update) => {
@@ -64,6 +71,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     try {
 
         const player = await Player.findByIdAndDelete({ _id })
+        // if player not found, throw error
+        if(!player) throw new Error("Player not found")
 
         res.send({player})
         

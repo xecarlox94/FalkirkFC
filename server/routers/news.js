@@ -21,8 +21,6 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const newsLetter = await News.find({})
-        // if not found, send error
-        if(newsLetter.length === 0) throw new Error("No news available")
 
         res.send({ newsLetter })
     } catch (error) { // catches any error in the try block
@@ -34,6 +32,7 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 router.get("/:id", userAuthMiddleware, async (req, res) => {
     try {
         const news = await News.findById(req.params.id)
+        // if news article not foun, throw error
         if(!news) throw new Error("News article not found")
 
         res.send({ news })
@@ -47,6 +46,7 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const news = await News.findById(_id)
+        // if news article not foun, throw error
         if(!news) throw new Error("News article not found")
 
         const updates = Object.keys(req.body)
@@ -68,7 +68,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const news = await News.findByIdAndDelete(_id)
-
+        // if news article not foun, throw error
         if(!news) throw new Error("News article not found")
 
         res.send({ news })

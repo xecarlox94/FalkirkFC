@@ -20,7 +20,6 @@ router.post("/", adminAuthMiddleware, async (req, res) => {
 router.get("/", userAuthMiddleware, async (req, res) => {
     try {
         const matches = await Match.getMatches({})
-        if(!matches) throw new Error()
 
         res.send({ matches })
 
@@ -34,7 +33,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const match = await Match.findByIdAndDelete({ _id })
-        if(!match) throw new Error()
+        // if no match found, throw error
+        if(!match) throw new Error("Match not found")
 
         res.send({match})
     } catch (error) { // catches any error in the try block
@@ -47,6 +47,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const matchReport = await Match.getMatchReport(_id)
+        // if no match found, throw error
+        if(!matchReport) throw new Error("Match report not found")
 
         res.send({ matchReport })
     } catch (error) { // catches any error in the try block
@@ -61,6 +63,9 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
         const updates = Object.keys(req.body)
         
         const match = await Match.findById({ _id })
+        // if no match found, throw error
+        if(!match) throw new Error("Match not found")
+
         updates.forEach( (update) => {
             if(update !== "_id") match[update] = req.body[update]
         })

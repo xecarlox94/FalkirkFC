@@ -9,6 +9,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const matchEvent = await MatchEvent.findByIdAndDelete(_id).populate("player").populate("team")
+        // if match event not found, throw error
+        if(!matchEvent) throw new Error("Match event not found")
 
         res.send({ matchEvent })
     } catch (error) { // catches any error in the try block

@@ -150,6 +150,8 @@ router.get("/", adminAuthMiddleware, async (req, res) => {
     try {
         // gets all users
         const fetchedUsers = await User.find({})
+        // if no users found, throw error
+        if(fetchedUsers.length === 0) throw new Error("No users found")
 
         // returns all users, without the current user
         const users = fetchedUsers.filter( (user) => user._id.toString() !== req.user._id.toString() )
@@ -168,6 +170,8 @@ router.get("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id
     try {
         const user = await User.findById(_id)
+        // if no user found, throw error
+        if(!user) throw new Error("User not found")
 
         res.send({ user })
     } catch (error) { // catches any error in the try block
@@ -180,16 +184,17 @@ router.get("/:id", adminAuthMiddleware, async (req, res) => {
 router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     // stores the id parameter and the body request
     const _id = req.params.id
-    const body = req.body;
     try {
         // gets the user by id
         const user = await User.findById(_id)
+        // if no user found, throw error
+        if(!user) throw new Error("User not found")
         
         // updates all user allowed fields
-        const updates = Object.keys(body);
+        const updates = Object.keys(req.body);
         const notAllowed = [ "_id", "admin", "typeSubscription", "email" ]
         updates.forEach( update => {
-            if(!notAllowed.includes(update)) user[update] = body[update]
+            if(!notAllowed.includes(update)) user[update] = req.body[update]
         })
         
         // user changes saved
@@ -210,6 +215,8 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     try {
         // finds the user by id and deletes it
         const user = await User.findByIdAndDelete(_id)
+        // if no user found, throw error
+        if(!user) throw new Error("User not found")
 
         // sends deleted user
         res.send({ user })

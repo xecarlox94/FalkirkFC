@@ -31,6 +31,8 @@ router.get("/", userAuthMiddleware, async (req, res) => {
 router.get("/table", userAuthMiddleware, async (req, res) => {
     try {
         const table = await Team.getTable()
+        // if table empty, throw error
+        if(table.length === 0) throw new Error("Table not available")
 
         res.send({ table })
     } catch (error) { // catches any error in the try block
@@ -41,9 +43,11 @@ router.get("/table", userAuthMiddleware, async (req, res) => {
 
 router.get("/performance/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
-
     try {
         const team = await Team.findById(_id)
+        //if no team, throw error
+        if(!team) throw new Error("Team not found")
+
         const performance =  await team.getPerformance();
 
         res.send({ team, performance })
@@ -58,6 +62,8 @@ router.get("/:id", userAuthMiddleware, async (req, res) => {
 
     try {
         const team = await Team.findById(_id)
+        //if no team, throw error
+        if(!team) throw new Error("Team not found")
 
         res.send({ team })
     } catch (error) { // catches any error in the try block
@@ -72,6 +78,8 @@ router.get("/squad/:id", userAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const team = await Team.findById(_id).populate("players")
+        //if no team, throw error
+        if(!team) throw new Error("Team not found")
 
         res.send({
             squad: {
@@ -89,6 +97,7 @@ router.patch("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const team = await Team.findOne({ _id })
+        //if no team, throw error
         if(!team) throw new Error("Team not found")
         
         const updates = Object.keys(req.body)
@@ -109,7 +118,7 @@ router.delete("/:id", adminAuthMiddleware, async (req, res) => {
     const _id = req.params.id;
     try {
         const team = await Team.findByIdAndDelete({ _id })
-
+        //if no team, throw error
         if(!team) throw new Error("Team not found")
 
         res.send({ team })
