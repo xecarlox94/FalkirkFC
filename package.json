@@ -5,14 +5,11 @@
   "main": "",
   "scripts": {
     "start": "node ./server/server.js",
-    "dev": "concurrently -k \"npm run node-watch\" \"npm run test-watch\"",
-    "node-watch": "env-cmd ./config/dev.env nodemon ./server/server.js",
-    "test-watch": "env-cmd ./config/test.env jest --watchAll"
+    "node-watch": "env-cmd ./config/dev.env nodemon ./server/server.js"
   },
   "author": "Jose Fernandes",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0",
     "env-cmd": "^8.0.2",
     "nodemon": "^1.18.10"
   },
@@ -25,11 +22,5 @@
     "mongoose": "^5.4.21",
     "socket.io": "^2.2.0",
     "validator": "^10.11.0"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testMatch": [
-      "/server/tests/*.test.js"
-    ]
   }
 }
