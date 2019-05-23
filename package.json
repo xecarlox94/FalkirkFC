@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "start": "node ./server/server.js",
-    "node-watch": "env-cmd ./config/dev.env nodemon ./server/server.js"
+    "dev": "env-cmd ./config/dev.env nodemon ./server/server.js"
   },
   "author": "Jose Fernandes",
   "license": "ISC",
