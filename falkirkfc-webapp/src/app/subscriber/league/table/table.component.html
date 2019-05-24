@@ -1,3 +1,4 @@
-<p>
-  table works!
+
+<p *ngFor="let club of table; let i = index ">
+  {{ i }}: {{ club.teamName }}, wins: {{ club.wins }}, draws: {{ club.draws }}, loses: {{ club.loses }}, points: {{ club.points }}
 </p>

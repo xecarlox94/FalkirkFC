@@ -32,6 +32,22 @@ export class MatchService {
         ).toPromise()
     }
 
+    getRoundMatches(round: number): Promise<Match[]> {
+        return this.http.get<Match[]>(`${ environment.baseURL }/matches/round/${ round }`).pipe(
+            map( (values: any) => {
+                const matchesJSON = values.matches;
+                const matches: Match[] = []
+                for (let i = 0; i < matchesJSON.length; i++) {
+                    const homeTeam = new Team(matchesJSON[i].home.name, matchesJSON[i].home.manager, matchesJSON[i].home._id)
+                    const awayTeam = new Team(matchesJSON[i].away.name, matchesJSON[i].away.manager, matchesJSON[i].away._id)
+                    matches[i] = new Match(homeTeam, awayTeam, matchesJSON[i].round, matchesJSON[i].time, matchesJSON[i]._id);
+                    matches[i].setResult(matchesJSON[i].homeScore, matchesJSON[i].awayScore)
+                }
+                return matches;
+            })
+        ).toPromise()
+    }
+
     fetchMatch(id: string): Promise<Match> {
         return this.http.get<Match>(`${ environment.baseURL }/matches/${ id }`).pipe(
             map( (value: any) => {

@@ -27,7 +27,7 @@ export class TeamService {
       map( bodyJSON => {
         var teams: Team[] = [];
         for (var i = 0; i < bodyJSON.teams.length; i++) {
-          teams[i] = new Team(bodyJSON.teams[i].name, bodyJSON.teams[i].name, bodyJSON.teams[i]._id)
+          teams[i] = new Team(bodyJSON.teams[i].name, bodyJSON.teams[i].manager, bodyJSON.teams[i]._id)
         }
         return teams;
       }))
@@ -59,6 +59,10 @@ export class TeamService {
         return team;
       })
     )
+  }
+
+  getLeagueTable(): Promise<any[]> {
+    return this.http.get<any>(`${ environment.baseURL }/teams/table`).toPromise()
   }
   
 }

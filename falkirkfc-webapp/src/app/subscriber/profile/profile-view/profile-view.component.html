@@ -1,9 +1,14 @@
-<h1>{{ user?.firstName }} {{ user?.lastName }}</h1>
-<h2>{{ user?.admin ? "Admin" : "Subscriber" }}</h2>
-<h2 *ngIf="!user?.admin"> {{ user?.typeSubscription }}</h2>
-<h3>{{ user?.email }}</h3>
-<h4>{{ user?.gender }}</h4>
-<h4>{{ user?.address }}</h4>
-<h4>{{ user?.mobilePhone }}</h4>
+<section class="section is-medium">
+    <div class="container">
 
-<button mat-raised-button color="accent" [routerLink]="['edit']">Edit</button>
+            <h1>{{ user?.firstName }} {{ user?.lastName }}</h1>
+            <h2>{{ user?.admin ? "Admin" : "Subscriber" }}</h2>
+            <h2 *ngIf="!user?.admin"> {{ user?.typeSubscription }}</h2>
+            <h3>{{ user?.email }}</h3>
+            <h4>{{ user?.gender }}</h4>
+            <h4>{{ user?.address }}</h4>
+            <h4>{{ user?.mobilePhone }}</h4>
+            
+            <button mat-raised-button color="accent" [routerLink]="['edit']">Edit</button>
+    </div>
+</section>
