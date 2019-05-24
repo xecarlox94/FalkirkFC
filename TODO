@@ -1,19 +1,17 @@
 
+
 -do all subscriber's competition, events, news, livefeed realtime and squads pages components / update documentation
 -upgrade subscription feature on paypal backend and frontend / update documentation
 
--user to get entry in event / update documentation
--add delete own account option (view profile) / update documentation
 -set default asset images to teams, users, events and news / update documentation
 -images teams (logo and stadium), players, users, events and news / update documentation
 
 -implement live score system / update documentation
+-user to get entry in event / update documentation
 -pop-up fade notifications to alert user of any event ( live match / get entry event / any app event ) / update documentation
--catch all errors on backend and front end / update documentation
+
 
 -improve the Falkirk page / update documentation
 -Breadcrumb on falkirk app / update documentation
--add footer / update documentation
 -finish styling app / update documentation
-
--delete share module folder
+-catch all errors on backend and front end / update documentation

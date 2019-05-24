@@ -1,4 +1,32 @@
 
-<p *ngFor="let club of table; let i = index ">
-  {{ i }}: {{ club.teamName }}, wins: {{ club.wins }}, draws: {{ club.draws }}, loses: {{ club.loses }}, points: {{ club.points }}
-</p>
+<table class="table" *ngIf="table">
+    <thead>
+      <tr>
+        <th><abbr title="Position">Pos</abbr></th>
+        <th>Club</th>
+        <th><abbr title="Games">Pld</abbr></th>
+        <th><abbr title="Won">W</abbr></th>
+        <th><abbr title="Drawn">D</abbr></th>
+        <th><abbr title="Lost">L</abbr></th>
+        <th><abbr title="Scored">GF</abbr></th>
+        <th><abbr title="Conceded">GA</abbr></th>
+        <th><abbr title="Goal difference">GD</abbr></th>
+        <th><abbr title="Points">Pts</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let club of table; let i = index " >
+        <th>{{ i + 1 }}</th>
+        <td><a mat-button colour="basic" >{{ club.teamName }}</a></td>
+        <td>{{ club.games }}</td>
+        <td>{{ club.wins }}</td>
+        <td>{{ club.draws }}</td>
+        <td>{{ club.loses }}</td>
+        <td>{{ club.scored }}</td>
+        <td>{{ club.conceded }}</td>
+        <td>{{ club.goalDiference }}</td>
+        <td>{{ club.points }}</td>
+      </tr>
+    </tbody>
+  </table>
+

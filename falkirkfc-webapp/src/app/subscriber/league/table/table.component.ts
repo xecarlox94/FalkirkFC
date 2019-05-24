@@ -21,7 +21,7 @@ class TableRow {
 })
 export class TableComponent implements OnInit {
   teamsService: TeamService;
-  table: TableRow[] = [];
+  table: TableRow[];
 
 
   constructor(teamsSrv: TeamService) {
@@ -31,6 +31,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.teamsService.getLeagueTable().then( (leagueTable: any) => {
       const tableJSON = leagueTable.table;
+      this.table = [];
       for (let i = 0; i < tableJSON.length; i++) {
         let row = new TableRow();
         row.teamName = tableJSON[i].team.name;

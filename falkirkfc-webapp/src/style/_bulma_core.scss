@@ -3,11 +3,13 @@
 
 @import "bulma/sass/utilities/_all.sass";
 
-//@import "bulma/sass/elements/table.sass"; 
+
+@import "bulma/sass/elements/table.sass"; 
 
 @import "bulma/sass/layout/section.sass";
 
-@import "bulma/sass/elements/container.sass"; 
+
+@import "bulma/sass/elements/container.sass";
 
 
-$primary: map-get($map: $my-primary, $key: 500);
+@import "bulma/sass/components/pagination.sass"; 
