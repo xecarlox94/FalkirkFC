@@ -30,15 +30,15 @@ const subscriberRoutes: Route[] = [
             { path: "news/:id", component: ArticleComponent },
             { path: "events", component: EventListComponent },
             { path: "events/:id", component: EventComponent },
-            { path: "team/:id", component: TeamComponent },
-            { path: "player/:id", component: PlayerComponent },
             {
                 path: "league", component: LeagueComponent, children: 
                 [
                     { path: "", redirectTo: "table" },
                     { path: "fixtures", component: FixturesComponent },
-                    { path: "match", component: MatchReportComponent }, // DELETEEEE
                     { path: "table", component: TableComponent },
+                    { path: "team", component: TeamComponent },
+                    { path: "player", component: PlayerComponent },
+                    { path: "match", component: MatchReportComponent }
                 ]
             }
         ]

@@ -1,23 +1,23 @@
 
-<table class="table" *ngIf="table">
+<table *ngIf="table">
     <thead>
       <tr>
-        <th><abbr title="Position">Pos</abbr></th>
+        <th>Pos</th>
         <th>Club</th>
-        <th><abbr title="Games">Pld</abbr></th>
-        <th><abbr title="Won">W</abbr></th>
-        <th><abbr title="Drawn">D</abbr></th>
-        <th><abbr title="Lost">L</abbr></th>
-        <th><abbr title="Scored">GF</abbr></th>
-        <th><abbr title="Conceded">GA</abbr></th>
-        <th><abbr title="Goal difference">GD</abbr></th>
-        <th><abbr title="Points">Pts</abbr></th>
+        <th>Games</th>
+        <th>Wins</th>
+        <th>Draws</th>
+        <th>Losses</th>
+        <th>GF</th>
+        <th>GA</th>
+        <th>GD</th>
+        <th>Points</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let club of table; let i = index " >
-        <th>{{ i + 1 }}</th>
-        <td><a mat-button colour="basic" >{{ club.teamName }}</a></td>
+        <td>{{ i + 1 }}</td>
+        <td><a mat-button colour="basic" (click)="visitTeamPage(club.teamId)" >{{ club.teamName }}</a></td>
         <td>{{ club.games }}</td>
         <td>{{ club.wins }}</td>
         <td>{{ club.draws }}</td>

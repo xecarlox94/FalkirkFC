@@ -14,10 +14,6 @@ export class LeagueComponent implements OnInit {
     {
       path: "fixtures",
       label: "Fixtures"
-    },
-    {
-      path: "match",
-      label: "Match?"
     }
   ]
 

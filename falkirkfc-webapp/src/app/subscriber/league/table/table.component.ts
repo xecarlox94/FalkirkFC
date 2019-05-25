@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from 'src/app/core/services/teams/team.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 class TableRow {
   teamName: string;
@@ -20,12 +21,16 @@ class TableRow {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  actRoute: ActivatedRoute;
+  router: Router;
   teamsService: TeamService;
   table: TableRow[];
 
 
-  constructor(teamsSrv: TeamService) {
+  constructor(teamsSrv: TeamService, router: Router, actRoute: ActivatedRoute) {
     this.teamsService = teamsSrv;
+    this.router = router;
+    this.actRoute = actRoute;
   }
 
   ngOnInit() {
@@ -46,8 +51,12 @@ export class TableComponent implements OnInit {
         row.scored = Number(tableJSON[i].scored);
         this.table[i] = row
       }
-      console.log(this.table)
     })
+  }
+
+  
+  visitTeamPage(id: string){
+    this.router.navigate([ "../", "team" ], { queryParams: { id }, relativeTo: this.actRoute })
   }
 
 }

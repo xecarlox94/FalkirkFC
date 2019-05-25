@@ -1,3 +1,6 @@
-<p>
-  player works!
-</p>
+<h1>{{ player?.name }}</h1>
+<h2>{{ player?.position }}</h2>
+
+<button mat-raised-button color="basic" (click)="visitTeamPage()" >
+    {{ team?.name }}
+</button>

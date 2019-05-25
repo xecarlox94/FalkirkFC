@@ -1,10 +1,8 @@
 
-<section class="section is-medium">
-    <div class="container">
-        
-        <p>
-            event-list works!
-          </p>
-            
-    </div>
-  </section>
+<p *ngFor="let event of events" >
+  <button 
+    mat-raised-button color="primary"
+    [routerLink]="event._id" >
+      {{ event.title }}
+  </button>
+</p>

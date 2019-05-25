@@ -1,9 +1,8 @@
-<section class="section is-medium">
-    <div class="container">
-        
-        <p>
-            event  works!
-          </p>
-            
-    </div>
-  </section>
+<h1>{{ event?.title }}</h1>
+
+<h3>{{ event?.subtitle }}</h3>
+
+<h5>{{ event?.time | date:"medium" }}</h5>
+
+
+<p style="white-space: pre-wrap; "  >{{ event?.body }}</p>

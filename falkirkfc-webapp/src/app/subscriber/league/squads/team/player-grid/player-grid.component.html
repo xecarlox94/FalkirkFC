@@ -1,0 +1,7 @@
+<p *ngFor="let player of players">
+  <button 
+    mat-button color="primary"
+    (click)="visitPlayerPage(player)" >
+      {{ player.name }}
+  </button>
+</p>

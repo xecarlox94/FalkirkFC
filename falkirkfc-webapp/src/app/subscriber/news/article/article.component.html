@@ -1,10 +1,6 @@
 
-<section class="section is-medium">
-  <div class="container">
-    
-      <p>
-          article works!
-        </p>
-        
-  </div>
-</section>
+<h1>{{ article?.title }}</h1>
+<h2>{{ article?.subtitle }}</h2>
+<h3>{{ article?.topic }}</h3>
+<h4>{{ article?.time | date:"medium" }}</h4>
+<p style="white-space: pre-wrap; " >{{ article?.body }}</p>

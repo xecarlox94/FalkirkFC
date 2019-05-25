@@ -1,3 +1,18 @@
-<p>
-  match-report works!
-</p>
+<h1 *ngIf="isLive" class="blinking">Live Match Broadcast</h1>
+
+<h1>{{ match?.home.name }} {{ match?.homeScore }} - {{ match?.awayScore }} {{ match?.away.name }}</h1>
+
+<h4>{{ match?.time | date }}</h4>
+
+<button mat-raised-button color="basic" (click)="visitTeamPage(match.home)" >{{ match?.home.name }}'s page</button>
+<button mat-raised-button color="basic" (click)="visitTeamPage(match.away)" >{{ match?.away.name }}'s page</button>
+
+
+<mat-list>
+  <mat-list-item *ngFor="let event of mEvents">
+    {{ event.typeEvent | titlecase  }} at min {{ event.minute }}, by 
+    <button mat-button color="basic" (click)="visitPlayerPage(event.player)" >
+      {{ event.player.name }} ({{ event.team.name }})
+    </button>
+  </mat-list-item>
+</mat-list>

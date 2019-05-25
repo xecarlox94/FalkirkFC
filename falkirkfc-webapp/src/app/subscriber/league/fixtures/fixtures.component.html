@@ -1,5 +1,20 @@
-<nav class="pagination" role="navigation" aria-label="pagination">
-    <button mat-button type="button" color="basic" class="pagination-previous">Previous Round</button>
-    <button mat-button type="button" color="basic"  class="pagination-previous">Next Round</button>
+<h1 *ngIf="round" >Round {{ round }}</h1>
+
+
+<nav role="navigation" aria-label="pagination" *ngIf="round" >
+    <button mat-button type="button" color="basic" (click)="loadRound(round - 1)" >Previous Round</button>
+    <button mat-button type="button" color="basic" (click)="loadRound(round + 1)" >Next Round</button>
     
   </nav>
+
+
+
+<mat-list *ngIf="matches" >
+  <mat-list-item *ngFor="let match of matches">
+    <button
+      mat-button color="primary"
+      (click)="visitMatchPage(match)" >
+      {{ match.home.name }} {{ match.homeScore }} - {{ match.awayScore }} {{ match.away.name }}
+    </button>
+  </mat-list-item>
+</mat-list>

@@ -1,52 +1,45 @@
-<section class="section is-medium">
-  <div class="container">
-    
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-            <mat-form-field>
-              <input type="text" matInput placeholder="First Name" formControlName="firstName" >
-            </mat-form-field>
-          
-            <mat-form-field>
-              <input type="text" matInput placeholder="Last Name" formControlName="lastName" >
-            </mat-form-field>
-          
-            <mat-form-field>
-              <input type="text" matInput placeholder="Mobile Phone" formControlName="mobilePhone" >
-            </mat-form-field>
-          
-            <mat-form-field>
-              <input type="text" matInput placeholder="Address" formControlName="address" >
-            </mat-form-field>
-          
-            <mat-radio-group required formControlName="gender" >
-              <mat-radio-button value="female">Female</mat-radio-button>
-              <mat-radio-button value="male">Male</mat-radio-button>
-            </mat-radio-group>
-          
-            <mat-form-field>
-              <input type="password" matInput placeholder="Password" formControlName="password" >
-            </mat-form-field>
-          
-            <mat-checkbox formControlName="admin" >Admin</mat-checkbox>
-          
-            <mat-form-field>
-              <input type="text" matInput placeholder="Admin Secret" formControlName="secret" >
-            </mat-form-field>
-          
-          
-            <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid" >Update</button>
+    <mat-form-field>
+      <input type="text" matInput placeholder="First Name" formControlName="firstName" >
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input type="text" matInput placeholder="Last Name" formControlName="lastName" >
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input type="text" matInput placeholder="Mobile Phone" formControlName="mobilePhone" >
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input type="text" matInput placeholder="Address" formControlName="address" >
+    </mat-form-field>
+  
+    <mat-radio-group required formControlName="gender" >
+      <mat-radio-button value="female">Female</mat-radio-button>
+      <mat-radio-button value="male">Male</mat-radio-button>
+    </mat-radio-group>
+  
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" formControlName="password" >
+    </mat-form-field>
+  
+    <mat-checkbox formControlName="admin" >Admin</mat-checkbox>
+  
+    <mat-form-field>
+      <input type="text" matInput placeholder="Admin Secret" formControlName="secret" >
+    </mat-form-field>
+  
+  
+    <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid" >Update</button>
 
-    </form>
-    
-    <button mat-button type="button" color="basic" (click)="onChangePassword()" >
-      {{ changePassword ? 'cancel password change' : 'change password' }}
-    </button>
-    
-    <button mat-button type="button" color="basic" (click)="onChangeStatus()" >
-      {{ changeStatus ? 'cancel account status change' : 'change account status' }}
-    </button>
+</form>
 
+<button mat-button type="button" color="basic" (click)="onChangePassword()" >
+{{ changePassword ? 'cancel password change' : 'change password' }}
+</button>
 
-  </div>
-</section>
+<button mat-button type="button" color="basic" (click)="onChangeStatus()" >
+{{ changeStatus ? 'cancel account status change' : 'change account status' }}
+</button>

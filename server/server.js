@@ -13,23 +13,13 @@ const server = app.listen(port, () => {
 const io = socketIO(server) // initializes the websocket
 
 //listens to client web sockets connecting
-io.on("connection", (socket) => { 
-
-    // logs if a websocket client is connected
-    console.log("user connected") 
+io.on("connection", (socket) => {
 
     // listens for the "live-match" event and stores the matchStream data
-    socket.on("live-match", ( matchStream ) => { 
-
+    socket.on("live-match", ( matchStream ) => {
+        
         // broadcasts the data to all users
         socket.broadcast.emit("live-match-broadcast", matchStream ) 
-        
-    })
-
-    //listens to client web sockets disconnecting
-    socket.on("disconnect", () => { 
-        // logs if a websocket client is connected
-        console.log("user disconnected") 
         
     })
 })
