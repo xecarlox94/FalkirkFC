@@ -21,12 +21,14 @@ import { ArticlePageComponent } from './news/article-page/article-page.component
 import { EventPageComponent } from './events/event-page/event-page.component';
 import { UserPageComponent } from './users/user-page/user-page.component';
 
+// admin local routes
 const adminRoutes: Route[] = [
     {
         path: "",
-        component: AdminDashboardComponent,
-        canActivate: [ AdminAuthGuard ],
-        children: [
+        component: AdminDashboardComponent, // parent component
+        canActivate: [ AdminAuthGuard ], // protects from non admin users
+        children: 
+        [ // children path and components
             { path: "", pathMatch: "full", redirectTo: "news"},
             { path: "news", component: NewsListComponent },
             { path: "news/new", component: ArticleEditComponent },
@@ -55,11 +57,13 @@ const adminRoutes: Route[] = [
     }
 ]
 
+// imports router module and sets admin routes up up
 @NgModule({
     imports: [
         RouterModule.forChild(adminRoutes)
     ],
     exports: [
+        // exports to admin module
         RouterModule
     ]
 })

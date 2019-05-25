@@ -22,11 +22,11 @@ import { PlayerGridComponent } from './league/squads/team/player-grid/player-gri
 
 
 @NgModule({
-    imports: [
+    imports: [ // loads all module's components
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        SubscriberRoutingModule,
+        SubscriberRoutingModule, // router module
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
@@ -35,7 +35,7 @@ import { PlayerGridComponent } from './league/squads/team/player-grid/player-gri
         MatTabsModule,
         MatListModule
     ],
-    declarations: [
+    declarations: [ // loads all components
         DashboardComponent,
         ProfileViewComponent,
         ProfileEditComponent,

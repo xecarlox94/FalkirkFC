@@ -10,10 +10,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    RegisterComponent
+    LoginComponent, // imports the login component
+    RegisterComponent // imports the register component
   ],
-  imports: [
+  imports: [ // imports external modules
     CommonModule,
     FormsModule,
     AuthRoutingModule,

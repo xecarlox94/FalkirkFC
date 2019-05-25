@@ -3,6 +3,7 @@ import { Route, RouterModule, PreloadAllModules } from "@angular/router";
 
 import { AboutUsComponent } from '../base/about-us/about-us.component';
 
+// root routes
 const appRoutes: Route[] = [
     { path: "", pathMatch: "full", redirectTo: "falkirk"},
     { path: "falkirk", component: AboutUsComponent },
@@ -12,10 +13,12 @@ const appRoutes: Route[] = [
 ]
 
 @NgModule({
-    imports: [
+    imports: [ // imported modules
+        // router module imported and set up
         RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules})
     ],
     exports: [
+        // router module exported
         RouterModule
     ]
 })

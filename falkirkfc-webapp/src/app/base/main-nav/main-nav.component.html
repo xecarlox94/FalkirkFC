@@ -1,4 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
+  
+  <!-- side navigation for mobile devices -->
   <mat-sidenav
       #drawer
       class="sidenav" 
@@ -22,7 +24,10 @@
       <a mat-list-item [routerLink]="['/','dashboard','league']" *ngIf="session?.loggedIn" >League</a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
+
+    <!-- main toolbar -->
     <mat-toolbar color="primary">
       <button
         type="button"
@@ -91,6 +96,8 @@
         Logout
       </button>
     </mat-toolbar>
-    <ng-content></ng-content>
+
+    <ng-content></ng-content> <!-- render elements nested inside of main-nav component's html tag-->
+
   </mat-sidenav-content>
 </mat-sidenav-container>

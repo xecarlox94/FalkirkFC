@@ -16,13 +16,14 @@ import { TeamComponent } from './league/squads/team/team.component';
 import { PlayerComponent } from './league/squads/player/player.component';
 import { FixturesComponent } from './league/fixtures/fixtures.component';
 
+// subscriber local routes
 const subscriberRoutes: Route[] = [
     {
         path: "",
-        component: DashboardComponent,
-        canActivate: [ UserAuthGuard ],
+        component: DashboardComponent, // parent component
+        canActivate: [ UserAuthGuard ], // protects from non users
         children: 
-        [
+        [ // children path and components
             { path: "", pathMatch: "full", redirectTo: "profile" },
             { path: "profile", component: ProfileViewComponent },
             { path: "profile/edit", component: ProfileEditComponent },
@@ -45,11 +46,13 @@ const subscriberRoutes: Route[] = [
     }
 ]
 
+// imports router module and sets admin routes up up
 @NgModule({
     imports: [
         RouterModule.forChild(subscriberRoutes)
     ],
     exports: [
+        // exports to admin module
         RouterModule
     ]
 })

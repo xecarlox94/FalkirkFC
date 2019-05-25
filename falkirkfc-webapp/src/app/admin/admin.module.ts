@@ -29,9 +29,9 @@ import { EventPageComponent } from './events/event-page/event-page.component';
 
 
 @NgModule({
-  imports: [
+  imports: [ // loads all module's components
     CommonModule,
-    AdminRoutingModule,
+    AdminRoutingModule, // router module
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -42,7 +42,7 @@ import { EventPageComponent } from './events/event-page/event-page.component';
     MatRadioModule,
     MatTabsModule
   ],
-  declarations: [
+  declarations: [ // loads all components
     AdminDashboardComponent,
     TeamEditComponent,
     TeamListComponent,

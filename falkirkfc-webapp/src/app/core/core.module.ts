@@ -3,6 +3,7 @@ import { MaterialDesignModule } from './other-core-modules/material-design.modul
 
 import { AppRoutingModule } from './app-routing.module';
 
+// other core modules
 const modules = [
     AppRoutingModule,
     MaterialDesignModule
