@@ -10,7 +10,7 @@ try {
 
 const server = app.listen(port, () => {
     // logs if the server is successfully initialized
-    console.log('Server is up on port ' + port) 
+    console.error('Server is up on port ' + port) 
 })
 
 
