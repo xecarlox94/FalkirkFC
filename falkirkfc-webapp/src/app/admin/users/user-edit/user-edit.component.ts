@@ -9,20 +9,24 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss']
 })
-export class UserEditComponent implements OnInit {
-  actRoute: ActivatedRoute;
-  router: Router;
-  userService: UsersService;
-  formBuilder: FormBuilder;
-  changePassword: boolean = true;
-  userForm: FormGroup;
-  user: User;
 
+export class UserEditComponent implements OnInit {
+  actRoute: ActivatedRoute; // activated route object
+  router: Router; // router dependency
+  userService: UsersService; // user services
+  formBuilder: FormBuilder; // form builder
+  changePassword: boolean = true;
+  userForm: FormGroup; // user form
+  user: User; // user variable
+
+  // dependency injection
   constructor(router: Router, actRoute: ActivatedRoute, userSrv: UsersService, formBuilder: FormBuilder) {
     this.router = router;
     this.actRoute = actRoute;
     this.userService = userSrv;
     this.formBuilder = formBuilder;
+
+    // initialize the user form and its validation
     this.userForm = this.formBuilder.group({
       'firstName': [ null, [ Validators.required, Validators.minLength(2), Validators.maxLength(30) ] ],
       'lastName': [ null, [ Validators.required, Validators.minLength(2), Validators.maxLength(30) ] ],
@@ -33,14 +37,22 @@ export class UserEditComponent implements OnInit {
     })
   }
 
+
+  // component's initial hook
   ngOnInit() {
+    // id param stored in a local variable
     const id = this.actRoute.snapshot.params.id;
+    // get user promise called
     this.userService.getUser(id)
         .then( (user: User) => {
+          // assign the promise result to component's user
           this.user = user;
+          // patch value in form
           this.userForm.patchValue(this.user)
+          // set password input status
           this.tooglePasswordInput()
         })
+        // catch promise error, return to previous page
         .catch( (err) => this.returnToUsersPage() )
   }
   
