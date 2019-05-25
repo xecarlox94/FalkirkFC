@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'); // loads mongoose module
-process.env.MONGODB_URL = "sdgsg"
+
 mongoose.connect(process.env.MONGODB_URL, { // connects to cluster
     useNewUrlParser: true,
     useCreateIndex: true,
