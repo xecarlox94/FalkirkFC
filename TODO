@@ -1,12 +1,12 @@
 
 -upgrade subscription feature on paypal backend and frontend / update documentation
--user to get entry in event / update documentation
+-finish styling whole app (maybe add a css library) / update documentation
+-improve the Falkirk page / update documentation
 
 -set default asset images to teams, events and news / update documentation
 -images teams (logo and stadium), players, events and news / update documentation
 
--improve the Falkirk page / update documentation
--finish styling whole app (maybe add a css library) / update documentation
+-user to get entry in event / update documentation
 -catch all errors on front end / update documentation
 
 -Breadcrumb on falkirk app / update documentation

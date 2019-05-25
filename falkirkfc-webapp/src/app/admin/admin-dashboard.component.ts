@@ -18,12 +18,12 @@ export class AdminDashboardComponent implements OnInit {
       label: "Events"
     },
     {
-      path: "matches",
-      label: "Matches"
-    },
-    {
       path: "teams",
       label: "Teams"
+    },
+    {
+      path: "matches",
+      label: "Matches"
     }
   ]
   
