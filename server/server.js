@@ -1,8 +1,12 @@
 const socketIO = require("socket.io") // load socket io module
-const app = require('./app'); // load application variable
+let app; // application variable
 const port = process.env.PORT; // get port variable
 
-
+try {
+    app = require('./app'); // loading application to variable
+} catch (error) {
+    console.log(error)
+}
 
 const server = app.listen(port, () => {
     // logs if the server is successfully initialized
