@@ -7,3 +7,9 @@
 <h4>{{ user?.mobilePhone }}</h4>
 
 <button mat-raised-button color="accent" [routerLink]="['edit']">Update</button>
+
+<br>
+
+<app-update-account 
+    *ngIf="!user?.admin && user?.typeSubscription === 'partial'"
+    (upgradeDone)="onUpgradeDone()" ></app-update-account>

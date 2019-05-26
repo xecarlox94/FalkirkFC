@@ -16,7 +16,17 @@ export class ProfileViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadCurrentUser()
+  }
+
+  loadCurrentUser(){
     this.userAuthService.getCurrentUser().then( (user: User) => this.user = user )
+    
+  }
+
+  onUpgradeDone(){
+    console.log("upgrade done")
+    // this.loadCurrentUser()
   }
 
 }

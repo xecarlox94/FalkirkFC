@@ -12,7 +12,10 @@ router.post("/", async (req, res) => {
 
     try {
         // create new user with the body request data
-        const newUser = new User(req.body) 
+        const newUser = new User(req.body)
+
+        // sets type of subscription to partial for default
+        newUser.typeSubscription = "partial"
 
         // gives a platinum subs type to an admin
         // throws error if secret is wrong
@@ -62,7 +65,7 @@ router.patch("/", userAuthMiddleware, async (req, res) => {
         const isAdminCurrently = req.user.admin;
     
         const updates = Object.keys(body);
-        const notAllowed = [ "_id", "email" ]
+        const notAllowed = [ "_id", "email", "typeSubscription" ]
 
         // updates every property allowed
         updates.forEach( update => {
@@ -141,7 +144,19 @@ router.get("/me", userAuthMiddleware, async(req, res) => {
     res.send({ user: req.user })
 })
 
+// upgrades user account
+router.post("/upgradeMe", userAuthMiddleware, async (req, res) => {
+    try {
+        req.user.typeSubscription = "platinum"
 
+        await req.user.save()
+
+        res.send({ user: req.user })
+    } catch (error) { // catches any error in the try block
+        // sends 500 internal error with the error message
+        res.status(500).send({ error })
+    }
+})
 
 // USER RESOURCES
 

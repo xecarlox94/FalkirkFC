@@ -96,6 +96,22 @@ export class UserAuthService {
         ).toPromise() // returns a promise
     }
 
+    // updates current logged in user
+    upgradeCurrentUser(){
+        return this.http.post(`${ environment.baseURL }/users/upgradeMe`, null).pipe(
+            map( (value: any) => {
+                const user = new User()
+                user.setEmail(value.user.email)
+                user.setAdmin(value.user.admin)
+                user.setSubscription(value.user.typeSubscription)
+                user.setContactInfo(value.user.firstName, value.user.lastName, value.user.gender, value.user.mobilePhone, value.user.address)
+                return user;
+            }),
+            // sets current session subscription
+            tap( (user: User) => this.setSubscription(user) )
+        ).toPromise() // returns a promise
+    }
+
     // sets coockies and local variables
     setCoockies(next: any){
         const user = new User(next.user._id)
@@ -113,10 +129,12 @@ export class UserAuthService {
         localStorage.setItem("auth-token", bearerToken)
     }
 
+    // sets local admin
     setAdmin(user: User) {
         localStorage.setItem("admin", user.getAdmin())
     }
 
+    // sets local subscription
     setSubscription(user: User) {
         localStorage.setItem("subscription", user.getSubscription())
     }

@@ -18,6 +18,10 @@ export class LiveMatchService {
 
     constructor(socketClientSrv: SocketClientService){
         this.socketClientService = socketClientSrv;
+        this.subscribeToMatchStream()
+    }
+
+    subscribeToMatchStream(){
         this.socketClientService.receiveMatchStream()
             .subscribe(
                 (matchStream: MatchStream) => {

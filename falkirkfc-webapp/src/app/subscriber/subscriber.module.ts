@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule, MatTabsModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule, MatTabsModule, MatListModule, MatSelectModule } from '@angular/material';
 
 
 import { DashboardComponent } from './dashboard.component';
@@ -19,6 +19,7 @@ import { EventComponent } from './events/event/event.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { EventListComponent } from './events/event-list/event-list.component';
 import { PlayerGridComponent } from './league/squads/team/player-grid/player-grid.component';
+import { UpdateAccountComponent } from './profile/profile-view/update-account/update-account.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PlayerGridComponent } from './league/squads/team/player-grid/player-gri
         MatCheckboxModule,
         MatRadioModule,
         MatTabsModule,
-        MatListModule
+        MatListModule,
+        MatSelectModule
     ],
     declarations: [ // loads all components
         DashboardComponent,
@@ -49,7 +51,8 @@ import { PlayerGridComponent } from './league/squads/team/player-grid/player-gri
         NewsListComponent,
         EventComponent,
         EventListComponent,
-        PlayerGridComponent
+        PlayerGridComponent,
+        UpdateAccountComponent
     ]
 })
 
