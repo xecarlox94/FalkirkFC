@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule, MatTabsModule, MatListModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatRadioModule, MatTabsModule, MatListModule, MatSelectModule, MatCardModule } from '@angular/material';
 
 
 import { DashboardComponent } from './dashboard.component';
@@ -35,7 +35,8 @@ import { UpdateAccountComponent } from './profile/profile-view/update-account/up
         MatRadioModule,
         MatTabsModule,
         MatListModule,
-        MatSelectModule
+        MatSelectModule,
+        MatCardModule
     ],
     declarations: [ // loads all components
         DashboardComponent,

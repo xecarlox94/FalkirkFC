@@ -1,6 +1,14 @@
 
-<h1>{{ article?.title }}</h1>
-<h2>{{ article?.subtitle }}</h2>
-<h3>{{ article?.topic }}</h3>
-<h4>{{ article?.time | date:"medium" }}</h4>
-<p style="white-space: pre-wrap; " >{{ article?.body }}</p>
+<div class="hero hero-lg">
+    <div class="container grid-sm">
+        <h1>{{ article?.title }}</h1>
+        <br>
+        <h2>{{ article?.subtitle }}</h2>
+        <br>
+        <h3>{{ article?.topic }}</h3>
+        <br>
+        <h4>{{ article?.time | date:"medium" }}</h4>
+        <br><br>
+        <p style="white-space: pre-wrap; " >{{ article?.body }}</p>
+    </div>
+</div>

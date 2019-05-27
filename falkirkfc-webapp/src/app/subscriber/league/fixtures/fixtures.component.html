@@ -1,20 +1,33 @@
-<h1 *ngIf="round" >Round {{ round }}</h1>
+<div class="innerContainer">
+  
+    <h1 *ngIf="round" >Round {{ round }}</h1>
 
 
-<nav role="navigation" aria-label="pagination" *ngIf="round" >
-    <button mat-button type="button" color="basic" (click)="loadRound(round - 1)" >Previous Round</button>
-    <button mat-button type="button" color="basic" (click)="loadRound(round + 1)" >Next Round</button>
+    <ul class="pagination" >
+      <li class="page-item page-prev">
+        <a (click)="loadRound(round - 1)" >
+          <div class="page-item-subtitle">Previous</div>
+          <div class="page-item-title h5">Round</div>
+        </a>
+      </li>
+      <li class="page-item page-next">
+        <a (click)="loadRound(round + 1)" >
+          <div class="page-item-subtitle">Next</div>
+          <div class="page-item-title h5">Round</div>
+        </a>
+      </li>
+    </ul>
     
-  </nav>
+    
+    <mat-list *ngIf="matches" >
+      <mat-list-item *ngFor="let match of matches">
+        <button
+          mat-button color="primary"
+          (click)="visitMatchPage(match)" >
+          {{ match.home.name }} {{ match.homeScore }} - {{ match.awayScore }} {{ match.away.name }}
+        </button>
+      </mat-list-item>
+    </mat-list>
+  
+</div>
 
-
-
-<mat-list *ngIf="matches" >
-  <mat-list-item *ngFor="let match of matches">
-    <button
-      mat-button color="primary"
-      (click)="visitMatchPage(match)" >
-      {{ match.home.name }} {{ match.homeScore }} - {{ match.awayScore }} {{ match.away.name }}
-    </button>
-  </mat-list-item>
-</mat-list>

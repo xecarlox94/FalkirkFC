@@ -1,0 +1,60 @@
+// Core colors
+$primary-color: #2a4379 !default;
+
+// Gray colors
+$dark-color: #09152b !default;
+
+// Control colors
+$success-color: #1d3a17 !default;
+$warning-color: #ffd910 !default;
+$error-color: #cf2425 !default;
+
+
+
+// Import full Spectre source code
+// Variables and mixins
+@import "node_modules/spectre.css/src/variables";
+@import "node_modules/spectre.css/src/mixins";
+
+/*! Spectre.css v#{$version} | MIT License | github.com/picturepan2/spectre */
+// Reset and dependencies
+@import "node_modules/spectre.css/src/normalize";
+
+
+// Base
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: $html-font-size;
+  line-height: $html-line-height;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: $body-bg;
+  color: $body-font-color;
+  font-family: $body-font-family;
+  font-size: $font-size;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+// Elements
+@import "node_modules/spectre.css/src/typography";
+@import "node_modules/spectre.css/src/tables";
+@import "node_modules/spectre.css/src/media";
+
+// Layout
+@import "node_modules/spectre.css/src/layout";
+@import "node_modules/spectre.css/src/hero";
+
+// Components
+@import "node_modules/spectre.css/src/pagination";
+
+// Utility classes
+@import "node_modules/spectre.css/src/utilities";

@@ -1,8 +1,23 @@
 
-<p *ngFor="let article of newsletter" >
-  <button 
-    mat-raised-button color="primary"
-    [routerLink]="article._id" >
-      {{ article.title }}
-  </button>
-</p>
+
+<div class="hero hero-lg">
+  <div class="container grid-lg">
+    <div class="columns">
+      <div *ngFor="let article of newsletter"  class="column col-4 col-md-6 col-sm-12">
+        
+        <mat-card class="grid-card">
+          <mat-card-header>
+            <mat-card-title>{{ article.title }}</mat-card-title>
+            <mat-card-subtitle>{{ article.topic }}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="assets/falkirk_image.png" [alt]="article.title" >
+          <mat-card-actions>
+            <button mat-raised-button color="primary" [routerLink]="article._id"  >View Article</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>
+

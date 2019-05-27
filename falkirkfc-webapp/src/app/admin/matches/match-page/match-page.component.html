@@ -1,14 +1,22 @@
 <h1>{{ match?.home.name }}  {{ match?.homeScore }} - {{ match?.awayScore }}   {{ match?.away.name }}</h1>
-<a mat-button color="primary" (click)="visitTeamPage(match?.home)" >visit {{ match?.home.name }}'s page</a>
-<a mat-button color="primary" (click)="visitTeamPage(match?.away)" >visit {{ match?.away.name }}'s page</a>
+
 
 <h5>{{ match?.time | date:"longDate" }} at {{ match?.time | date:"shortTime" }}</h5>
+
+<br><br>
+
+<a mat-stroked-button color="primary" (click)="visitTeamPage(match?.home)" >{{ match?.home.name }}'s page</a>
+<a mat-stroked-button color="primary" (click)="visitTeamPage(match?.away)" class="float-right" >{{ match?.away.name }}'s page</a>
+
+<br><br>
 
 <button mat-raised-button color="accent" (click)="editMatch()" >Edit Match</button>
 <button mat-button color="warn" (click)="deleteMatch()">Delete Match</button><br><br>
 
 
 <app-match-event-list [mEventsObs]="matchIDSubject.asObservable()" (mEventChanges)="onMatchEventsChanges()"></app-match-event-list>
+
+<br>
 
 <app-new-match-event *ngIf="isCreatingMatchEvent; else normalSection" (mEventCreated)="onMatchEventCreated($event)" ></app-new-match-event>
 

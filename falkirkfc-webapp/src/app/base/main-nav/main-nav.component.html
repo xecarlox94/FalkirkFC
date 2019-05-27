@@ -11,9 +11,7 @@
       [opened]="!(isHandset$ | async)">
 
       <div id="sidenavlogo_wrapper">
-        <a [routerLink]="['/', 'about' ]" >
-          <img src="assets/falkirk-darkLogo.png" alt="logo" />
-        </a>
+        <img src="assets/falkirk-darkLogo.png" alt="logo" />
       </div>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/','dashboard','profile']" *ngIf="session?.loggedIn" >Profile</a>
@@ -22,6 +20,7 @@
       <a mat-list-item [routerLink]="['/','dashboard','news']" *ngIf="session?.loggedIn && !session?.admin" >News</a>
       <a mat-list-item [routerLink]="['/','dashboard','events']" *ngIf="session?.loggedIn && !session?.admin" >Events</a>
       <a mat-list-item [routerLink]="['/','dashboard','league']" *ngIf="session?.loggedIn" >League</a>
+      <a mat-list-item [routerLink]="['/']" *ngIf="!session?.loggedIn" >Our Falkirk</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -38,9 +37,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <div id="logo_wrapper">
-        <a [routerLink]="['/']" >
-          <img src="assets/falkirk-brightLogo.png" alt="logo" />
-        </a>
+        <img src="assets/falkirk-brightLogo.png" alt="logo" />
       </div>
       <button
           *ngIf="session?.loggedIn && matchStatus?.live"
@@ -84,6 +81,12 @@
           mat-raised-button color="primary"
           [routerLink]="['/','dashboard','league']" >
         League
+      </button>
+      <button
+          *ngIf="!isHandset && !session?.loggedIn"
+          mat-raised-button color="primary"
+          [routerLink]="['/']" >
+        Our Falkirk
       </button>
       <span class="_spacer"></span>
       <button mat-raised-button color="primary" [routerLink]="['/', 'auth','login' ]" *ngIf="!session?.loggedIn" id="_login" >

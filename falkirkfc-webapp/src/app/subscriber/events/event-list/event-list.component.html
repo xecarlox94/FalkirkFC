@@ -1,8 +1,24 @@
 
-<p *ngFor="let event of events" >
-  <button 
-    mat-raised-button color="primary"
-    [routerLink]="event._id" >
-      {{ event.title }}
-  </button>
-</p>
+
+
+<div class="hero hero-lg">
+    <div class="container grid-lg">
+      <div class="columns">
+        <div *ngFor="let event of events"  class="column col-6 col-md-12 col-sm-12">
+
+            <mat-card class="grid-card">
+              <mat-card-header>
+                <mat-card-title>{{ event.title }}</mat-card-title>
+                <mat-card-subtitle>{{ event.subtitle }}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/falkirk_image.png" [alt]="event.title" >
+              <mat-card-actions>
+                <button mat-raised-button color="primary" [routerLink]="event._id"  >View Event</button>
+              </mat-card-actions>
+            </mat-card>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

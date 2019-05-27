@@ -1,7 +1,18 @@
-<p *ngFor="let player of players">
-  <button 
-    mat-button color="primary"
-    (click)="visitPlayerPage(player)" >
-      {{ player.name }}
-  </button>
-</p>
+
+<div class="columns">
+    <div *ngFor="let player of players"  class="column col-6 col-md-12 col-sm-12">
+
+        <mat-card class="grid-card">
+          <img mat-card-image src="assets/player.png" [alt]="player.name" >
+          <mat-card-header>
+            <mat-card-title>{{ player.name }}</mat-card-title>
+            <mat-card-subtitle>{{ player.position }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="visitPlayerPage(player)" >View Player</button>
+          </mat-card-actions>
+        </mat-card>
+
+
+    </div>
+  </div>

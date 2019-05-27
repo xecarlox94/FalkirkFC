@@ -1,4 +1,13 @@
+@media (max-width: 650px)  {
+  div.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
+.grid-card {
+  margin: 15px;
+}
 
 ._spacer {
     flex: 1 1 auto;

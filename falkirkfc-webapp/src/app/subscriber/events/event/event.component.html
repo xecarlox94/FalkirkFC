@@ -1,8 +1,13 @@
-<h1>{{ event?.title }}</h1>
 
-<h3>{{ event?.subtitle }}</h3>
+<div class="hero hero-lg">
+    <div class="container grid-sm">
+        <h1>{{ event?.title }}</h1>
+        <br>
+        <h3>{{ event?.subtitle }}</h3>
+        <br>
+        <h5>{{ event?.time | date:"medium" }}</h5>
+        <br><br>
+        <p style="white-space: pre-wrap; "  >{{ event?.body }}</p>
+    </div>
+</div>
 
-<h5>{{ event?.time | date:"medium" }}</h5>
-
-
-<p style="white-space: pre-wrap; "  >{{ event?.body }}</p>
