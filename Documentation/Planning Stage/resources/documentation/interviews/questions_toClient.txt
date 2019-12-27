@@ -1,0 +1,34 @@
+This interview will be documented in the inception brief report and it will be used to clarify some non-functional requirements, contrains and even expectations.
+A potential user will also be interviewed to investigate on user expectations and to validate assumptions made during the brief and client analysis.
+
+
+
+-Apart from GDPR, Disability act 1995,  which other legislation must we be computerized system must comply with?
+(https://www.falkirkfc.co.uk/our-policies/)
+
+
+
+
+-which services are given to a partial subscription?
+-which services are given to a full subscription?
+-what is the value of the full subscription?
+-Is the club interested to use the paypal payment system to pay for the subscription?
+
+
+
+-it will be held user's personal data information, for legal reasons and to send relevant information to them. about which details are needed from the user?
+-which details can the user modify?
+
+
+-What is the available budget you have for the project? (constrains)
+
+
+-Should users get tickets/guestList to cooperate events them?
+-what kinds of cooperate events will be published on the system?
+
+
+-When can the feasability meeting take place?
+-do you need an additional presentation, containing the feasability report information, to show during the feasability meeting? 
+
+
+
